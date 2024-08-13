@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Milk Money App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Milk Money</h1>
-    <p>Please drink milk</p>
+    <h1>Milk Moolah</h1>
+    <div id="cow-container">
+      <img src="images/daycow.png" id="cow" alt="a female cartoon cow">
+      <div id="speech-container" class="say-something">
+        <p id="speech-text"></p>
+      </div>
+    </div>
+    <input type="checkbox" id="day-night" onclick="dayNight()">
 	<script src="index.js"></script>
   </body>
 </html>

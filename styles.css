@@ -1,3 +1,162 @@
+/* CSS RESET */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+* {
+    margin: 0;
+  }
+
 body {
-    background-color: red;
+    height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+input, button, textarea, select {
+    font: inherit;
+  }
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+#root, #__next {
+    isolation: isolate;
+  }
+
+/* END OF CSS RESET */
+
+
+/* checkbox is sun/moon icon: background changes when checked */  
+body {
+    background-image: linear-gradient(
+        180deg,
+        hsl(240deg 95% 76%) 1%,
+        hsl(207deg 100% 55%) 43%,
+        hsl(200deg 100% 50%) 50%,
+        hsl(197deg 100% 50%) 51%,
+        hsl(195deg 100% 50%) 51%,
+        hsl(189deg 100% 45%) 49%,
+        hsl(177deg 100% 40%) 49%,
+        hsl(162deg 100% 40%) 50%,
+        hsl(146deg 100% 40%) 57%,
+        hsl(121deg 91% 42%) 99%
+      );     
+  }
+
+  body:has(input[type='checkbox']:checked) {
+    background-image: linear-gradient(
+        180deg,
+        hsl(240deg 100% 20%) 0%,
+        hsl(240deg 100% 20%) 1%,
+        hsl(240deg 100% 19%) 2%,
+        hsl(240deg 100% 19%) 3%,
+        hsl(240deg 100% 19%) 5%,
+        hsl(240deg 100% 19%) 6%,
+        hsl(240deg 100% 18%) 8%,
+        hsl(240deg 100% 18%) 10%,
+        hsl(240deg 100% 18%) 12%,
+        hsl(240deg 100% 17%) 14%,
+        hsl(240deg 100% 17%) 17%,
+        hsl(240deg 100% 17%) 21%,
+        hsl(240deg 100% 17%) 25%,
+        hsl(240deg 100% 16%) 31%,
+        hsl(240deg 100% 16%) 39%,
+        hsl(0deg 0% 0%) 59%
+    );
+  } 
+
+h1 {
+    margin: 20px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    color: white;
+    font-size: 4rem;
+  }
+
+/* holds cow and speech bubble */
+#cow-container {
+    width: 100%;
+    height: 50%;
+    background: transparent;
+    display: flex;
+  }
+
+#cow {
+    margin: 20px 0;
+    width: 500px;
+    height: 450px;
+  }
+
+/* clunky alignment of speech bubble with cow */
+#speech-container {
+    display: inline;
+    background-image: url(images/dayspeech.png);
+    background-size: cover;
+    width: 350px;
+    height: 300px;
+    margin-left: -90px;
+    margin-top: -50px;
 }
+
+#speech-text {
+    font-size: 1.5rem;
+    padding: 50px;
+}
+
+/* these classes are applied when #speech-text innerText changes */
+.say-something {
+  opacity: 1;
+  transition: opacity 2s;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+/*
+.hide-speech {
+    opacity: 0;
+    transition: 2s;
+}
+
+.show-speech {
+  opacity: 1;
+  transition: 2s;
+}
+*/
+
+/* what is this? */
+#day-night {
+    appearance: none;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    background: yellow;
+    border-radius: 50%;
+    border: 1px solid white;
+    top: 60px;
+    right: 60px;
+    -webkit-box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
+    -moz-box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
+    box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
+    
+}
+
+#day-night:checked {
+    border: none;
+    background-color: transparent;
+	border-radius: 50%;
+    box-shadow: 18px 10px 0px 0px white;
+    top: 50px;
+    right: 90px;  
+}
+
