@@ -3,23 +3,29 @@ const cowImage = document.getElementById("cow");
 const speechBubble = document.getElementById("speech-container");
 const speechText = document.getElementById("speech-text");
 
+function theCowSpeaks(whatTheCowSays) {
+  speechBubble.style.opacity = "1";
+  speechText.innerText = whatTheCowSays
+  setTimeout(()=>{
+    speechBubble.style.opacity = "0";
+    speechText.innerText = "";
+  }, "5000")
+}
 
 function dayNight() {
   if (dayNightCheckbox.checked) {
     cowImage.src = "images/nightcow.png"
     speechBubble.style.backgroundImage = "url(images/nightspeech.png)"
     speechText.style.color = "white";
-    speechText.innerText = "Hey! Who turned off all the lights?"
+    theCowSpeaks("Hey, who turned off all the lights?")
   } else {
     cowImage.src = "images/daycow.png"
     speechBubble.style.backgroundImage = "url(images/dayspeech.png)"
     speechText.style.color = "black";
-    speechText.innerText = "What a beautiful sunny day! Moooooo!"
+    theCowSpeaks("What a beautiful sunny day! Mooooo!")
   }
 }
 
-function theCowSpeaks() {
-  
-}
+
 
 

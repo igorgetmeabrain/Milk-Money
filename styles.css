@@ -107,6 +107,8 @@ h1 {
     height: 300px;
     margin-left: -90px;
     margin-top: -50px;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
 #speech-text {
@@ -114,25 +116,6 @@ h1 {
     padding: 50px;
 }
 
-/* these classes are applied when #speech-text innerText changes */
-.say-something {
-  opacity: 1;
-  transition: opacity 2s;
-  opacity: 0;
-  transition: opacity 2s;
-}
-
-/*
-.hide-speech {
-    opacity: 0;
-    transition: 2s;
-}
-
-.show-speech {
-  opacity: 1;
-  transition: 2s;
-}
-*/
 
 /* what is this? */
 #day-night {
