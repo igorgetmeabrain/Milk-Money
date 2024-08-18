@@ -116,8 +116,6 @@ h1 {
     padding: 50px;
 }
 
-
-/* what is this? */
 #day-night {
     appearance: none;
     height: 100px;
@@ -143,3 +141,11 @@ h1 {
     right: 90px;  
 }
 
+#buy_milk {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 100px;
+  background: purple;
+  color: white;
+}

@@ -2,10 +2,13 @@ const dayNightCheckbox = document.getElementById("day-night");
 const cowImage = document.getElementById("cow");
 const speechBubble = document.getElementById("speech-container");
 const speechText = document.getElementById("speech-text");
+const moo = document.getElementById("moo")
+const cowbell = document.getElementById("cowbell")
 let whatTheCowSays = "Moooooooo!"
 
 function theCowSpeaks(whatTheCowSays) {
   speechBubble.style.opacity = "1";
+  moo.play();
   speechText.innerText = whatTheCowSays
   setTimeout(()=>{
     speechBubble.style.opacity = "0";
