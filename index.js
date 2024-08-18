@@ -2,6 +2,7 @@ const dayNightCheckbox = document.getElementById("day-night");
 const cowImage = document.getElementById("cow");
 const speechBubble = document.getElementById("speech-container");
 const speechText = document.getElementById("speech-text");
+let whatTheCowSays = "Moooooooo!"
 
 function theCowSpeaks(whatTheCowSays) {
   speechBubble.style.opacity = "1";
@@ -26,6 +27,9 @@ function dayNight() {
   }
 }
 
+/* this needs to happen on successful login 
+theCowSpeaks(welcomeUser)
+*/
 
-
+let thusSpakeTheCow = whatTheCowSays
 
