@@ -1,7 +1,7 @@
 const dayNightCheckbox = document.getElementById("day-night");
 const cowImage = document.getElementById("cow");
-const speechBubble = document.getElementById("speech-container");
-const speechText = document.getElementById("speech-text");
+const speechBubble = document.getElementById("speech-bubble");
+const speechText = document.getElementById("cow-speech");
 const moo = document.getElementById("moo")
 const cowbell = document.getElementById("cowbell")
 let whatTheCowSays = "Moooooooo!"
@@ -14,6 +14,11 @@ function theCowSpeaks(whatTheCowSays) {
     speechBubble.style.opacity = "0";
     speechText.innerText = "";
   }, "5000")
+}
+
+function buttonSound() {
+  cowbell.currentTime = 0;
+  cowbell.play();
 }
 
 function dayNight() {
