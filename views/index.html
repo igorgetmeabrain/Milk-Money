@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="styles.css" type="text/css">
   </head>
 
-  <body>
+  <body class="no-select">
     
-    <div class="cloud"></div>
-    <input type="checkbox" id="day-night" onclick="dayNight()">
+    <div class="cloud" id="cloud1"></div>
+    <div class="cloud" id="cloud2"></div>
+    <div class="cloud" id="cloud3"></div>
+    <input type="checkbox" id="day-night-checkbox" onclick="dayNight()">
 
     <div id="container">
 
@@ -28,7 +30,7 @@
         </div>
       </div>
 
-      <div id="milk-splash">
+      <div id="noticeboard">
         <div id="noticeboard-text"><h2>Here is today's leaderboard!</h2><p><br>1. Doug<br>2. Alison<br>3. Reuben<br>4. Alex</b2></p></div>
       </div>
 

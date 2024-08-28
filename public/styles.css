@@ -31,14 +31,14 @@ p, h1, h2, h3, h4, h5, h6 {
   }
 
 /* END OF CSS RESET */
-
-
-/* checkbox is sun/moon icon: background changes when checked */  
+ 
 body {
   font-family: "Permanent Marker", cursive;
   font-weight: 400;
   font-style: normal;
+  letter-spacing: 2px;
   text-align: center;
+  cursor: grab;
   background-image: linear-gradient(
     180deg,
     hsl(240deg 96% 82%) 0%,
@@ -67,6 +67,7 @@ body {
   );     
   }
 
+/* checkbox is sun/moon icon: background changes when checked */ 
 body:has(input[type='checkbox']:checked) {
   background-image: linear-gradient(
     180deg,
@@ -96,7 +97,7 @@ body:has(input[type='checkbox']:checked) {
   );
   }
 
-#day-night {
+#day-night-checkbox {
     appearance: none;
     height: 80px;
     width: 80px;
@@ -108,20 +109,55 @@ body:has(input[type='checkbox']:checked) {
     right: 50px;
     -webkit-box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
     -moz-box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
-    box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);   
+    box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);  
+    z-index: 1; 
   }
 
-.cloud{
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+.cloud {
     position: absolute; 
-    margin-top: 70px;
-    width: 200px;
-    height: 69px;
-    background:#ECEFF1;
-    box-shadow: 10px 10px rgba(0,0,0,0.2);
+    background:hsla(0, 0%, 100%, 0.9);
     border-radius: 100px;
+    translate: 0;
+    z-index:2;
   }
 
-.cloud::after, .cloud::before{
+#cloud1 {
+    top: 115px;
+    left: 10px;
+    width: 100px;
+    height: 35px;
+    box-shadow: 10px 10px rgba(0,0,0,0.2);
+    transition: translate 15s;
+  }
+  
+#cloud2 {
+    top: 45px;
+    left: 75px;
+    width: 75px;
+    height: 25px;
+    box-shadow: 5px 5px rgba(0,0,0,0.2);
+    transition: translate 5s;
+  }
+  
+#cloud3 {
+  top: 30px;
+  left: 175px;
+  width: 175px;
+  height: 70px;
+  box-shadow: 15px 15px rgba(0,0,0,0.2);
+  transition: translate 25s;
+  }
+
+#cloud1::after, #cloud1::before, #cloud2::after, #cloud2::before, #cloud3::after, #cloud3::before {
      content: "";
      position: relative;
      display: inline-block;
@@ -129,21 +165,53 @@ body:has(input[type='checkbox']:checked) {
      border-radius: inherit;
   }
 
-.cloud::after{
-     width: 57px;
-     height: 57px;
-     top: -70px;
-     left: -80px;
+#cloud1::after{
+     width: 28px;
+     height: 28px;
+     top: -35px;
+     left: -40px;
   }
 
-.cloud::before{
-     width: 100px;
-     height: 100px;
-     top: -50px;
-     left: 60px;
+#cloud1::before{
+     width: 50px;
+     height: 50px;
+     top: -25px;
+     left: 30px;
   }
 
-#day-night:checked {
+#cloud2::after{
+    width: 23px;
+    height: 23px;
+    top: -22px;
+    left: -30px;
+ }
+
+#cloud2::before{
+  width: 38px;
+  height: 38px;
+  top: -18px;
+  left: 23px;
+}
+
+#cloud3::after{
+  width: 50px;
+  height: 50px;
+  top: -50px;
+  left: -65px;
+}
+
+#cloud3::before{
+width: 80px;
+height: 80px;
+top: -28px;
+left: 50px;
+}
+
+.cloud:hover {
+  translate: 1150px;
+  }
+
+#day-night-checkbox:checked {
   border: none;
   background-color: transparent;
   border-radius: 50%;
@@ -155,10 +223,10 @@ body:has(input[type='checkbox']:checked) {
 #container {
     display: grid;
     grid-template-columns: 45% 55%;
-    grid-template-rows: 13vh 69vh 12vh 5vh;
+    grid-template-rows: 16vh 66vh 12vh 5vh;
     grid-template-areas: 
       "header header"
-      "cow splash"
+      "cow noticeboard"
       "buttons buttons"
       "footer footer";
     background: transparent;
@@ -167,15 +235,16 @@ body:has(input[type='checkbox']:checked) {
 h1 {
     grid-area: header;
     color: white;
+    -webkit-text-stroke: 1px darkgreen;
     font-size: clamp(2rem, 4.5vw, 5rem);
   }
 
 h2 {
-    font-size: clamp(1rem, 2.5vw, 3rem);
+    font-size: clamp(1rem, 2vw, 3rem);
   }
 
 p {
-    font-size: clamp(0.75rem, 1.5vw, 2rem);
+    font-size: clamp(1rem, 1.5vw, 2rem);
   }
 
 #cow-container {
@@ -183,6 +252,7 @@ p {
     display: flex;
     max-width: 100%;
     background: transparent;
+    z-index: 3;
   }
 
 #cow {
@@ -196,24 +266,23 @@ p {
     background-repeat: no-repeat;
     width: 100%;
     max-height: 60%;
-    padding: 3%;
+    padding: 2% 5%;
     opacity: 0;
     transition: opacity 0.5s;
   }
 
-#milk-splash {
-    grid-area: splash;
-    background-image: url(images/milksplash.png);
+#noticeboard {
+    grid-area: noticeboard;
+    background-image: url(images/noticeboard.png);
     background-size: contain;
     background-repeat: no-repeat;
     max-width: 100%;
+    z-index: 3;
   }
 
 #noticeboard-text {
-    display: block;
-    margin: auto;
-    margin-top: 12%;
-    padding-right: 2%;
+    margin: 10% 0 0 7%;
+    padding: 2%;
     max-width: 70%;
     height: 50%;
   }
@@ -230,6 +299,10 @@ p {
     background: green;
     color: white;
   }
+
+.button:hover {
+  color: orange;
+}
 
 #footer {
     grid-area: footer;

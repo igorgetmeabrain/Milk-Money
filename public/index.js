@@ -1,9 +1,11 @@
-const dayNightCheckbox = document.getElementById("day-night");
+const dayNightCheckbox = document.getElementById("day-night-checkbox");
 const cowImage = document.getElementById("cow");
 const speechBubble = document.getElementById("speech-bubble");
 const speechText = document.getElementById("cow-speech");
+const noticeboard = document.getElementById("noticeboard");
 const moo = document.getElementById("moo")
 const cowbell = document.getElementById("cowbell")
+const clouds = document.querySelectorAll(".cloud")
 let whatTheCowSays = "Moooooooo!"
 
 function theCowSpeaks(whatTheCowSays) {
@@ -23,15 +25,21 @@ function buttonSound() {
 
 function dayNight() {
   if (dayNightCheckbox.checked) {
-    cowImage.src = "images/nightcow.png"
-    speechBubble.style.backgroundImage = "url(images/nightspeech.png)"
+    cowImage.src = "images/nightcow.png";
+    clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 20%, 0.9)");
+    speechBubble.style.backgroundImage = "url(images/nightspeech.png)";
+    noticeboard.style.backgroundImage = "url(images/dark-noticeboard.png)";
+    noticeboard.style.color = "white";
     speechText.style.color = "white";
-    theCowSpeaks("Hey, who turned off all the lights?")
+    theCowSpeaks("Hey, who turned off all the lights?");
   } else {
-    cowImage.src = "images/daycow.png"
-    speechBubble.style.backgroundImage = "url(images/dayspeech.png)"
+    cowImage.src = "images/daycow.png";
+    clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 100%, 0.9)");
+    speechBubble.style.backgroundImage = "url(images/dayspeech.png)";
+    noticeboard.style.backgroundImage = "url(images/noticeboard.png)";
     speechText.style.color = "black";
-    theCowSpeaks("What a beautiful sunny day! Mooooo!")
+    noticeboard.style.color = "black";
+    theCowSpeaks("What a beautiful sunny day! Mooooo!");
   }
 }
 
