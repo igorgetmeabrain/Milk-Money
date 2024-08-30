@@ -113,6 +113,15 @@ body:has(input[type='checkbox']:checked) {
     z-index: 1; 
   }
 
+#day-night-checkbox:checked {
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 18px 10px 0px 0px white;
+    top: 40px;
+    right: 75px;  
+  }
+
 .no-select {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -211,15 +220,6 @@ left: 50px;
   translate: 1150px;
   }
 
-#day-night-checkbox:checked {
-  border: none;
-  background-color: transparent;
-  border-radius: 50%;
-  box-shadow: 18px 10px 0px 0px white;
-  top: 40px;
-  right: 75px;  
-  }
-
 #container {
     display: grid;
     grid-template-columns: 45% 55%;
@@ -227,7 +227,7 @@ left: 50px;
     grid-template-areas: 
       "header header"
       "cow noticeboard"
-      "buttons buttons"
+      "buttons tabs"
       "footer footer";
     background: transparent;
   }
@@ -268,7 +268,7 @@ p {
     max-height: 60%;
     padding: 2% 5%;
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.3s;
   }
 
 #noticeboard {
@@ -289,6 +289,11 @@ p {
 
 #buttons {
     grid-area: buttons;
+    padding: 1%;
+  }
+
+#tabs {
+    grid-area: tabs;
     padding: 1%;
   }
 
