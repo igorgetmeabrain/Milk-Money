@@ -1,316 +1,359 @@
 /* CSS RESET */
 
-*, *::before, *::after {
-    box-sizing: border-box;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 * {
-    margin: 0;
-  }
+  margin: 0;
+}
 
 body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
-img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-  }
-  
-input, button, textarea, select {
-    font: inherit;
-  }
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
 
-p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
-  }
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
 
-#root, #__next {
-    isolation: isolate;
-  }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
 
 /* END OF CSS RESET */
- 
+
 body {
   font-family: "Permanent Marker", cursive;
+  -webkit-text-stroke: 1px black;
   font-weight: 400;
   font-style: normal;
   letter-spacing: 2px;
   text-align: center;
   cursor: grab;
-  background-image: linear-gradient(
-    180deg,
-    hsl(240deg 96% 82%) 0%,
-    hsl(198deg 100% 50%) 33%,
-    hsl(194deg 100% 50%) 46%,
-    hsl(188deg 100% 47%) 52%,
-    hsl(170deg 100% 41%) 56%,
-    hsl(145deg 100% 40%) 57%,
-    hsl(126deg 96% 40%) 58%,
-    hsl(126deg 96% 40%) 59%,
-    hsl(126deg 96% 40%) 59%,
-    hsl(126deg 96% 40%) 60%,
-    hsl(126deg 96% 40%) 60%,
-    hsl(126deg 96% 40%) 61%,
-    hsl(126deg 96% 40%) 62%,
-    hsl(126deg 96% 40%) 64%,
-    hsl(126deg 96% 40%) 66%,
-    hsl(126deg 96% 40%) 69%,
-    hsl(126deg 96% 40%) 72%,
-    hsl(126deg 96% 40%) 75%,
-    hsl(126deg 96% 40%) 79%,
-    hsl(126deg 96% 40%) 84%,
-    hsl(126deg 96% 40%) 89%,
-    hsl(126deg 96% 40%) 94%,
-    hsl(126deg 96% 40%) 100%
-  );     
-  }
+  background-image: linear-gradient(180deg,
+      hsl(240deg 96% 82%) 0%,
+      hsl(198deg 100% 50%) 33%,
+      hsl(194deg 100% 50%) 46%,
+      hsl(188deg 100% 47%) 52%,
+      hsl(170deg 100% 41%) 56%,
+      hsl(145deg 100% 40%) 57%,
+      hsl(126deg 96% 40%) 58%,
+      hsl(126deg 96% 40%) 59%,
+      hsl(126deg 96% 40%) 59%,
+      hsl(126deg 96% 40%) 60%,
+      hsl(126deg 96% 40%) 60%,
+      hsl(126deg 96% 40%) 61%,
+      hsl(126deg 96% 40%) 62%,
+      hsl(126deg 96% 40%) 64%,
+      hsl(126deg 96% 40%) 66%,
+      hsl(126deg 96% 40%) 69%,
+      hsl(126deg 96% 40%) 72%,
+      hsl(126deg 96% 40%) 75%,
+      hsl(126deg 96% 40%) 79%,
+      hsl(126deg 96% 40%) 84%,
+      hsl(126deg 96% 40%) 89%,
+      hsl(126deg 96% 40%) 94%,
+      hsl(126deg 96% 40%) 100%);
+}
 
-/* checkbox is sun/moon icon: background changes when checked */ 
+/* checkbox is sun/moon icon: background changes when checked */
 body:has(input[type='checkbox']:checked) {
-  background-image: linear-gradient(
-    180deg,
-    hsl(240deg 88% 19%) 0%,
-    hsl(222deg 100% 19%) 33%,
-    hsl(214deg 100% 15%) 46%,
-    hsl(200deg 100% 10%) 52%,
-    hsl(172deg 100% 7%) 56%,
-    hsl(144deg 100% 6%) 57%,
-    hsl(125deg 72% 6%) 58%,
-    hsl(126deg 76% 6%) 59%,
-    hsl(126deg 82% 6%) 59%,
-    hsl(127deg 87% 5%) 60%,
-    hsl(127deg 93% 5%) 60%,
-    hsl(127deg 100% 5%) 61%,
-    hsl(127deg 100% 5%) 62%,
-    hsl(127deg 100% 4%) 64%,
-    hsl(127deg 100% 4%) 66%,
-    hsl(127deg 100% 4%) 69%,
-    hsl(127deg 100% 4%) 72%,
-    hsl(126deg 97% 4%) 75%,
-    hsl(126deg 92% 5%) 79%,
-    hsl(125deg 88% 6%) 84%,
-    hsl(124deg 86% 7%) 89%,
-    hsl(125deg 88% 7%) 94%,
-    hsl(126deg 95% 8%) 100%
-  );
-  }
+  background-image: linear-gradient(180deg,
+      hsl(240deg 88% 19%) 0%,
+      hsl(222deg 100% 19%) 33%,
+      hsl(214deg 100% 15%) 46%,
+      hsl(200deg 100% 10%) 52%,
+      hsl(172deg 100% 7%) 56%,
+      hsl(144deg 100% 6%) 57%,
+      hsl(125deg 72% 6%) 58%,
+      hsl(126deg 76% 6%) 59%,
+      hsl(126deg 82% 6%) 59%,
+      hsl(127deg 87% 5%) 60%,
+      hsl(127deg 93% 5%) 60%,
+      hsl(127deg 100% 5%) 61%,
+      hsl(127deg 100% 5%) 62%,
+      hsl(127deg 100% 4%) 64%,
+      hsl(127deg 100% 4%) 66%,
+      hsl(127deg 100% 4%) 69%,
+      hsl(127deg 100% 4%) 72%,
+      hsl(126deg 97% 4%) 75%,
+      hsl(126deg 92% 5%) 79%,
+      hsl(125deg 88% 6%) 84%,
+      hsl(124deg 86% 7%) 89%,
+      hsl(125deg 88% 7%) 94%,
+      hsl(126deg 95% 8%) 100%);
+}
 
 #day-night-checkbox {
-    appearance: none;
-    height: 80px;
-    width: 80px;
-    position: absolute;
-    background: yellow;
-    border-radius: 50%;
-    border: 1px solid white;
-    top: 50px;
-    right: 50px;
-    -webkit-box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
-    -moz-box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);
-    box-shadow: -2px 5px 86px 43px rgba(223,242,14,1);  
-    z-index: 1; 
-  }
+  appearance: none;
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  background: yellow;
+  border-radius: 50%;
+  border: 1px solid white;
+  top: 50px;
+  right: 50px;
+  -webkit-box-shadow: -2px 5px 86px 43px rgba(223, 242, 14, 1);
+  -moz-box-shadow: -2px 5px 86px 43px rgba(223, 242, 14, 1);
+  box-shadow: -2px 5px 86px 43px rgba(223, 242, 14, 1);
+  z-index: 1;
+}
 
 #day-night-checkbox:checked {
-    border: none;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 18px 10px 0px 0px white;
-    top: 40px;
-    right: 75px;  
-  }
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 18px 10px 0px 0px white;
+  top: 40px;
+  right: 75px;
+}
 
 .no-select {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 .cloud {
-    position: absolute; 
-    background:hsla(0, 0%, 100%, 0.9);
-    border-radius: 100px;
-    translate: 0;
-    z-index:2;
-  }
+  position: absolute;
+  background: hsla(0, 0%, 100%, 0.9);
+  border-radius: 100px;
+  translate: 0;
+  z-index: 2;
+}
 
 #cloud1 {
-    top: 115px;
-    left: 10px;
-    width: 100px;
-    height: 35px;
-    box-shadow: 10px 10px rgba(0,0,0,0.2);
-    transition: translate 15s;
-  }
-  
+  top: 115px;
+  left: 10px;
+  width: 100px;
+  height: 35px;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
+  transition: translate 15s;
+}
+
 #cloud2 {
-    top: 45px;
-    left: 75px;
-    width: 75px;
-    height: 25px;
-    box-shadow: 5px 5px rgba(0,0,0,0.2);
-    transition: translate 5s;
-  }
-  
+  top: 45px;
+  left: 75px;
+  width: 75px;
+  height: 25px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
+  transition: translate 5s;
+}
+
 #cloud3 {
   top: 30px;
   left: 175px;
   width: 175px;
   height: 70px;
-  box-shadow: 15px 15px rgba(0,0,0,0.2);
+  box-shadow: 15px 15px rgba(0, 0, 0, 0.2);
   transition: translate 25s;
-  }
+}
 
-#cloud1::after, #cloud1::before, #cloud2::after, #cloud2::before, #cloud3::after, #cloud3::before {
-     content: "";
-     position: relative;
-     display: inline-block;
-     background: inherit;
-     border-radius: inherit;
-  }
+#cloud1::after,
+#cloud1::before,
+#cloud2::after,
+#cloud2::before,
+#cloud3::after,
+#cloud3::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+}
 
-#cloud1::after{
-     width: 28px;
-     height: 28px;
-     top: -35px;
-     left: -40px;
-  }
+#cloud1::after {
+  width: 28px;
+  height: 28px;
+  top: -35px;
+  left: -40px;
+}
 
-#cloud1::before{
-     width: 50px;
-     height: 50px;
-     top: -25px;
-     left: 30px;
-  }
+#cloud1::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 30px;
+}
 
-#cloud2::after{
-    width: 23px;
-    height: 23px;
-    top: -22px;
-    left: -30px;
- }
+#cloud2::after {
+  width: 23px;
+  height: 23px;
+  top: -22px;
+  left: -30px;
+}
 
-#cloud2::before{
+#cloud2::before {
   width: 38px;
   height: 38px;
   top: -18px;
   left: 23px;
 }
 
-#cloud3::after{
+#cloud3::after {
   width: 50px;
   height: 50px;
   top: -50px;
   left: -65px;
 }
 
-#cloud3::before{
-width: 80px;
-height: 80px;
-top: -28px;
-left: 50px;
+#cloud3::before {
+  width: 80px;
+  height: 80px;
+  top: -28px;
+  left: 50px;
 }
 
 .cloud:hover {
   translate: 1150px;
-  }
+}
 
 #container {
-    display: grid;
-    grid-template-columns: 45% 55%;
-    grid-template-rows: 16vh 66vh 12vh 5vh;
-    grid-template-areas: 
-      "header header"
-      "cow noticeboard"
-      "buttons tabs"
-      "footer footer";
-    background: transparent;
-  }
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-template-rows: 16vh 78vh 5vh;
+  grid-template-areas:
+    "header header"
+    "cow noticeboard"
+    "footer footer";
+  background: transparent;
+}
 
 h1 {
-    grid-area: header;
-    color: white;
-    -webkit-text-stroke: 1px darkgreen;
-    font-size: clamp(2rem, 4.5vw, 5rem);
-  }
+  grid-area: header;
+  color: white;
+  font-size: clamp(2rem, 4.5vw, 5rem);
+}
 
 h2 {
-    font-size: clamp(1rem, 2vw, 3rem);
-  }
+  font-size: clamp(1rem, 2vw, 3rem);
+}
 
 p {
-    font-size: clamp(1rem, 1.5vw, 2rem);
-  }
+  font-size: clamp(1rem, 1.25vw, 2rem);
+}
 
 #cow-container {
-    grid-area: cow;
-    display: flex;
-    max-width: 100%;
-    background: transparent;
-    z-index: 3;
-  }
+  grid-area: cow;
+  display: grid;
+  grid-template-areas:
+    "cow speech"
+    "buttons buttons";
+  grid-template-columns: 55% 45%;
+  grid-template-rows: 66vh 12vh;
+  max-width: 100%;
+  background: transparent;
+  z-index: 3;
+}
 
 #cow {
-    max-height: 100%;
-    padding: 2%;
-  }
+  grid-area: cow;
+  max-height: 100%;
+  padding: 2%;
+}
 
 #speech-bubble {
-    background-image: url(images/dayspeech.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 100%;
-    max-height: 60%;
-    padding: 2% 5%;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-#noticeboard {
-    grid-area: noticeboard;
-    background-image: url(images/noticeboard.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    max-width: 100%;
-    z-index: 3;
-  }
-
-#noticeboard-text {
-    margin: 10% 0 0 7%;
-    padding: 2%;
-    max-width: 70%;
-    height: 50%;
-  }
+  grid-area: speech;
+  background-image: url(images/dayspeech.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-height: 60%;
+  padding: 10%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
 #buttons {
-    grid-area: buttons;
-    padding: 1%;
-  }
-
-#tabs {
-    grid-area: tabs;
-    padding: 1%;
-  }
+  grid-area: buttons;
+  padding: 1%;
+  border: 1px solid red;
+}
 
 .button {
-    width: 100px;
-    margin: 0 1%;
-    display: inline;
-    background: green;
-    color: white;
-  }
+  display: inline-block;
+  height: 40px;
+  padding: 3px 6px;
+  background: green;
+  color: white;
+}
 
-.button:hover {
+#noticeboard {
+  grid-area: noticeboard;
+  position: relative;
+  background-image: url(images/noticeboard.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  z-index: 3;
+}
+
+#noticeboard-text {
+  display: block;
+  margin: auto;
+  margin-top: 10%;
+  padding: 2%;
+  max-width: 70%;
+  height: 50%;
+}
+
+#tabs {
+  position: absolute;
+  bottom: 11%;
+  left: 14%;
+  padding: 1%;
+  z-index: 4;
+}
+
+.tab {
+  display: inline-block;
+  margin: 0 -4px;
+  height: 40px;
+  padding: 3px 6px;
+  font-size: 1.1rem;
+  line-height: normal;
+  background: green;
+  color: white;
+  border: 2px solid black;
+}
+
+.button:hover,
+.tab:hover {
   color: orange;
 }
 
 #footer {
-    grid-area: footer;
-    text-align: center;
-    font-size: 1.5rem;
-  }
+  grid-area: footer;
+  text-align: center;
+  font-size: 1.5rem;
+}

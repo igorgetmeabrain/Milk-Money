@@ -20,43 +20,36 @@
 
     <div id="container">
 
-      <h1 id="heading">Milk Moolah</h1>
+      <h1 id="heading">Moooolah!</h1>
 
       <div id="cow-container">
         <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
-        <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="theCowSpeaks(whatTheCowSays)">
+        <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="pokeTheCow()">
         <div id="speech-bubble">
           <p id="cow-speech"></p>
         </div>
-      </div>
-
-      <div id="buttons">
-        <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
-        <button onclick="buttonSound()" id="button-1" class="button">I bought some milk</button>
-        <button onclick="buttonSound()" id="button-2" class="button">I drank some milk</button>
-        <button onclick="buttonSound()" id="button-3" class="button">I lost some milk</button>
-        <button onclick="buttonSound()" id="button-4" class="button">I found some milk</button>
-        <button onclick="buttonSound()" id="button-5" class="button">I spilt some milk</button>
+        <div id="buttons">
+          <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
+          <button onclick="buttonOneClick()" id="button-1" class="button">I bought milk</button>
+          <button onclick="buttonTwoClick()" id="button-2" class="button">I drank milk</button>
+          <button onclick="buttonThreeClick()" id="button-3" class="button">I spilt milk</button>
+        </div>
       </div>
 
       <div id="noticeboard">
         <div id="noticeboard-text"><h2>Here is today's leaderboard!</h2><p><br>1. Doug<br>2. Alison<br>3. Reuben<br>4. Alex</b2></p></div>
-      </div>
-
-      <div id="tabs">
-        <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
-        <button onclick="buttonSound()" id="button-1" class="button">I bought some milk</button>
-        <button onclick="buttonSound()" id="button-2" class="button">I drank some milk</button>
-        <button onclick="buttonSound()" id="button-3" class="button">I lost some milk</button>
-        <button onclick="buttonSound()" id="button-4" class="button">I found some milk</button>
-        <button onclick="buttonSound()" id="button-5" class="button">I spilt some milk</button>
+        <div id="tabs">
+          <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
+          <button onclick="tabOneClick()" id="tab-1" class="tab">Leaderboard</button>
+          <button onclick="tabTwoClick()" id="tab-2" class="tab">My milk balance</button>
+          <button onclick="tabThreeClick()" id="tab-3" class="tab">Recent milk usage</button>
+          <button onclick="tabFourClick()" id="tab-4" class="tab">My Account</button>
+        </div>
       </div>
 
       <footer id="footer">Hello I am the footer 2024</footer>
-
     </div>
-    
-    
+       
 	  <script src="index.js"></script>
   </body>
 </html>
