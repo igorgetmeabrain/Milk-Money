@@ -49,11 +49,8 @@ h6 {
 /* END OF CSS RESET */
 
 body {
-  font-family: "Permanent Marker", cursive;
-  -webkit-text-stroke: 1px black;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 2px;
+  font-family: "Fuzzy Bubbles", sans-serif;
+  font-weight: 700;
   text-align: center;
   cursor: grab;
   background-image: linear-gradient(180deg,
@@ -153,10 +150,10 @@ body:has(input[type='checkbox']:checked) {
 }
 
 #cloud1 {
-  top: 115px;
+  top: 125px;
   left: 10px;
-  width: 100px;
-  height: 35px;
+  width: 120px;
+  height: 45px;
   box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
   transition: translate 15s;
 }
@@ -207,8 +204,8 @@ body:has(input[type='checkbox']:checked) {
 }
 
 #cloud2::after {
-  width: 23px;
-  height: 23px;
+  width: 25px;
+  height: 25px;
   top: -22px;
   left: -30px;
 }
@@ -250,6 +247,8 @@ body:has(input[type='checkbox']:checked) {
 }
 
 h1 {
+  font-family: "Permanent Marker", cursive;
+  -webkit-text-stroke: 1px black;
   grid-area: header;
   color: white;
   font-size: clamp(2rem, 4.5vw, 5rem);
@@ -259,17 +258,13 @@ h2 {
   font-size: clamp(1rem, 2vw, 3rem);
 }
 
-p {
-  font-size: clamp(1rem, 1.25vw, 2rem);
-}
-
 #cow-container {
   grid-area: cow;
   display: grid;
   grid-template-areas:
     "cow speech"
     "buttons buttons";
-  grid-template-columns: 55% 45%;
+  grid-template-columns: 50% 50%;
   grid-template-rows: 66vh 12vh;
   max-width: 100%;
   background: transparent;
@@ -279,17 +274,21 @@ p {
 #cow {
   grid-area: cow;
   max-height: 100%;
+  margin-top: 10%;
   padding: 2%;
 }
 
 #speech-bubble {
   grid-area: speech;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: url(images/dayspeech.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
   max-height: 60%;
-  padding: 10%;
+  padding: 0 12% 25% 9%;
   opacity: 0;
   transition: opacity 0.3s;
 }

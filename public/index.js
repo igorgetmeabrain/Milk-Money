@@ -7,7 +7,8 @@ const moo = document.getElementById("moo")
 const cowbell = document.getElementById("cowbell")
 const cowpat = document.getElementById("cowpat")
 const clouds = document.querySelectorAll(".cloud")
-const whatTheCowSays = ["Moooooooo!", "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", "Oh, What a beautiful Mooooorning!", "Hey, quit poking me, that's mooolestation!", "Oi, don't make me hoof it over there - you'll udderly regret it!"]
+// move this to a separate file
+const whatTheCowSays = ["Mooooooooooo!", "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", "Oh, What a beautiful Mooooorning!", "Hey, quit poking me, that's mooolestation!", "Oi, don't make me hoof it over there - you'll udderly regret it!"]
 
 // average uk supermarket price per litre (aug 2024)
 const milkPrices = {
@@ -17,20 +18,16 @@ const milkPrices = {
   almond: 2
 }
 
-console.log("Hello")
-fetch('./cowquotes.json')
-.then((res) => {console.log(res.json())})
-
 // frontend interaction
 
 function theCowSpeaks(mooing) {
+  // check this line
+  let fontSize = (2.2-mooing.length*0.01) < 0.8 ? 0.8 : (2.2-mooing.length*0.01)
+  console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
+  speechText.style.fontSize = `${fontSize}rem`
   speechBubble.style.opacity = "1";
   moo.play();
-  speechText.innerHTML = mooing
-  setTimeout(()=>{
-    speechBubble.style.opacity = "0";
-    speechText.innerHTML = "";
-  }, "10000")
+  speechText.innerHTML = mooing;
 }
 
 let cowPokeCount = 0;
@@ -51,16 +48,20 @@ function buttonSound() {
   cowbell.play();
 }
 
-function buttonOneClick() {
+function boughtMilk() {
   buttonSound()
 }
 
-function buttonTwoClick() {
+function drankMilk() {
   buttonSound()
 }
 
-function buttonThreeClick() {
+async function spiltMilk() {
   buttonSound()
+  // fetch random quote
+  const randomQuote = await fetch("/quote")
+  const parsed = await randomQuote.json()
+  theCowSpeaks(`Oh dear.<br>Perhaps this observation from ${parsed.author} will help:<br>"${parsed.quote}".`)
 }
 
 // tab functions
@@ -109,4 +110,3 @@ function dayNight() {
 function buyMilk() {
 
 }
-
