@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Moolah Login</title>
+    <title>Moola Login</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
@@ -13,39 +14,26 @@
   </head>
 
   <body class="no-select">
-
     <div id="container">
 
-      <h1 id="heading">Welcome to Moooolah!</h1>
+      <h1 id="heading">Welcome to Moola!</h1>
 
-      <div id="cow-container">
-        <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
-        <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="pokeTheCow()">
-        <div id="speech-bubble" onclick="style='opacity: 0'">
-          <p id="cow-speech"></p>
-        </div>
-        <div id="buttons">
-          <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
-          <button onclick="boughtMilk()" id="bought-milk" class="button">I bought milk</button>
-          <button onclick="drankMilk()" id="drank-milk" class="button">I drank milk</button>
-          <button onclick="spiltMilk()" id="spilt-milk" class="button">I spilt milk</button>
-        </div>
-      </div>
-
-      <div id="noticeboard">
-        <div id="noticeboard-text"><h2>Here is today's leaderboard!</h2><p><br>1. Doug<br>2. Alison<br>3. Reuben<br>4. Alex</b2></p></div>
-        <div id="tabs">
-          <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
-          <button onclick="tabOneClick()" id="tab-1" class="tab">Leaderboard</button>
-          <button onclick="tabTwoClick()" id="tab-2" class="tab">My milk balance</button>
-          <button onclick="tabThreeClick()" id="tab-3" class="tab">Recent milk usage</button>
-          <button onclick="tabFourClick()" id="tab-4" class="tab">My Account</button>
-        </div>
+      <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
+      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="">
+      
+      <div id="login-form">
+        <input type="text" placeholder="please enter your first name">
+        <input type="password" placeholder="please enter your password">
+        <button type="submit">Login</button>
+        <a id="forgot-password" href="/forgot-password">Forgotten password?</a>
+        <a id="create-account" href="/create-account">New to Moolah? Create an account</a>
       </div>
 
       <footer id="footer">Hello I am the footer 2024</footer>
+      
     </div>
+    
        
-	  <script src="index.js"></script>
+	  <script src="login.js"></script>
   </body>
 </html>

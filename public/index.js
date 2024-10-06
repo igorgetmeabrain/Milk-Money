@@ -3,12 +3,19 @@ const cowImage = document.getElementById("cow");
 const speechBubble = document.getElementById("speech-bubble");
 const speechText = document.getElementById("cow-speech");
 const noticeboard = document.getElementById("noticeboard");
-const moo = document.getElementById("moo")
-const cowbell = document.getElementById("cowbell")
-const cowpat = document.getElementById("cowpat")
-const clouds = document.querySelectorAll(".cloud")
-// move this to a separate file
-const whatTheCowSays = ["Mooooooooooo!", "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", "Oh, What a beautiful Mooooorning!", "Hey, quit poking me, that's mooolestation!", "Oi, don't make me hoof it over there - you'll udderly regret it!"]
+const moo = document.getElementById("moo");
+const cowbell = document.getElementById("cowbell");
+const cowpat = document.getElementById("cowpat");
+const clouds = document.querySelectorAll(".cloud");
+
+
+const whatTheCowSays = [
+  "Mooooooooooo!", 
+  "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", 
+  "Oh, What a beautiful Mooooorning!", 
+  "Hey, quit poking me, that's mooolestation!", 
+  "Oi, don't make me hoof it over there - you'll udderly regret it!"
+];
 
 // average uk supermarket price per litre (aug 2024)
 const milkPrices = {
@@ -16,7 +23,10 @@ const milkPrices = {
   oat: 2,
   soya: 2,
   almond: 2
-}
+};
+
+// one moonit is equivalent to 100ml of cow's milk at the going rate (approx measure for one hot drink)
+const moonit = (milkPrices.cow/10).toFixed(2);
 
 // frontend interaction
 
@@ -49,14 +59,15 @@ function buttonSound() {
 }
 
 function boughtMilk() {
-  buttonSound()
+  buttonSound();
+  openModal();
 }
 
 function drankMilk() {
   buttonSound()
 }
 
-async function spiltMilk() {
+async function needMilk() {
   buttonSound()
   // fetch random quote
   const randomQuote = await fetch("/quote")
@@ -92,7 +103,6 @@ function dayNight() {
     cowImage.src = "images/nightcow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 20%, 0.9)");
     speechBubble.style.backgroundImage = "url(images/nightspeech.png)";
-    noticeboard.style.backgroundImage = "url(images/dark-noticeboard.png)";
     noticeboard.style.color = "white";
     speechText.style.color = "white";
     theCowSpeaks(whatTheCowSays[1]);
@@ -100,7 +110,6 @@ function dayNight() {
     cowImage.src = "images/daycow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 100%, 0.9)");
     speechBubble.style.backgroundImage = "url(images/dayspeech.png)";
-    noticeboard.style.backgroundImage = "url(images/noticeboard.png)";
     speechText.style.color = "black";
     noticeboard.style.color = "black";
     theCowSpeaks(whatTheCowSays[2]);
@@ -110,3 +119,21 @@ function dayNight() {
 function buyMilk() {
 
 }
+
+// modal 
+
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const closeModalBtn = document.querySelector(".btn-close");
+
+const openModal = function () {
+  modal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+};
+
+const closeModal = function () {
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+};
+
+closeModalBtn.addEventListener("click", closeModal);

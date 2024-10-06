@@ -16,6 +16,15 @@ app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/views/login.html");
 });
 
+app.get("/create-account", (req, res) => {
+  res.sendFile(__dirname + "/views/account.html");
+});
+
+/* 
+app.get("/create-new-user", (req, res) => {
+});
+*/
+
 app.get("/quote", (req, res) => {
   let randomQuote = cowQuotes.quotes[Math.floor(Math.random()*(cowQuotes.quotes.length))]
   res.send(randomQuote)

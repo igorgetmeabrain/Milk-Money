@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Moola Create Account</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="account.css" type="text/css">
+  </head>
+
+  <body class="no-select">
+    <div id="container">
+
+      <h1 id="heading">Welcome to Moola!</h1>
+
+      <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
+      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="">
+      
+      <form id="account-form" action="/create-new-user">
+        <label for="username">Please choose a username: </label>
+        <input id="username" name="username" type="text" placeholder="alphnumeric characters and underscores only" required>
+        
+        <label for="password">Choose a password: </label>
+        <input id="password" name="password" type="password" required>
+        
+        <label for="password-check">Re-enter your password: </label>
+        <input id="password-check" type="password" placeholder="please re-enter your password" required>
+        
+        <div class="custom-select">
+          <label for="security-question">Please choose a security question: </label>
+          <select id="security-question">
+            <option value=1>Who is your least favourite composer?</option>
+            <option value=2>Which musical instrument would you uninvent?</option>
+            <option value=3>What is your most annoying earworm?</option>
+            <option value=4>Who is the most over-rated musician?</option>
+          </select>
+          <input type="text" placeholder="please type your answer" required>
+        </div>
+        
+        <div id="milk-preference" class="custom-select">
+          <select>
+            <option value=0>Which is your preferred milk?</option>
+            <option value=1>Skimmed</option>
+            <option value=2>Semi-skimmed</option>
+            <option value=3>Full fat</option>
+            <option value=4>Oat</option>
+            <option value=5>Almond</option>
+            <option value=6>Soy</option>
+            <option value=6>Other</option>
+          </select>
+        </div>
+        <label for="bot-check">What is the shelfmark for Debussy's Cello Sonata?</label>
+        <input type="text" id="bot-check" required>
+        <button type="submit" value="Submit">Create Account</button>
+      </form>
+
+      <footer id="footer">Hello I am the footer 2024</footer>
+      
+    </div>
+    
+       
+	  <script src="login.js"></script>
+  </body>
+</html>

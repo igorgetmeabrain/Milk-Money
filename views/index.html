@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Milk Money App</title>
+    <title>Moola Homepage</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
 
     <div id="container">
 
-      <h1 id="heading">Moooolah!</h1>
+      <h1 id="heading">Moola!</h1>
 
       <div id="cow-container">
         <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
@@ -33,23 +34,43 @@
           <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
           <button onclick="boughtMilk()" id="bought-milk" class="button">I bought milk</button>
           <button onclick="drankMilk()" id="drank-milk" class="button">I drank milk</button>
-          <button onclick="spiltMilk()" id="spilt-milk" class="button">I spilt milk</button>
+          <button onclick="needMilk()" id="need-milk" class="button">We need milk</button>
         </div>
       </div>
 
       <div id="noticeboard">
-        <div id="noticeboard-text"><h2>Here is today's leaderboard!</h2><p><br>1. Doug<br>2. Alison<br>3. Reuben<br>4. Alex</b2></p></div>
         <div id="tabs">
           <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
           <button onclick="tabOneClick()" id="tab-1" class="tab">Leaderboard</button>
-          <button onclick="tabTwoClick()" id="tab-2" class="tab">My milk balance</button>
-          <button onclick="tabThreeClick()" id="tab-3" class="tab">Recent milk usage</button>
+          <button onclick="tabTwoClick()" id="tab-2" class="tab">My moonit balance</button>
+          <button onclick="tabThreeClick()" id="tab-3" class="tab">Recent moonit usage</button>
           <button onclick="tabFourClick()" id="tab-4" class="tab">My Account</button>
         </div>
       </div>
 
       <footer id="footer">Hello I am the footer 2024</footer>
     </div>
+
+<!-- modal -->
+    <section class="modal hidden">
+      <div class="flex">
+        <img src="images/daycow.png" width="42px" height="50px" alt="user" />
+        <button class="btn-close">⨉</button>
+      </div>
+      <div>
+        <h3>You bought milk!</h3>
+        <p>
+          Here is your updated moonit balance!
+        </p>
+      </div>
+    
+      <input type="email" id="email" placeholder="brendaneich@js.com" />
+      <button class="btn">Submit</button>
+    </section>
+    
+    <div class="overlay hidden"></div>
+
+  <!-- modal end -->
        
 	  <script src="index.js"></script>
   </body>
