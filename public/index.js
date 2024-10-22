@@ -7,8 +7,7 @@ const moo = document.getElementById("moo");
 const cowbell = document.getElementById("cowbell");
 const cowpat = document.getElementById("cowpat");
 const clouds = document.querySelectorAll(".cloud");
-
-
+const toggleUnitButton = document.getElementById("toggle-units");
 const whatTheCowSays = [
   "Mooooooooooo!", 
   "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", 
@@ -17,18 +16,7 @@ const whatTheCowSays = [
   "Oi, don't make me hoof it over there - you'll udderly regret it!"
 ];
 
-// average uk supermarket price per litre (aug 2024)
-const milkPrices = {
-  cow: 0.95,
-  oat: 2,
-  soya: 2,
-  almond: 2
-};
-
-// one moonit is equivalent to 100ml of cow's milk at the going rate (approx measure for one hot drink)
-const moonit = (milkPrices.cow/10).toFixed(2);
-
-// frontend interaction
+/* HOMEPAGE INTERACTION */
 
 function theCowSpeaks(mooing) {
   // check this line
@@ -120,11 +108,13 @@ function buyMilk() {
 
 }
 
-// modal 
+const toggleUnits = () => toggleUnitButton.innerText == "Litres" ? toggleUnitButton.innerText = "Pints" : toggleUnitButton.innerText = "Litres"
 
+// modal functions
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const closeModalBtn = document.querySelector(".btn-close");
+const modalSubmit = document.querySelector("#modal-submit");
 
 const openModal = function () {
   modal.classList.remove("hidden");
@@ -136,4 +126,36 @@ const closeModal = function () {
   overlay.classList.add("hidden");
 };
 
+const modalHandler = async () => {
+  const errorArea = document.querySelector("#error-div");
+  const resultArea = document.querySelector("#result-div"); 
+  const numberInput = document.querySelector("#milk-qty");
+  const milkQty = numberInput.value;
+  const unitsButton = document.querySelector("#toggle-units");
+  const units = unitsButton.innerText;
+  
+  const stuff = {"qty": milkQty, "units": units}
+
+  const data = await fetch("/buy-milk", {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(stuff)
+  });
+  
+  const parsed = await data.json();
+  if (parsed.error) {
+    errorArea.innerText = JSON.stringify(parsed);
+    return;
+  }
+
+  resultArea.innerText = parsed.result;
+  return; 
+};
+
+modalSubmit.addEventListener("click", modalHandler);
 closeModalBtn.addEventListener("click", closeModal);
+
+
