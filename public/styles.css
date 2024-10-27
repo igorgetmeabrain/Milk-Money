@@ -283,7 +283,6 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(images/dayspeech.png);
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
@@ -309,6 +308,9 @@ h2 {
   font-weight: 600;
 }
 
+
+/* NOTICEBOARD STYLES */
+
 #noticeboard-container {
   grid-area: noticeboard;
   background: transparent;
@@ -325,7 +327,7 @@ h2 {
   width: 80%;
   height: 80%;
   background: white;
-  border: 1px solid black;
+  border: 3px solid black;
 }
 
 #tabs {
@@ -347,10 +349,38 @@ h2 {
   border-top: none;
 }
 
+.active-tab {
+  /* calculate color of tab by tab number */
+  background: blue;
+  color: white;
+}
+
 .button:hover,
 .tab:hover {
   color: orange;
 }
+
+.leaderboard {
+  color: blue;
+  border: 3px solid blue !important;
+}
+
+.moonit-balance {
+  color: red;
+  border: 3px solid red !important;
+}
+
+.transactions{
+  color: orange;
+  border: 3px solid orange !important;
+}
+
+.about {
+  color: purple;
+  border: 3px solid purple !important;
+}
+
+/* END OF NOTICEBOARD STYLES */
 
 #footer {
   grid-area: footer;

@@ -23,11 +23,28 @@ module.exports = function (app) {
         res.send(randomQuote)
     });
         
-      // flesh this out... convert to moonits and get updated balance
+    // flesh this out... get updated balance and leaderboard
     app.route("/buy-milk")
       .post((req, res)=>{
-        const {qty, units} = req.body;
+        const {qty, units, date} = req.body;
         const moonits = converter.convertToMoonits(qty, units)
-        return res.json({result: `you gained ${moonits} moonits`})
+        return res.json({result: `You gained ${moonits} moonits on ${date}`})
       });
+
+    app.route("/drink-milk")
+      .post((req, res)=>{
+        const {qty, date} = req.body;
+        return res.send({result: `You drank ${qty} moonits on ${date}`})
+      });
+
+    app.route("/leaderboard")
+      .get((req, res) => {
+        return res.json({leaderboard: [
+          {name: "Doug", balance: 33},
+          {name: "Mimi", balance: 20},
+          {name: "Alison", balance: 3},
+          {name: "Reuben", balance: 0},
+          {name: "Alex", balance: -10}
+         ]})
+      })
 }

@@ -39,13 +39,13 @@
       </div>
 
       <div id="noticeboard-container">
-        <div id="noticeboard">hello</div>
+        <div id="noticeboard"></div>
         <div id="tabs">
           <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
-          <button onclick="tabOneClick()" id="tab-1" class="tab">Leaderboard</button>
-          <button onclick="tabTwoClick()" id="tab-2" class="tab">My moonit balance</button>
-          <button onclick="tabThreeClick()" id="tab-3" class="tab">Recent moonit usage</button>
-          <button onclick="tabFourClick()" id="tab-4" class="tab">My Account</button>
+          <button onclick="displayLeaderboard()" id="tab-1" class="tab">Leaderboard</button>
+          <button onclick="displayBalance()" id="tab-2" class="tab">My moonit balance</button>
+          <button onclick="displayTransactions()" id="tab-3" class="tab">Recent moonit usage</button>
+          <button onclick="displayAbout()" id="tab-4" class="tab">About Moonit</button>
         </div>
       </div>
 
@@ -56,13 +56,12 @@
  
     <section class="modal hidden">
       <div class="flex">
-        <img src="images/daycow.png" width="42px" height="50px" alt="user" />
+        <img src="images/daycow.png" width="42px" height="50px" alt="mini cow logo" />
         <button class="btn-close">⨉</button>
       </div>
-      <h3>You bought milk!</h3>
-      <input type="number" id="milk-qty" placeholder="enter amount" />
-      <button id="toggle-units" onclick="toggleUnits()">Litres</button>
-      <button class="btn" id="modal-submit" >Submit</button>
+      <div id="modal-content"></div>
+      <input type="date" id="transaction-date">
+      <button class="btn" id="modal-submit">Submit</button>
       <div id="error-div"></div>
       <div id="result-div"></div>
     </section>
