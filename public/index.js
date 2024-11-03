@@ -87,16 +87,16 @@ async function needMilk() {
 // tab functions
 const leaderboardTab = document.getElementById("tab-1");
 const balanceTab = document.getElementById("tab-2");
-const transactionsTab = document.getElementById("tab-3");
+const dailyQuizTab = document.getElementById("tab-3");
 const aboutTab = document.getElementById("tab-4");
-const tabContent = document.getElementById("noticeboard");
+const noticeboardContent = document.getElementById("noticeboard");
 
 function tabSound() {
   cowpat.currentTime = 0;
   cowpat.play();
 }
 
-const renderLeaderBoardAsHTML = (leaderboard) => {
+const leaderboardHTML = (leaderboard) => {
   let HTMLString = `
   <h2>Leaderboard</h2>
   <h4>Rank Name Moonits</h4>
@@ -107,58 +107,136 @@ const renderLeaderBoardAsHTML = (leaderboard) => {
   return HTMLString;
 }
 
+// incorporate codepen totaliser here
+const balanceHTML = (transactions, balance) => {
+  let HTMLString = `
+  <div id="totaliser"></div>
+  <div id="balance-text">
+    <h2>Your Moonit Balance</h2>
+    <h3>You have ${balance} moonits!</h3>
+    <p>Your recent transactions:</p>
+    <ul>`
+  transactions.forEach(t=>HTMLString += `<li>${t.moonits} on ${t.date}</li>`);
+  HTMLString += `
+    </ul>
+  </div>`;
+
+  console.log(HTMLString);
+  return HTMLString;
+}
+
 const displayLeaderboard = async () =>  {
 
   tabSound();
   const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   leaderboardTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "moonit-balance", "transactions", "my-account-tab");
+  noticeboard.classList.remove("leaderboard", "moonit-balance", "daily-quiz", "about");
   noticeboard.classList.add("leaderboard");
 
   const data = await fetch("/leaderboard");
 
   const parsed = await data.json();
   if (parsed.error) {
-    tabContent.innerText = JSON.stringify(parsed);
+    noticeboardContent.innerText = JSON.stringify(parsed);
     return;
   }
 
-  tabContent.innerHTML = renderLeaderBoardAsHTML(parsed.leaderboard);
+  noticeboardContent.innerHTML = leaderboardHTML(parsed.leaderboard);
   return; 
 };
 
+// functions for totaliser display
+function fillScaleElement(i) {
+  setTimeout(function() { 
+    document.getElementById(`${i}`).style.background = `hsl(${i+50}, 70%, 50%)`;
+    document.getElementById("counter").innerText = `${Math.round(i/4)}`;
+  }, i<0 ? -10*i : 10*i)
+  
+}
+
+const fillTotaliser = (total) => {
+  const negPos = total<0 ? -1 : 1 
+  for (let i=total<0 ? 1 : 0; i<total*4*negPos; i++) {
+    fillScaleElement(i*negPos)
+  }
+};
+
 const displayBalance = async () => {
+  
   tabSound();
   const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   balanceTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "moonit-balance", "transactions", "my-account-tab");
+  noticeboard.classList.remove("leaderboard", "daily-quiz", "about");
   noticeboard.classList.add("moonit-balance");
 
-  tabContent.innerHTML = "This is placeholder text until I have written this function"
+  const data = await fetch("/user-balance");
+  console.log(data);
+
+  const parsed = await data.json();
+  if (parsed.error) {
+    tabContent.innerText = JSON.stringify(parsed);
+    return;
+  }
+  
+
+  // need to deal with min (-20) max (24) values and confetti
+  noticeboardContent.innerHTML = balanceHTML(parsed.transactions, parsed.balance);
+  const totaliser = document.getElementById("totaliser");
+  
+  // create document fragment and populate
+  let fragment = document.createDocumentFragment();
+  let div, counter, button, posEls = 96, negEls = 80;
+  for (let i=0; i<=posEls; i++) {
+   div = document.createElement("div")
+   div.className = "scale"
+   div.id = `${posEls-i}`
+   fragment.appendChild(div)
+  }
+
+  const zero = document.createElement("hr");
+  fragment.appendChild(zero);
+
+  for (let i=0; i<=negEls; i++) {
+    div = document.createElement("div")
+    div.className = "scale"
+    div.id = `${-1-i}`
+    fragment.appendChild(div)
+  }
+  counter = document.createElement("p")
+  counter.innerText = "0";
+  fragment.appendChild(counter).id = "counter";
+  button = document.createElement("button")
+  fragment.appendChild(button).id = "refresh-button"
+  button.onclick = fillTotaliser(parsed.balance)
+  button.innerText = "Refresh"
+
+  totaliser.appendChild(fragment)
+  return;
 }
 
-const displayTransactions = async () => {
+const displayDailyQuiz = async () => {
   tabSound();
   const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
-  transactionsTab.classList.add("active-tab");
+  dailyQuizTab.classList.add("active-tab");
   noticeboard.classList.remove("leaderboard", "moonit-balance", "about");
-  noticeboard.classList.add("transactions");
+  noticeboard.classList.add("daily-quiz");
 
-  tabContent.innerHTML = "This is placeholder text until I have written this function"
+  noticeboardContent.innerHTML = "This is placeholder text until I have written this function"
 }
+
 
 const displayAbout = async () => {
   tabSound();
   const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   aboutTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "moonit-balance", "transactions");
+  noticeboard.classList.remove("leaderboard", "moonit-balance", "daily-quiz");
   noticeboard.classList.add("about");
 
-  tabContent.innerHTML = "This is placeholder text until I have written this function"
+  noticeboardContent.innerHTML = "This is placeholder text until I have written this function"
 }
 
 // modal functions
@@ -204,15 +282,10 @@ const modalHandler = async () => {
   const numberInput = document.querySelector("#milk-qty");
   const milkQty = numberInput.value;
   const unitsButton = document.querySelector("#toggle-units");
-  const units = unitsButton ? unitsButton.innerText : "no units button"
+  const units = unitsButton ? unitsButton.innerText : "moonits"
   const datePicker = document.querySelector("#transaction-date");
-  // converts e.g. '2024-10-25' to 'Fri 25 Oct 2024'
-  const dateString = new Date(datePicker.value).toLocaleDateString(undefined, {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'}).split(",").join("");
-  
-  const stuff = {"qty": milkQty, "units": units, "date": dateString}
-
-  console.log(units)
-  const route = units == "no units button" ? "/drink-milk" : "/buy-milk";
+  const stuff = {"qty": milkQty, "units": units, "date": datePicker.value}
+  const route = units == "moonits" ? "/drink-milk" : "/buy-milk";
 
   const data = await fetch(route, {
     method: "POST",
@@ -231,6 +304,7 @@ const modalHandler = async () => {
 
   resultArea.innerText = parsed.result;
   return; 
+
 };
 
 modalSubmit.addEventListener("click", modalHandler);

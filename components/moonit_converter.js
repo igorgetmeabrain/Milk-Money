@@ -40,8 +40,25 @@ class Converter {
   convertToMoonits(qty, units) {return units == "Litres" ? Math.round(+qty*10) : Math.round(+qty*5.68)}
 
   // transaction id for database
-  moonitTransactionId(moonits) {return `{moonits}-${Date.now()}`}
+  transactionId(moonits, date) {return `${moonits}d${Date.now()}`}
 
+  getDateString(date) {return new Date(date).toLocaleDateString(undefined, 
+    {
+      weekday: 'short', 
+      day: 'numeric', 
+      month: 'short', 
+      year: 'numeric'
+    }).split(",").join("");}
+
+  transactionsObjects(array) {
+    let formatted = [], splitTrans, transDate;
+    for (let i=0; i<array.length; i++) {
+      splitTrans = array[i].split("d");
+      transDate = this.getDateString(+splitTrans[1])
+      formatted.push({moonits: +splitTrans[0], date: transDate })
+    }
+    return formatted;
+  }
 }
 
 module.exports = Converter;

@@ -39,12 +39,13 @@
       </div>
 
       <div id="noticeboard-container">
+        <!-- noticeboard content rendered to this div -->
         <div id="noticeboard"></div>
         <div id="tabs">
           <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
           <button onclick="displayLeaderboard()" id="tab-1" class="tab">Leaderboard</button>
           <button onclick="displayBalance()" id="tab-2" class="tab">My moonit balance</button>
-          <button onclick="displayTransactions()" id="tab-3" class="tab">Recent moonit usage</button>
+          <button onclick="displayDailyQuiz()" id="tab-3" class="tab">Daily Quiz</button>
           <button onclick="displayAbout()" id="tab-4" class="tab">About Moonit</button>
         </div>
       </div>
@@ -68,7 +69,11 @@
     
     <div class="overlay hidden"></div>
 
-  <!-- modal end -->
+  <!-- orientation warning -->
+  <div id="orientation">
+    <div class="phone"></div>
+    <div class="message">Please rotate your device!</div>
+  </div>
        
 	  <script src="index.js"></script>
   </body>
