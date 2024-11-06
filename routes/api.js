@@ -39,14 +39,14 @@ module.exports = function (app) {
 
     app.route("/drink-milk")
       .post((req, res)=>{
-        const {moonits, date} = req.body;
+        const {qty, date} = req.body;
         const dateString = converter.getDateString(date);
-        const transactionId = converter.transactionId(moonits, date);
+        const transactionId = converter.transactionId(qty, date);
         // save transactionid and update balance in database
         let balanceFromDatabase = 15;
         console.log(transactionId);
 
-        return res.send({result: `You drank ${moonits} moonits on ${dateString}. You now have ${balanceFromDatabase-moonits} moonits.`})
+        return res.send({result: `You drank ${qty} moonits on ${dateString}. You now have ${balanceFromDatabase-qty} moonits.`})
       });
     
     // placeholder object - will be retrieved from database
@@ -65,7 +65,7 @@ module.exports = function (app) {
     .get((req, res) => {
       // user.transactions and user.balance from database
       const userTransactions = ["-6d1730654468178", "10d1730654429573", "10d1730654358280"];
-      const userBalance = 24;
+      const userBalance = -80;
       const transactionsArray = converter.transactionsObjects(userTransactions);
       return res.json({
         transactions: transactionsArray,

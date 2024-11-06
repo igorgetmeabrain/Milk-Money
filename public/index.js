@@ -16,6 +16,12 @@ const whatTheCowSays = [
 ];
 let isItDaytime = true;
 
+const jsConfetti = new JSConfetti()
+jsConfetti.addConfetti({
+  emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '🐄', '🐮', '🦡', '🥛', '💥', '💦', '🎉', '🎊', '🎉'],
+  emojiSize: 50,
+  confettiNumber: 100,
+})
 
 /* HOMEPAGE INTERACTION */
 
@@ -107,21 +113,18 @@ const leaderboardHTML = (leaderboard) => {
   return HTMLString;
 }
 
-// incorporate codepen totaliser here
 const balanceHTML = (transactions, balance) => {
   let HTMLString = `
   <div id="totaliser"></div>
   <div id="balance-text">
-    <h2>Your Moonit Balance</h2>
-    <h3>You have ${balance} moonits!</h3>
-    <p>Your recent transactions:</p>
+    <h2 id="balance-title">Your Moonit Balance</h2>
+    <h3 id="balance-display">You have ${balance} moonits!</h3>
+    <p id="transactions-text">Your recent transactions:</p>
     <ul>`
-  transactions.forEach(t=>HTMLString += `<li>${t.moonits} on ${t.date}</li>`);
+  transactions.forEach(t=>HTMLString += `<li>${t.moonits} moonits on ${t.date}</li>`);
   HTMLString += `
     </ul>
   </div>`;
-
-  console.log(HTMLString);
   return HTMLString;
 }
 
@@ -148,16 +151,22 @@ const displayLeaderboard = async () =>  {
 
 // functions for totaliser display
 function fillScaleElement(i) {
-  setTimeout(function() { 
-    document.getElementById(`${i}`).style.background = `hsl(${i+50}, 70%, 50%)`;
-    document.getElementById("counter").innerText = `${Math.round(i/4)}`;
+  let negPos = i<0 ? -1 : 1;
+  setTimeout(function() {
+    if (i>=-85 && i<=100) {
+      document.getElementById(`${i}`).style.background = `hsl(${i+50}, 70%, 50%)`;
+    } else if (i>100) {
+      console.log("confetti")
+    }
+    document.getElementById("counter").innerText = `${i}`;
+    
   }, i<0 ? -10*i : 10*i)
   
 }
 
-const fillTotaliser = (total) => {
-  const negPos = total<0 ? -1 : 1 
-  for (let i=total<0 ? 1 : 0; i<total*4*negPos; i++) {
+const fillTotaliser = (balance) => {
+  const negPos = balance<0 ? -1 : 1 
+  for (let i=1; i<=balance*negPos; i++) {
     fillScaleElement(i*negPos)
   }
 };
@@ -172,7 +181,6 @@ const displayBalance = async () => {
   noticeboard.classList.add("moonit-balance");
 
   const data = await fetch("/user-balance");
-  console.log(data);
 
   const parsed = await data.json();
   if (parsed.error) {
@@ -180,15 +188,13 @@ const displayBalance = async () => {
     return;
   }
   
-
-  // need to deal with min (-20) max (24) values and confetti
   noticeboardContent.innerHTML = balanceHTML(parsed.transactions, parsed.balance);
   const totaliser = document.getElementById("totaliser");
   
   // create document fragment and populate
   let fragment = document.createDocumentFragment();
-  let div, counter, button, posEls = 96, negEls = 80;
-  for (let i=0; i<=posEls; i++) {
+  let div, counter, posEls = 100, negEls = -85;
+  for (let i=0; i<posEls; i++) {
    div = document.createElement("div")
    div.className = "scale"
    div.id = `${posEls-i}`
@@ -198,21 +204,18 @@ const displayBalance = async () => {
   const zero = document.createElement("hr");
   fragment.appendChild(zero);
 
-  for (let i=0; i<=negEls; i++) {
+  for (let i=-1; i>=negEls; i--) {
     div = document.createElement("div")
     div.className = "scale"
-    div.id = `${-1-i}`
+    div.id = `${i}`
     fragment.appendChild(div)
   }
   counter = document.createElement("p")
   counter.innerText = "0";
   fragment.appendChild(counter).id = "counter";
-  button = document.createElement("button")
-  fragment.appendChild(button).id = "refresh-button"
-  button.onclick = fillTotaliser(parsed.balance)
-  button.innerText = "Refresh"
-
   totaliser.appendChild(fragment)
+
+  fillTotaliser(parsed.balance);
   return;
 }
 
@@ -242,8 +245,12 @@ const displayAbout = async () => {
 // modal functions
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
+const errorArea = document.querySelector("#error-div");
+const resultArea = document.querySelector("#result-div"); 
 
 const openModal = function (buyOrDrink) {
+  errorArea.innerText = "";
+  resultArea.innerText = "";
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
   const modalContent = document.getElementById("modal-content");
@@ -276,14 +283,17 @@ const closeModalBtn = document.querySelector(".btn-close");
 const modalSubmit = document.querySelector("#modal-submit");
 
 const modalHandler = async () => {
-
-  const errorArea = document.querySelector("#error-div");
-  const resultArea = document.querySelector("#result-div"); 
   const numberInput = document.querySelector("#milk-qty");
   const milkQty = numberInput.value;
   const unitsButton = document.querySelector("#toggle-units");
   const units = unitsButton ? unitsButton.innerText : "moonits"
   const datePicker = document.querySelector("#transaction-date");
+
+  // input error handling
+  if (datePicker.value == "Invalid Date" || numberInput.value == 0) {
+    errorArea.innerText = "Please enter valid values for quantity and date."
+    return;
+  }
   const stuff = {"qty": milkQty, "units": units, "date": datePicker.value}
   const route = units == "moonits" ? "/drink-milk" : "/buy-milk";
 
