@@ -14,14 +14,8 @@ const whatTheCowSays = [
   "Hey, quit poking me, that's mooolestation!", 
   "Oi, don't make me hoof it over there - you'll udderly regret it!"
 ];
-let isItDaytime = true;
 
-const jsConfetti = new JSConfetti()
-jsConfetti.addConfetti({
-  emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '🐄', '🐮', '🦡', '🥛', '💥', '💦', '🎉', '🎊', '🎉'],
-  emojiSize: 50,
-  confettiNumber: 100,
-})
+let isItDaytime = true;
 
 /* HOMEPAGE INTERACTION */
 
@@ -84,7 +78,7 @@ function drankMilk() {
 
 async function needMilk() {
   buttonSound()
-  // fetch random quote
+  // add catch error message
   const randomQuote = await fetch("/quote")
   const parsed = await randomQuote.json()
   theCowSpeaks(`Oh dear.<br>Perhaps this observation from ${parsed.author} will help:<br>"${parsed.quote}".`)
@@ -95,7 +89,6 @@ const leaderboardTab = document.getElementById("tab-1");
 const balanceTab = document.getElementById("tab-2");
 const dailyQuizTab = document.getElementById("tab-3");
 const aboutTab = document.getElementById("tab-4");
-const noticeboardContent = document.getElementById("noticeboard");
 
 function tabSound() {
   cowpat.currentTime = 0;
@@ -128,30 +121,40 @@ const balanceHTML = (transactions, balance) => {
   return HTMLString;
 }
 
+const modalHTML = `<section class="modal hidden">
+<div class="flex" id="modal">
+<img src="images/daycow.png" width="42px" height="50px" alt="mini cow logo" />
+<button class="btn-close" onclick="closeModal()">⨉</button>
+</div>
+<div id="modal-content"></div>
+<input type="date" id="transaction-date">
+<button class="btn" id="modal-submit" onclick="modalHandler()">Submit</button>
+<div id="error-div"></div>
+<div id="result-div"></div>
+</section>`
+
 const displayLeaderboard = async () =>  {
 
   tabSound();
-  const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   leaderboardTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "moonit-balance", "daily-quiz", "about");
+  noticeboard.classList.remove("moonit-balance", "daily-quiz", "about", "modal-style");
   noticeboard.classList.add("leaderboard");
 
   const data = await fetch("/leaderboard");
 
   const parsed = await data.json();
   if (parsed.error) {
-    noticeboardContent.innerText = JSON.stringify(parsed);
+    noticeboard.innerText = JSON.stringify(parsed);
     return;
   }
 
-  noticeboardContent.innerHTML = leaderboardHTML(parsed.leaderboard);
+  noticeboard.innerHTML = leaderboardHTML(parsed.leaderboard);
   return; 
-};
+}
 
 // functions for totaliser display
 function fillScaleElement(i) {
-  let negPos = i<0 ? -1 : 1;
   setTimeout(function() {
     if (i>=-85 && i<=100) {
       document.getElementById(`${i}`).style.background = `hsl(${i+50}, 70%, 50%)`;
@@ -169,15 +172,14 @@ const fillTotaliser = (balance) => {
   for (let i=1; i<=balance*negPos; i++) {
     fillScaleElement(i*negPos)
   }
-};
+}
 
 const displayBalance = async () => {
   
   tabSound();
-  const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   balanceTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "daily-quiz", "about");
+  noticeboard.classList.remove("leaderboard", "daily-quiz", "about", "modal-style");
   noticeboard.classList.add("moonit-balance");
 
   const data = await fetch("/user-balance");
@@ -188,7 +190,7 @@ const displayBalance = async () => {
     return;
   }
   
-  noticeboardContent.innerHTML = balanceHTML(parsed.transactions, parsed.balance);
+  noticeboard.innerHTML = balanceHTML(parsed.transactions, parsed.balance);
   const totaliser = document.getElementById("totaliser");
   
   // create document fragment and populate
@@ -221,34 +223,39 @@ const displayBalance = async () => {
 
 const displayDailyQuiz = async () => {
   tabSound();
-  const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   dailyQuizTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "moonit-balance", "about");
+  noticeboard.classList.remove("leaderboard", "moonit-balance", "about", "modal-style");
   noticeboard.classList.add("daily-quiz");
 
-  noticeboardContent.innerHTML = "This is placeholder text until I have written this function"
+  noticeboard.innerHTML = "This is placeholder text until I have written this function"
 }
-
 
 const displayAbout = async () => {
   tabSound();
-  const allTabs = document.querySelectorAll(".tab");
   allTabs.forEach(e => e.classList.remove("active-tab"));
   aboutTab.classList.add("active-tab");
-  noticeboard.classList.remove("leaderboard", "moonit-balance", "daily-quiz");
+  noticeboard.classList.remove("leaderboard", "moonit-balance", "daily-quiz", "modal-style");
   noticeboard.classList.add("about");
 
-  noticeboardContent.innerHTML = "This is placeholder text until I have written this function"
+  noticeboard.innerHTML = "This is placeholder text until I have written this function"
 }
 
 // modal functions
-const modal = document.querySelector(".modal");
-const overlay = document.querySelector(".overlay");
-const errorArea = document.querySelector("#error-div");
-const resultArea = document.querySelector("#result-div"); 
+const allTabs = document.querySelectorAll(".tab");
+const allButtons = document.querySelectorAll(".button");
 
 const openModal = function (buyOrDrink) {
+  noticeboard.innerHTML = modalHTML;
+  const modal = document.querySelector(".modal");
+  const overlay = document.querySelector(".overlay");
+  const errorArea = document.querySelector("#error-div");
+  const resultArea = document.querySelector("#result-div");
+  noticeboard.classList.remove("leaderboard", "daily-quiz", "about", "moonit-balance");
+  noticeboard.classList.add("modal-style");
+  allTabs.forEach(e => e.classList.remove("active-tab"));
+  allTabs.forEach(e => e.classList.add("hidden"));
+  allButtons.forEach(e => e.classList.add("hidden"));
   errorArea.innerText = "";
   resultArea.innerText = "";
   modal.classList.remove("hidden");
@@ -274,13 +281,18 @@ const openModal = function (buyOrDrink) {
   
 };
 
+
+
 const closeModal = function () {
+  const modal = document.querySelector(".modal");
+  const overlay = document.querySelector(".overlay");
   modal.classList.add("hidden");
   overlay.classList.add("hidden");
+  allTabs.forEach(e => e.classList.remove("hidden"));
+  allButtons.forEach(e => e.classList.remove("hidden"));
 };
 
-const closeModalBtn = document.querySelector(".btn-close");
-const modalSubmit = document.querySelector("#modal-submit");
+
 
 const modalHandler = async () => {
   const numberInput = document.querySelector("#milk-qty");
@@ -288,9 +300,11 @@ const modalHandler = async () => {
   const unitsButton = document.querySelector("#toggle-units");
   const units = unitsButton ? unitsButton.innerText : "moonits"
   const datePicker = document.querySelector("#transaction-date");
+  const errorArea = document.querySelector("#error-div");
+  const resultArea = document.querySelector("#result-div");
 
   // input error handling
-  if (datePicker.value == "Invalid Date" || numberInput.value == 0) {
+  if (!datePicker.value || numberInput.value == 0) {
     errorArea.innerText = "Please enter valid values for quantity and date."
     return;
   }
@@ -313,11 +327,17 @@ const modalHandler = async () => {
   }
 
   resultArea.innerText = parsed.result;
+  const jsConfetti = new JSConfetti()
+  jsConfetti.addConfetti({
+    emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '🐄', '🐮', '🦡', '🥛', '💥', '💦', '🎉', '🎊', '🎉'],
+    emojiSize: 30,
+    confettiNumber: 100,
+  });
   return; 
 
 };
 
-modalSubmit.addEventListener("click", modalHandler);
-closeModalBtn.addEventListener("click", closeModal);
+//modalSubmit.addEventListener("click", modalHandler);
+//closeModalBtn.addEventListener("click", closeModal);
 
 

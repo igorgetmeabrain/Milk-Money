@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" type="text/css">
   </head>
 
@@ -40,7 +41,9 @@
 
       <div id="noticeboard-container">
         <!-- noticeboard content rendered to this div -->
-        <div id="noticeboard"></div>
+        <div id="noticeboard">
+          <!-- modal also rendered to noticeboard-->
+        </div>
         <div id="tabs">
           <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
           <button onclick="displayLeaderboard()" id="tab-1" class="tab">Leaderboard</button>
@@ -53,27 +56,15 @@
       <footer id="footer">Hello I am the footer 2024</footer>
     </div>
 
-<!-- modal -->
- 
-    <section class="modal hidden">
-      <div class="flex">
-        <img src="images/daycow.png" width="42px" height="50px" alt="mini cow logo" />
-        <button class="btn-close">⨉</button>
-      </div>
-      <div id="modal-content"></div>
-      <input type="date" id="transaction-date">
-      <button class="btn" id="modal-submit">Submit</button>
-      <div id="error-div"></div>
-      <div id="result-div"></div>
-    </section>
-    
-    <div class="overlay hidden"></div>
+  <!-- modal overlay -->
+  <div class="overlay hidden"></div>
 
   <!-- orientation warning -->
   <div id="orientation">
     <div class="phone"></div>
     <div class="message">Please rotate your device!</div>
   </div>
+
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 	  <script src="index.js"></script>
   </body>
