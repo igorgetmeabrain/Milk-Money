@@ -2,8 +2,8 @@
 // average UK supermarket milk price per litre (Aug 2024)
 const milkPricePerLitre = 0.95
 
-// one moonit is equivalent to 100ml of cow's milk at the going rate (approx measure for one hot drink)
-const moonitPrice = (milkPricePerLitre/10).toFixed(2);
+// one moonit is equivalent to 25ml of cow's milk at the going rate (approx measure for one hot drink)
+const moonitPrice = (milkPricePerLitre/40).toFixed(2);
 
 /*
 // {units, qty} = req.body;
@@ -37,7 +37,7 @@ res.json({
 class Converter {
 
   // 1 pint = 0.568 litres
-  convertToMoonits(qty, units) {return units == "Litres" ? Math.round(+qty*10) : Math.round(+qty*5.68)}
+  convertToMoonits(qty, units) {return units == "Litres" ? Math.round(+qty*40) : Math.round(+qty*22.72)}
 
   // transaction id for database
   transactionId(moonits, date) {return `${moonits}d${Date.now()}`}

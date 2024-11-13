@@ -59,17 +59,17 @@ module.exports = function (app) {
           {name: "Reuben", balance: 0},
           {name: "Alex", balance: -10}
          ]})
-      })
+      });
 
     app.route("/user-balance")
     .get((req, res) => {
       // user.transactions and user.balance from database
       const userTransactions = ["-6d1730654468178", "10d1730654429573", "10d1730654358280"];
-      const userBalance = -80;
+      const userBalance = 100;
       const transactionsArray = converter.transactionsObjects(userTransactions);
       return res.json({
         transactions: transactionsArray,
         balance: userBalance
       });
-    })
+    });
 }

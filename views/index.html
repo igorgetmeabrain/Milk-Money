@@ -40,20 +40,36 @@
       </div>
 
       <div id="noticeboard-container">
+        <audio src="audio/milkpour.mp3" preload="auto" id="milk-pour"></audio>
+        <audio src="audio/milkpourup2.mp3" preload="auto" id="milk-pour-up"></audio>
+        <audio src="audio/confetti.mp3" preload="auto" id="confetti"></audio>
         <!-- noticeboard content rendered to this div -->
         <div id="noticeboard">
           <!-- modal also rendered to noticeboard-->
         </div>
         <div id="tabs">
           <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
-          <button onclick="displayLeaderboard()" id="tab-1" class="tab">Leaderboard</button>
+          <button onclick="displayLeaderboards()" id="tab-1" class="tab">Leaderboards</button>
           <button onclick="displayBalance()" id="tab-2" class="tab">My moonit balance</button>
           <button onclick="displayDailyQuiz()" id="tab-3" class="tab">Daily Quiz</button>
-          <button onclick="displayAbout()" id="tab-4" class="tab">About Moonit</button>
+          <button onclick="displayAbout()" id="tab-4" class="tab">About Moola!</button>
         </div>
       </div>
 
-      <footer id="footer">Hello I am the footer 2024</footer>
+      <footer id="footer">
+        <span class="left">
+          <span class="fa fa-regular fa-copyright"></span>
+          <span>Badger 2024</span>
+          <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
+          <img src="images/badger.png" onclick="badger.play()">
+        </span>
+        <span class="right">
+          Follow me:
+          <a href="https://github.com/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-github"></span> GitHub</a>
+          <a href="https://www.freecodecamp.org/igorgetmeabrain" target="_blank" class="follow">freeCodeCamp <span class="fab fa-free-code-camp"></span></a>
+          <a href="https://codepen.io/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-codepen"></span> CodePen</a>
+        </span>
+      </footer>
     </div>
 
   <!-- modal overlay -->
@@ -64,7 +80,7 @@
     <div class="phone"></div>
     <div class="message">Please rotate your device!</div>
   </div>
-
+    <script src="https://kit.fontawesome.com/d1e8eb8a9f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 	  <script src="index.js"></script>
   </body>

@@ -1,5 +1,4 @@
 /* CSS RESET */
-
 *,
 *::before,
 *::after {
@@ -47,68 +46,23 @@ h6 {
 }
 
 /* END OF CSS RESET */
-
 body {
   font-family: "Fuzzy Bubbles", sans-serif;
   font-weight: 700;
   text-align: center;
   cursor: grab;
-  background-image: linear-gradient(180deg,
-      hsl(240deg 96% 82%) 0%,
-      hsl(198deg 100% 50%) 33%,
-      hsl(194deg 100% 50%) 46%,
-      hsl(188deg 100% 47%) 52%,
-      hsl(170deg 100% 41%) 56%,
-      hsl(145deg 100% 40%) 57%,
-      hsl(126deg 96% 40%) 58%,
-      hsl(126deg 96% 40%) 59%,
-      hsl(126deg 96% 40%) 59%,
-      hsl(126deg 96% 40%) 60%,
-      hsl(126deg 96% 40%) 60%,
-      hsl(126deg 96% 40%) 61%,
-      hsl(126deg 96% 40%) 62%,
-      hsl(126deg 96% 40%) 64%,
-      hsl(126deg 96% 40%) 66%,
-      hsl(126deg 96% 40%) 69%,
-      hsl(126deg 96% 40%) 72%,
-      hsl(126deg 96% 40%) 75%,
-      hsl(126deg 96% 40%) 79%,
-      hsl(126deg 96% 40%) 84%,
-      hsl(126deg 96% 40%) 89%,
-      hsl(126deg 96% 40%) 94%,
-      hsl(126deg 96% 40%) 100%);
+  background-image: linear-gradient(180deg, hsl(240, 96%, 82%) 0%, hsl(198, 100%, 50%) 33%, hsl(194, 100%, 50%) 46%, hsl(188, 100%, 47%) 52%, hsl(170, 100%, 41%) 56%, hsl(145, 100%, 40%) 57%, hsl(126, 96%, 40%) 58%, hsl(126, 96%, 40%) 59%, hsl(126, 96%, 40%) 59%, hsl(126, 96%, 40%) 60%, hsl(126, 96%, 40%) 60%, hsl(126, 96%, 40%) 61%, hsl(126, 96%, 40%) 62%, hsl(126, 96%, 40%) 64%, hsl(126, 96%, 40%) 66%, hsl(126, 96%, 40%) 69%, hsl(126, 96%, 40%) 72%, hsl(126, 96%, 40%) 75%, hsl(126, 96%, 40%) 79%, hsl(126, 96%, 40%) 84%, hsl(126, 96%, 40%) 89%, hsl(126, 96%, 40%) 94%, hsl(126, 96%, 40%) 100%);
 }
 
 /* checkbox is sun/moon icon: background changes when checked */
-body:has(input[type='checkbox']:checked) {
-  background-image: linear-gradient(180deg,
-      hsl(240deg 88% 19%) 0%,
-      hsl(222deg 100% 19%) 33%,
-      hsl(214deg 100% 15%) 46%,
-      hsl(200deg 100% 10%) 52%,
-      hsl(172deg 100% 7%) 56%,
-      hsl(144deg 100% 6%) 57%,
-      hsl(125deg 72% 6%) 58%,
-      hsl(126deg 76% 6%) 59%,
-      hsl(126deg 82% 6%) 59%,
-      hsl(127deg 87% 5%) 60%,
-      hsl(127deg 93% 5%) 60%,
-      hsl(127deg 100% 5%) 61%,
-      hsl(127deg 100% 5%) 62%,
-      hsl(127deg 100% 4%) 64%,
-      hsl(127deg 100% 4%) 66%,
-      hsl(127deg 100% 4%) 69%,
-      hsl(127deg 100% 4%) 72%,
-      hsl(126deg 97% 4%) 75%,
-      hsl(126deg 92% 5%) 79%,
-      hsl(125deg 88% 6%) 84%,
-      hsl(124deg 86% 7%) 89%,
-      hsl(125deg 88% 7%) 94%,
-      hsl(126deg 95% 8%) 100%);
+body:has(input[type=checkbox]:checked) {
+  background-image: linear-gradient(180deg, hsl(240, 88%, 19%) 0%, hsl(222, 100%, 19%) 33%, hsl(214, 100%, 15%) 46%, hsl(200, 100%, 10%) 52%, hsl(172, 100%, 7%) 56%, hsl(144, 100%, 6%) 57%, hsl(125, 72%, 6%) 58%, hsl(126, 76%, 6%) 59%, hsl(126, 82%, 6%) 59%, hsl(127, 87%, 5%) 60%, hsl(127, 93%, 5%) 60%, hsl(127, 100%, 5%) 61%, hsl(127, 100%, 5%) 62%, hsl(127, 100%, 4%) 64%, hsl(127, 100%, 4%) 66%, hsl(127, 100%, 4%) 69%, hsl(127, 100%, 4%) 72%, hsl(126, 97%, 4%) 75%, hsl(126, 92%, 5%) 79%, hsl(125, 88%, 6%) 84%, hsl(124, 86%, 7%) 89%, hsl(125, 88%, 7%) 94%, hsl(126, 95%, 8%) 100%);
 }
 
 #day-night-checkbox {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   height: 80px;
   width: 80px;
   position: absolute;
@@ -117,15 +71,12 @@ body:has(input[type='checkbox']:checked) {
   border: 1px solid white;
   top: 50px;
   right: 50px;
-  -webkit-box-shadow: -2px 5px 86px 43px rgba(223, 242, 14, 1);
-  -moz-box-shadow: -2px 5px 86px 43px rgba(223, 242, 14, 1);
-  box-shadow: -2px 5px 86px 43px rgba(223, 242, 14, 1);
+  box-shadow: -2px 5px 86px 43px rgb(223, 242, 14);
   z-index: 1;
 }
-
 #day-night-checkbox:checked {
   border: none;
-  background-color: transparent;
+  background: transparent;
   border-radius: 50%;
   box-shadow: 18px 10px 0px 0px white;
   top: 40px;
@@ -135,9 +86,7 @@ body:has(input[type='checkbox']:checked) {
 .no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -148,6 +97,9 @@ body:has(input[type='checkbox']:checked) {
   translate: 0;
   z-index: 2;
 }
+.cloud:hover {
+  translate: 1150px;
+}
 
 #cloud1 {
   top: 125px;
@@ -156,6 +108,28 @@ body:has(input[type='checkbox']:checked) {
   height: 45px;
   box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
   transition: translate 15s;
+}
+#cloud1::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+  width: 28px;
+  height: 28px;
+  top: -35px;
+  left: -40px;
+}
+#cloud1::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 30px;
 }
 
 #cloud2 {
@@ -166,6 +140,28 @@ body:has(input[type='checkbox']:checked) {
   box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
   transition: translate 5s;
 }
+#cloud2::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+  width: 25px;
+  height: 25px;
+  top: -22px;
+  left: -30px;
+}
+#cloud2::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+  width: 38px;
+  height: 38px;
+  top: -18px;
+  left: 23px;
+}
 
 #cloud3 {
   top: 30px;
@@ -175,75 +171,36 @@ body:has(input[type='checkbox']:checked) {
   box-shadow: 15px 15px rgba(0, 0, 0, 0.2);
   transition: translate 25s;
 }
-
-#cloud1::after,
-#cloud1::before,
-#cloud2::after,
-#cloud2::before,
-#cloud3::after,
+#cloud3::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+  width: 50px;
+  height: 50px;
+  top: -50px;
+  left: -65px;
+}
 #cloud3::before {
   content: "";
   position: relative;
   display: inline-block;
   background: inherit;
   border-radius: inherit;
-}
-
-#cloud1::after {
-  width: 28px;
-  height: 28px;
-  top: -35px;
-  left: -40px;
-}
-
-#cloud1::before {
-  width: 50px;
-  height: 50px;
-  top: -25px;
-  left: 30px;
-}
-
-#cloud2::after {
-  width: 25px;
-  height: 25px;
-  top: -22px;
-  left: -30px;
-}
-
-#cloud2::before {
-  width: 38px;
-  height: 38px;
-  top: -18px;
-  left: 23px;
-}
-
-#cloud3::after {
-  width: 50px;
-  height: 50px;
-  top: -50px;
-  left: -65px;
-}
-
-#cloud3::before {
   width: 80px;
   height: 80px;
   top: -28px;
   left: 50px;
 }
 
-.cloud:hover {
-  translate: 1150px;
-}
-
 #container {
   display: grid;
   grid-template-columns: 45% 55%;
-  grid-template-rows: 16vh 78vh 5vh;
-  grid-template-areas:
-    "header header"
-    "cow noticeboard"
-    "footer footer";
+  grid-template-rows: 16vh 78vh 6vh;
+  grid-template-areas: "header header" "cow noticeboard" "footer footer";
   background: transparent;
+  overflow: hidden;
 }
 
 h1 {
@@ -254,7 +211,8 @@ h1 {
   grid-area: header;
   color: white;
   background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
-  -webkit-text-stroke: 1px black;
+  background-clip: text;
+  -webkit-text-stroke: 2px black;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: clamp(2rem, 7vw, 6rem);
@@ -267,9 +225,7 @@ h2 {
 #cow-container {
   grid-area: cow;
   display: grid;
-  grid-template-areas:
-    "cow speech"
-    "buttons buttons";
+  grid-template-areas: "cow speech" "buttons buttons";
   grid-template-columns: 50% 50%;
   grid-template-rows: 66vh 12vh;
   max-width: 100%;
@@ -313,9 +269,11 @@ h2 {
   cursor: pointer;
   font-weight: 600;
 }
+.button:hover {
+  color: orange;
+}
 
 /* NOTICEBOARD STYLES */
-
 #noticeboard-container {
   grid-area: noticeboard;
   background: transparent;
@@ -352,20 +310,16 @@ h2 {
   border: 2px solid black;
   border-top: none;
 }
-
-.active-tab {
-  /* calculate color of tab by tab number */
-  background: blue;
-  color: white;
-}
-
-.button:hover,
 .tab:hover {
   color: orange;
 }
 
-/* END OF NOTICEBOARD STYLES */
+.active-tab {
+  /* calculate color of tab by tab number */
+  background: blue;
+}
 
+/* END OF NOTICEBOARD STYLES */
 .leaderboard {
   display: block;
   margin: auto;
@@ -374,7 +328,6 @@ h2 {
 }
 
 /* BALANCE STYLES */
-
 .moonit-balance {
   display: grid !important;
   grid-template-columns: 25% 75% !important;
@@ -414,7 +367,7 @@ hr {
   border-radius: 3px;
 }
 
-#balance-text ul {
+ul {
   list-style: none;
 }
 
@@ -427,8 +380,7 @@ hr {
 }
 
 /* END OF BALANCE STYLES */
-
-.daily-quiz{
+.daily-quiz {
   color: orange;
   border: 3px solid orange !important;
 }
@@ -439,7 +391,6 @@ hr {
 }
 
 /* MODAL STYLES */
-
 .modal-style {
   color: black;
   border: 3px solid black !important;
@@ -448,13 +399,11 @@ hr {
 .modal {
   z-index: 5;
 }
-
 .modal .flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .modal input {
   padding: 0.7rem 1rem;
   border: 1px solid #ddd;
@@ -490,11 +439,10 @@ hr {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
   z-index: 3;
 }
-
-/* END OF MODAL STYLES */
 
 .hidden {
   display: none;
@@ -503,11 +451,38 @@ hr {
 #footer {
   grid-area: footer;
   text-align: center;
-  font-size: 1.5rem;
+  padding: 0 10px;
 }
 
-/* STYLES FOR ORIENTATION WARNING */
+footer a {
+  display: inline;
+  text-decoration: none;
+  color: yellow;
+}
+footer a:hover {
+  color: orange;
+}
+footer img {
+  margin-top: 2%;
+  display: inline;
+  height: 35px;
+  border: 1px solid red;
+}
 
+.left {
+  margin-left: 10px;
+  float: left;
+  border: 1px solid red;
+}
+
+.right {
+  margin-right: 10px;
+  float: right;
+  border: 1px solid red;
+}
+
+/* END OF MODAL STYLES */
+/* STYLES FOR ORIENTATION WARNING */
 #orientation {
   height: 100vh;
   width: 100vw;
@@ -541,22 +516,26 @@ hr {
   display: none;
 }
 
-@keyframes rotate {
-  0% {
-		transform: rotate(0deg)
-	}
-	50% {
-		transform: rotate(-90deg)
-	}
-	100% {
-		transform: rotate(-90deg)
-	}
-}
-
 @media (orientation: portrait) {
-  #orientation, .phone, .message {
+  #orientation {
+    display: block;
+  }
+  .phone {
+    display: block;
+  }
+  .message {
     display: block;
   }
 }
-
-/* END OF STYLES FOR ORIENTATION WARNING */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+/* END OF STYLES FOR ORIENTATION WARNING *//*# sourceMappingURL=styles.css.map */
