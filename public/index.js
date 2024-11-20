@@ -5,7 +5,7 @@ const speechText = document.getElementById("cow-speech");
 const noticeboard = document.getElementById("noticeboard");
 const clouds = document.querySelectorAll(".cloud");
 const whatTheCowSays = [
-  "Mooooooooooo!", 
+  "Moooooooooooo!", 
   "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", 
   "Oh, What a beautiful Mooooorning!", 
   "Hey, quit poking me, that's mooolestation!", 
@@ -45,8 +45,8 @@ function dayNight() {
 
 function theCowSpeaks(mooing) {
   // check this line
-  let fontSize = (2.2-mooing.length*0.01) < 0.8 ? 0.8 : (2.2-mooing.length*0.01)
-  console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
+  let fontSize = (2.2-mooing.length*0.01) < 0.9 ? 0.9 : (2.2-mooing.length*0.01)
+  //console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
   speechText.style.fontSize = `${fontSize}rem`
   speechBubble.style.backgroundImage = isItDaytime ? "url(images/dayspeech.png)" : "url(images/nightspeech.png)";
   speechBubble.style.opacity = "1";
@@ -65,6 +65,17 @@ function pokeTheCow() {
   return cowPokeCount>4 ? cowPokeCount = 0 : cowPokeCount
 }
 
+function cowfetti(cowfettiType, size, number) {
+  confettiSound.currentTime = 0;
+  confettiSound.play();
+  const jsConfetti = new JSConfetti()
+  jsConfetti.addConfetti({
+    emojis: cowfettiType,
+    emojiSize: size,
+    confettiNumber: number,
+  });
+}
+
 // button functions
 
 function buttonSound() {
@@ -72,10 +83,7 @@ function buttonSound() {
   cowbell.play();
 }
 
-function playConfettiSound() {
-  confettiSound.currenTime = 0;
-  confettiSound.play();
-}
+
 
 function boughtMilk() {
   buttonSound();
@@ -88,11 +96,25 @@ function drankMilk() {
 }
 
 async function needMilk() {
+  // add catch error message
+  const data = await fetch("/need-milk")
+  const parsed = await data.json()
+  
+  let results = parsed.names.length == 1 
+  ? `It is ${parsed.names[0]}'s turn to buy milk today!`
+  : `It is either ${parsed.names[0]}'s or ${parsed.names[1]}'s turn to buy milk today. Have some cowfetti!`
+
+  theCowSpeaks(results);
+  cowfetti(['🐄', '🐮', '🦡', '🥛'], 75, 50);
+
+}
+
+async function ruminate() {
   buttonSound()
   // add catch error message
   const randomQuote = await fetch("/quote")
   const parsed = await randomQuote.json()
-  theCowSpeaks(`Oh dear.<br>Perhaps this observation from ${parsed.author} will help:<br>"${parsed.quote}".`)
+  theCowSpeaks(`As ${parsed.author} once said, "${parsed.quote}".`)
 }
 
 // tab functions
@@ -132,6 +154,7 @@ const balanceHTML = (transactions, balance) => {
   return HTMLString;
 }
 
+// submit button triggers modalHandler
 const modalHTML = `<section class="modal hidden">
 <div class="flex" id="modal">
 <img src="images/daycow.png" width="42px" height="50px" alt="mini cow logo" />
@@ -334,13 +357,7 @@ const modalHandler = async () => {
   }
 
   resultArea.innerText = parsed.result;
-  playConfettiSound();
-  const jsConfetti = new JSConfetti()
-  jsConfetti.addConfetti({
-    emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '🐄', '🐮', '🦡', '🥛', '💥', '💦', '🎉', '🎊', '🎉'],
-    emojiSize: 30,
-    confettiNumber: 100,
-  });
+  cowfetti(['🌈', '⚡️', '💥', '✨', '💫', '🌸', '🐄', '🐮', '🦡', '🥛', '💥', '💦', '🎉', '🎊', '🎉'], 30, 100);
   return; 
 
 };

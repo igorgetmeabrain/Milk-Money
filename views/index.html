@@ -25,6 +25,13 @@
 
       <h1 id="heading">Moola!</h1>
 
+      <div id="navbar">
+        <span class="fa fa-solid fa-circle-info"></span>
+        <span class="fa fa-solid fa-volume-off"></span>
+        <span class="fa fa-solid fa-volume-high"></span>
+        <p>Welcome Doug!</p>
+      </div>
+
       <div id="cow-container">
         <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
         <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="pokeTheCow()">
@@ -36,6 +43,7 @@
           <button onclick="boughtMilk()" id="bought-milk" class="button">I bought milk</button>
           <button onclick="drankMilk()" id="drank-milk" class="button">I drank milk</button>
           <button onclick="needMilk()" id="need-milk" class="button">We need milk</button>
+          <button onclick="ruminate()" id="ruminate" class="button">Ruminations</button>
         </div>
       </div>
 
@@ -57,12 +65,13 @@
       </div>
 
       <footer id="footer">
-        <span class="left">
+        <div class="left">
           <span class="fa fa-regular fa-copyright"></span>
-          <span>Badger 2024</span>
+          <p class="footer-text">Badger 2024</p>
           <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
           <img src="images/badger.png" onclick="badger.play()">
-        </span>
+          
+        </div>
         <span class="right">
           Follow me:
           <a href="https://github.com/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-github"></span> GitHub</a>
@@ -72,14 +81,15 @@
       </footer>
     </div>
 
-  <!-- modal overlay -->
-  <div class="overlay hidden"></div>
+    <!-- modal overlay -->
+    <div class="overlay hidden"></div>
 
-  <!-- orientation warning -->
-  <div id="orientation">
-    <div class="phone"></div>
+    <!-- orientation warning -->
+    <div id="orientation">
+    <div class="phone"><img src="images/daycowrotated.png" id="orient-img"></div>
     <div class="message">Please rotate your device!</div>
-  </div>
+    </div>
+
     <script src="https://kit.fontawesome.com/d1e8eb8a9f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 	  <script src="index.js"></script>

@@ -61,6 +61,13 @@ module.exports = function (app) {
          ]})
       });
 
+    // get team leaderboard from database
+    // retrieve the lowest balance(s) and return name(s)
+    app.route("/need-milk")
+      .get((req, res) => {
+        return res.json({names: ["Doug", "Reuben"]})
+      });
+
     app.route("/user-balance")
     .get((req, res) => {
       // user.transactions and user.balance from database

@@ -1,20 +1,4 @@
-﻿$button-text-color: white;
-$button-text-hover-color: orange;
-$leaderboard: blue;
-$moonit-balance: red;
-$daily-quiz: orange;
-$about: purple;
-$modal: black;
-$yellow: yellow;
-$button-color: green;
-$fuzzy-bubbles: "Fuzzy Bubbles", sans-serif;
-$bungee-shade: "Bungee Shade", serif;
-$modal-button: black;
-$modal-button-text: white;
-$link-color: yellow;
-$link-hover-color: orange;
-
-/* CSS RESET */
+﻿/* CSS RESET */
 
 *,
 *::before,
@@ -63,6 +47,22 @@ h6 {
 }
 
 /* END OF CSS RESET */
+$navbar-text: yellow;
+$footer-text: yellow;
+$button-text-color: white;
+$button-text-hover-color: orange;
+$leaderboard: blue;
+$moonit-balance: red;
+$daily-quiz: orange;
+$about: purple;
+$modal: black;
+$button-color: green;
+$modal-button: black;
+$modal-button-text: white;
+$link-color: yellow;
+$link-hover-color: orange;
+$fuzzy-bubbles: "Fuzzy Bubbles", sans-serif;
+$bungee-shade: "Bungee Shade", serif;
 
 body {
   font-family: $fuzzy-bubbles;
@@ -269,6 +269,14 @@ body:has(input[type='checkbox']:checked) {
 	overflow: hidden;
 }
 
+#navbar {
+	position: absolute;
+	top: 2%;
+	right: 20%;
+	border: 1px solid red;
+	color: $navbar-text;
+}
+
 h1 {
 	width: 40%;
 	margin: auto;
@@ -302,41 +310,55 @@ h2 {
 #cow {
 	grid-area: cow;
 	max-height: 100%;
-	margin-top: 10%;
-	padding: 2%;
+	margin-top: 15%;
 }
 
 #speech-bubble {
 	grid-area: speech;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-items: center;
 	background-size: contain;
 	background-repeat: no-repeat;
-	width: 100%;
-	max-height: 60%;
-	padding: 0 12% 25% 9%;
+	width: 110%;
+	max-height: 70%;
+	margin-top: 5%;
 	opacity: 0;
 	transition: opacity 0.3s;
+
+	p {
+		margin: -30% 0 0 -3%;
+		padding: 0 11%;
+	}
 }
 
 #buttons {
 	grid-area: buttons;
 	padding: 1%;
-	border: 1px solid red;
 }
 
 .button {
 	display: inline-block;
+	margin-top: 2%;
 	height: 40px;
 	padding: 3px 6px;
 	background: $button-color;
 	color: $button-text-color;
 	cursor: pointer;
 	font-weight: 600;
+	border: 3px solid darkgreen;
+	border-radius: 3%;
+	box-shadow: 5px 5px 5px black;
+
+
 	&:hover {
 		color: $button-text-hover-color;
 	}
+
+	&:active {
+		box-shadow: none;
+		transform: translateY(3px);
+	  }
 }
 
 /* NOTICEBOARD STYLES */
@@ -358,6 +380,8 @@ h2 {
 	height: 80%;
 	background: white;
 	border: 3px solid black;
+	border-radius: 1%;
+	box-shadow: 5px 5px 30px 5px black;
 }
 
 #tabs {
@@ -374,11 +398,18 @@ h2 {
 	line-height: normal;
 	background: $button-color;
 	color: $button-text-color;
-	border: 2px solid black;
-	border-top: none;
+	border: 2px solid darkgreen;
+	border-radius: 3%;
+	box-shadow: 5px 5px 5px black;
+
 	&:hover {
 		color: $button-text-hover-color;
 	}
+
+	&:active {
+		box-shadow: none;
+		transform: translateY(3px);
+	  }
 }
 
 .active-tab {
@@ -518,42 +549,50 @@ ul {
 	display: none;
 }
 
-#footer {
-	grid-area: footer;
-	text-align: center;
-	padding: 0 10px;
-}
+/* END OF MODAL STYLES */
 
 footer {
-	a {
-		display: inline;
-		text-decoration: none;
-		color: $link-color;
-		&:hover {
-			color: $link-hover-color;
+	grid-area: footer;
+	text-align: center;
+	font-size: 1.2rem;
+	padding: 0 10px;
+	color: $footer-text;
+
+	.left {
+		float: left;
+		margin-left: 10px;
+	
+		.footer-text {
+			display: inline-block;
+		}
+
+		img {
+			display: inline;
+			padding-top: 2%;
+			height: 33px;
 		}
 	}
-	img {
-		margin-top: 2%;
-		display: inline;
-		height: 35px;
-		border: 1px solid red;
+	
+	.right {
+		float: right;
+		width: 50%;
+		padding-top: 1%;
+		margin-right: 10px;
+		
+	
+		a {
+			display: inline;
+			margin: 0 2%;
+			text-decoration: none;
+			color: $link-color;
+			&:hover {
+				color: $link-hover-color;
+			}
+		}
 	}
-}
 
-.left {
-	margin-left: 10px;
-	float: left;
-	border: 1px solid red;
+	
 }
-
-.right {
-	margin-right: 10px;
-	float: right;
-	border: 1px solid red;
-}
-
-/* END OF MODAL STYLES */
 
 /* STYLES FOR ORIENTATION WARNING */
 #orientation {
@@ -570,21 +609,26 @@ footer {
 .phone {
 	margin: auto;
 	margin-top: 45%;
-	height: 50px;
+	height: 200px;
 	width: 100px;
 	border: 3px solid white;
 	border-radius: 10px;
-	animation: rotate 1.5s ease-in-out infinite alternate;
+	animation: rotate 2s ease-in-out infinite alternate;
 	z-index: 6;
 	display: none;
+
+	img {
+		height: 75px;
+		position: absolute;
+		animation: slippy 2s ease-in-out infinite alternate;
+	}
 }
 
 .message {
 	margin: auto;
-	margin-top: 55%;
+	margin-top: 2%;
 	color: white;
 	font-size: 1em;
-	margin-top: 40px;
 	z-index: 6;
 	display: none;
 }
@@ -610,6 +654,18 @@ footer {
 	}
 	100% {
 		transform: rotate(-90deg);
+	}
+}
+
+@keyframes slippy {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(120px);
+	}
+	100% {
+		transform: translateY(120px);
 	}
 }
 /* END OF STYLES FOR ORIENTATION WARNING */
