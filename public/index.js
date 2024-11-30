@@ -4,65 +4,109 @@ const speechBubble = document.getElementById("speech-bubble");
 const speechText = document.getElementById("cow-speech");
 const noticeboard = document.getElementById("noticeboard");
 const clouds = document.querySelectorAll(".cloud");
-const whatTheCowSays = [
-  "Moooooooooooo!", 
-  "Hey, who turned off all the lights?<br>Brrr, I'm freisian!", 
-  "Oh, What a beautiful Mooooorning!", 
-  "Hey, quit poking me, that's mooolestation!", 
-  "Oi, don't make me hoof it over there - you'll udderly regret it!"
-];
-
 let isItDaytime = true;
 
 // audio clips
 const moo = document.getElementById("moo");
+const baa = document.getElementById("baa");
+const goat = document.getElementById("goat");
+const queen = document.getElementById("queen");
 const cowbell = document.getElementById("cowbell");
 const cowpat = document.getElementById("cowpat");
 const confettiSound = document.getElementById("confetti");
 const badger = document.getElementById("badger");
 const milkPour = document.getElementById("milk-pour");
 const milkPourUp = document.getElementById("milk-pour-up");
+const navbarModal = document.getElementById("navbar-modal");
 
 /* HOMEPAGE INTERACTION */
+
+const whatTheCowSays = [
+  ["Hey, who turned off all the lights?<br>Brrr, I'm freisian!", moo],
+  ["Oh, What a beautiful Mooooorning!", moo],
+  ["Moooooooooooo!", moo],
+  ["Hey, quit poking me, that's mooolestation!", moo],
+  ["Oi, don't make me hoof it over there - you'll udderly regret it!", moo],
+  ["You're really getting my goat now!", goat],
+  ["I'm feeling a little sheepish today...", baa],
+  ["Moo-la la la Moo-la la la Moo-la la la Moo-la la la Moo-la la Moooo!", queen]
+];
+
+function theCowSpeaks(cowVocab) {
+  const [mooing, mootype] = cowVocab
+  whatTheCowSays.forEach(e=>{e[1].pause(); e[1].currentTime = 0})
+  // check this line
+  let fontSize = (2.2-mooing.length*0.01) < 0.9 ? 0.9 : (2.2-mooing.length*0.01)
+  //console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
+  speechText.style.fontSize = `${fontSize}rem`
+  speechBubble.style.opacity = "1";
+  mootype.play()
+  speechText.innerHTML = mooing; 
+};
 
 function dayNight() {
   if (dayNightCheckbox.checked) {
     isItDaytime = false;
     cowImage.src = "images/nightcow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 20%, 0.9)");
-    speechText.style.color = "white";
     noticeboard.style.backgroundColor = "black";
-    theCowSpeaks(whatTheCowSays[1]);
+    speechBubble.style.backgroundImage = "url(images/nightspeech.png)";
+    speechText.style.color = "white";
+    navbarModal.style.backgroundColor = "black";
+    navbarModal.style.color = "white";
+  
+    theCowSpeaks(whatTheCowSays[0]);
   } else {
     isItDaytime = true;
     cowImage.src = "images/daycow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 100%, 0.9)");
-    speechText.style.color = "black";
     noticeboard.style.backgroundColor = "white";
-    theCowSpeaks(whatTheCowSays[2]);
+    speechBubble.style.backgroundImage = "url(images/dayspeech.png)";
+    speechText.style.color = "black";
+    navbarModal.style.backgroundColor = "white";
+    navbarModal.style.color = "black";
+    theCowSpeaks(whatTheCowSays[1]);
   }
 }
 
-function theCowSpeaks(mooing) {
-  // check this line
-  let fontSize = (2.2-mooing.length*0.01) < 0.9 ? 0.9 : (2.2-mooing.length*0.01)
-  //console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
-  speechText.style.fontSize = `${fontSize}rem`
-  speechBubble.style.backgroundImage = isItDaytime ? "url(images/dayspeech.png)" : "url(images/nightspeech.png)";
-  speechBubble.style.opacity = "1";
-  moo.play();
-  speechText.innerHTML = mooing;
+function mootButton() {
+  document.querySelectorAll("audio").forEach((elem) => elem.muted == true ? elem.muted = false : elem.muted = true);
+  document.getElementById("moot-button").classList.toggle("fa-volume-up")
+  document.getElementById("moot-button").classList.toggle("fa-volume-mute")
+}
+
+const helpHTML = `<p>Help</p>`;
+const settingsHTML = `<p>Settings</p>`;
+
+function openNavbarModal(settingsOrHelp) {
+
+  if (settingsOrHelp == 'help') {
+    navbarModal.style.left ="66vw";
+    navbarModal.innerHTML = helpHTML;
+  } else if (settingsOrHelp == 'settings') {
+    navbarModal.style.left ="2%";
+    navbarModal.innerHTML = settingsHTML;
+  }
+
+  navbarModal.classList.toggle("hidden");
+  
 }
 
 let cowPokeCount = 0;
 function pokeTheCow() {
-  if (cowPokeCount>2) {
-    theCowSpeaks(whatTheCowSays[cowPokeCount])
-  } else {
-    theCowSpeaks(whatTheCowSays[0])
+
+  let random = Math.floor(Math.random()*25);
+
+  if (random == 24) {
+    theCowSpeaks(whatTheCowSays[7])
+  } else if (random < 2) {
+    theCowSpeaks(whatTheCowSays[6])
+  } else { 
+    theCowSpeaks(cowPokeCount < 3 ? whatTheCowSays[2] : whatTheCowSays[cowPokeCount]);
   }
-  cowPokeCount++
-  return cowPokeCount>4 ? cowPokeCount = 0 : cowPokeCount
+
+  return cowPokeCount >= 5 ? cowPokeCount = 0 : cowPokeCount++
+
 }
 
 function cowfetti(cowfettiType, size, number) {
@@ -83,8 +127,6 @@ function buttonSound() {
   cowbell.play();
 }
 
-
-
 function boughtMilk() {
   buttonSound();
   openModal("buy");
@@ -104,7 +146,7 @@ async function needMilk() {
   ? `It is ${parsed.names[0]}'s turn to buy milk today!`
   : `It is either ${parsed.names[0]}'s or ${parsed.names[1]}'s turn to buy milk today. Have some cowfetti!`
 
-  theCowSpeaks(results);
+  theCowSpeaks([results, moo]);
   cowfetti(['🐄', '🐮', '🦡', '🥛'], 75, 50);
 
 }
@@ -114,7 +156,7 @@ async function ruminate() {
   // add catch error message
   const randomQuote = await fetch("/quote")
   const parsed = await randomQuote.json()
-  theCowSpeaks(`As ${parsed.author} once said, "${parsed.quote}".`)
+  theCowSpeaks([`As ${parsed.author} once said, "${parsed.quote}".`, moo])
 }
 
 // tab functions
@@ -157,7 +199,7 @@ const balanceHTML = (transactions, balance) => {
 // submit button triggers modalHandler
 const modalHTML = `<section class="modal hidden">
 <div class="flex" id="modal">
-<img src="images/daycow.png" width="42px" height="50px" alt="mini cow logo" />
+<img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" />
 <button class="btn-close" onclick="closeModal()">⨉</button>
 </div>
 <div id="modal-content"></div>
@@ -291,7 +333,9 @@ const openModal = function (buyOrDrink) {
   allTabs.forEach(e => e.classList.add("hidden"));
   allButtons.forEach(e => e.classList.add("hidden"));
   errorArea.innerText = "";
+  errorArea.style.color = isItDaytime ? "black" : "white"
   resultArea.innerText = "";
+  resultArea.style.color = isItDaytime ? "black" : "white"
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
   const modalContent = document.getElementById("modal-content");
