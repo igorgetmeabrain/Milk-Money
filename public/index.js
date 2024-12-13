@@ -22,11 +22,12 @@ const navbarModal = document.getElementById("navbar-modal");
 /* HOMEPAGE INTERACTION */
 
 const whatTheCowSays = [
-  ["Hey, who turned off all the lights?<br>Brrr, I'm freisian!", moo],
+  ["Hey, who turned off all the lights? <br> Brrr, I'm freisian!", moo],
+  ["Mooo, the milky way is udderly beautiful! Do you think we're all alone in the mooniverse?", moo],
   ["Oh, What a beautiful Mooooorning!", moo],
   ["Moooooooooooo!", moo],
   ["Hey, quit poking me, that's mooolestation!", moo],
-  ["Oi, don't make me hoof it over there - you'll udderly regret it!", moo],
+  ["Oi, don't make me hoof it over there <br> You'll udderly regret it!", moo],
   ["You're really getting my goat now!", goat],
   ["I'm feeling a little sheepish today...", baa],
   ["Moo-la la la Moo-la la la Moo-la la la Moo-la la la Moo-la la Moooo!", queen]
@@ -39,6 +40,7 @@ function theCowSpeaks(cowVocab) {
   let fontSize = (2.2-mooing.length*0.01) < 0.9 ? 0.9 : (2.2-mooing.length*0.01)
   //console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
   speechText.style.fontSize = `${fontSize}rem`
+  speechBubble.style.backgroundImage = isItDaytime ? "url(images/dayspeech.png)" : "url(images/nightspeech.png)";
   speechBubble.style.opacity = "1";
   mootype.play()
   speechText.innerHTML = mooing; 
@@ -50,22 +52,20 @@ function dayNight() {
     cowImage.src = "images/nightcow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 20%, 0.9)");
     noticeboard.style.backgroundColor = "black";
-    speechBubble.style.backgroundImage = "url(images/nightspeech.png)";
     speechText.style.color = "white";
     navbarModal.style.backgroundColor = "black";
     navbarModal.style.color = "white";
   
-    theCowSpeaks(whatTheCowSays[0]);
+    theCowSpeaks(Math.random() < 0.5 ? whatTheCowSays[0] : whatTheCowSays[1]);
   } else {
     isItDaytime = true;
     cowImage.src = "images/daycow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 100%, 0.9)");
     noticeboard.style.backgroundColor = "white";
-    speechBubble.style.backgroundImage = "url(images/dayspeech.png)";
     speechText.style.color = "black";
     navbarModal.style.backgroundColor = "white";
     navbarModal.style.color = "black";
-    theCowSpeaks(whatTheCowSays[1]);
+    theCowSpeaks(whatTheCowSays[2]);
   }
 }
 
@@ -75,8 +75,9 @@ function mootButton() {
   document.getElementById("moot-button").classList.toggle("fa-volume-mute")
 }
 
-const helpHTML = `<p>Help</p>`;
-const settingsHTML = `<p>Settings</p>`;
+const helpHTML = `<h2>Help</h2>
+                  `;
+const settingsHTML = `<h2>Settings</h2>`;
 
 function openNavbarModal(settingsOrHelp) {
 
@@ -98,14 +99,14 @@ function pokeTheCow() {
   let random = Math.floor(Math.random()*25);
 
   if (random == 24) {
-    theCowSpeaks(whatTheCowSays[7])
+    theCowSpeaks(whatTheCowSays[8])
   } else if (random < 2) {
-    theCowSpeaks(whatTheCowSays[6])
+    theCowSpeaks(whatTheCowSays[7])
   } else { 
-    theCowSpeaks(cowPokeCount < 3 ? whatTheCowSays[2] : whatTheCowSays[cowPokeCount]);
+    theCowSpeaks(cowPokeCount < 4 ? whatTheCowSays[3] : whatTheCowSays[cowPokeCount]);
   }
 
-  return cowPokeCount >= 5 ? cowPokeCount = 0 : cowPokeCount++
+  return cowPokeCount >= 6 ? cowPokeCount = 0 : cowPokeCount++
 
 }
 
@@ -144,7 +145,7 @@ async function needMilk() {
   
   let results = parsed.names.length == 1 
   ? `It is ${parsed.names[0]}'s turn to buy milk today!`
-  : `It is either ${parsed.names[0]}'s or ${parsed.names[1]}'s turn to buy milk today. Have some cowfetti!`
+  : `It is either ${parsed.names[0]}'s or ${parsed.names[1]}'s turn to buy milk today. <br> Have some cowfetti!`
 
   theCowSpeaks([results, moo]);
   cowfetti(['🐄', '🐮', '🦡', '🥛'], 75, 50);
@@ -177,7 +178,6 @@ const leaderboardHTML = (leaderboard) => {
   <ol id="numbered-list">`
   leaderboard.forEach(o => HTMLString += `<li>${o.name} ${o.balance}</li>`)
   HTMLString += `</ol>`
-  console.log(HTMLString)
   return HTMLString;
 }
 
@@ -210,7 +210,7 @@ const modalHTML = `<section class="modal hidden">
 </section>`
 
 const resetNoticeboard = () => {
-  allTabs.forEach(e => e.classList.remove("active-tab"));
+  allTabs.forEach(e => e.style.background = "green");
   noticeboard.classList.remove("moonit-balance", "daily-quiz", "about", "modal-style", "leaderboard");
 }
 
@@ -218,7 +218,7 @@ const displayLeaderboards = async () =>  {
 
   tabSound();
   resetNoticeboard();
-  leaderboardTab.classList.add("active-tab");
+  leaderboardTab.style.background = "blue";
   noticeboard.classList.add("leaderboard");
 
   const data = await fetch("/leaderboard");
@@ -258,7 +258,7 @@ const fillTotaliser = (balance) => {
 
 const displayBalance = async () => {
   resetNoticeboard();
-  balanceTab.classList.add("active-tab");
+  balanceTab.style.background = "red";
   noticeboard.classList.add("moonit-balance");
 
   const data = await fetch("/user-balance");
@@ -303,7 +303,7 @@ const displayBalance = async () => {
 const displayDailyQuiz = async () => {
   tabSound();
   resetNoticeboard();
-  dailyQuizTab.classList.add("active-tab");
+  dailyQuizTab.style.background = "darkorange";
   noticeboard.classList.add("daily-quiz");
 
   noticeboard.innerHTML = "This is placeholder text until I have written this function"
@@ -312,7 +312,7 @@ const displayDailyQuiz = async () => {
 const displayAbout = async () => {
   tabSound();
   resetNoticeboard();
-  aboutTab.classList.add("active-tab");
+  aboutTab.style.background = "purple";
   noticeboard.classList.add("about");
 
   noticeboard.innerHTML = "This is placeholder text until I have written this function"

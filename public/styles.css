@@ -12,6 +12,7 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 
 img,
@@ -51,12 +52,38 @@ body {
   font-weight: 700;
   text-align: center;
   cursor: grab;
-  background-image: linear-gradient(180deg, hsl(240, 96%, 82%) 0%, hsl(198, 100%, 50%) 33%, hsl(194, 100%, 50%) 46%, hsl(188, 100%, 47%) 52%, hsl(170, 100%, 41%) 56%, hsl(145, 100%, 40%) 57%, hsl(126, 96%, 40%) 58%, hsl(126, 96%, 40%) 59%, hsl(126, 96%, 40%) 59%, hsl(126, 96%, 40%) 60%, hsl(126, 96%, 40%) 60%, hsl(126, 96%, 40%) 61%, hsl(126, 96%, 40%) 62%, hsl(126, 96%, 40%) 64%, hsl(126, 96%, 40%) 66%, hsl(126, 96%, 40%) 69%, hsl(126, 96%, 40%) 72%, hsl(126, 96%, 40%) 75%, hsl(126, 96%, 40%) 79%, hsl(126, 96%, 40%) 84%, hsl(126, 96%, 40%) 89%, hsl(126, 96%, 40%) 94%, hsl(126, 96%, 40%) 100%);
+  background-image: linear-gradient(180deg, hsl(240, 96%, 82%) 0%, hsl(198, 100%, 50%) 33%, hsl(194, 100%, 50%) 46%, hsl(188, 100%, 47%) 52%, hsl(188, 100%, 47%) 56%, hsl(188, 100%, 47%) 57%, hsl(188, 100%, 47%) 58%, hsl(170, 100%, 41%) 59%, hsl(126, 96%, 40%) 60%, hsl(126, 96%, 40%) 60%, hsl(126, 96%, 40%) 61%, hsl(126, 96%, 40%) 62%, hsl(126, 96%, 40%) 64%, hsl(126, 96%, 40%) 66%, hsl(126, 96%, 40%) 69%, hsl(126, 96%, 40%) 72%, hsl(126, 96%, 40%) 75%, hsl(126, 96%, 40%) 79%, hsl(126, 96%, 40%) 84%, hsl(126, 96%, 40%) 89%, hsl(126, 96%, 40%) 94%, hsl(126, 96%, 40%) 100%);
+}
+body::before {
+  content: "";
+  width: 100vw;
+  height: 40vh;
+  background-image: url(./images/grasstexture.jpg);
+  z-index: 0;
+  background-repeat: repeat;
+  position: absolute;
+  top: 60vh;
+  left: 0;
+  opacity: 0.2;
+  filter: blur(1px);
 }
 
 /* checkbox is sun/moon icon: background changes when checked */
 body:has(input[type=checkbox]:checked) {
-  background-image: linear-gradient(180deg, hsl(240, 88%, 19%) 0%, hsl(222, 100%, 19%) 33%, hsl(214, 100%, 15%) 46%, hsl(200, 100%, 10%) 52%, hsl(172, 100%, 7%) 56%, hsl(144, 100%, 6%) 57%, hsl(125, 72%, 6%) 58%, hsl(126, 76%, 6%) 59%, hsl(126, 82%, 6%) 59%, hsl(127, 87%, 5%) 60%, hsl(127, 93%, 5%) 60%, hsl(127, 100%, 5%) 61%, hsl(127, 100%, 5%) 62%, hsl(127, 100%, 4%) 64%, hsl(127, 100%, 4%) 66%, hsl(127, 100%, 4%) 69%, hsl(127, 100%, 4%) 72%, hsl(126, 97%, 4%) 75%, hsl(126, 92%, 5%) 79%, hsl(125, 88%, 6%) 84%, hsl(124, 86%, 7%) 89%, hsl(125, 88%, 7%) 94%, hsl(126, 95%, 8%) 100%);
+  background-image: linear-gradient(180deg, hsl(240, 88%, 19%) 0%, hsl(222, 100%, 19%) 33%, hsl(214, 100%, 15%) 46%, hsl(200, 100%, 10%) 52%, hsl(200, 100%, 10%) 56%, hsl(200, 100%, 10%) 57%, hsl(200, 100%, 10%) 58%, hsl(126, 76%, 6%) 59%, hsl(127, 87%, 5%) 60%, hsl(127, 93%, 5%) 60%, hsl(127, 100%, 5%) 61%, hsl(127, 100%, 5%) 62%, hsl(127, 100%, 4%) 64%, hsl(127, 100%, 4%) 66%, hsl(127, 100%, 4%) 69%, hsl(127, 100%, 4%) 72%, hsl(126, 97%, 4%) 75%, hsl(126, 92%, 5%) 79%, hsl(125, 88%, 6%) 84%, hsl(124, 86%, 7%) 89%, hsl(125, 88%, 7%) 94%, hsl(126, 95%, 8%) 100%);
+}
+body:has(input[type=checkbox]:checked)::after {
+  content: "";
+  width: 100vw;
+  height: 60vh;
+  background-image: url(./images/milkyway.jpg);
+  background-size: cover;
+  z-index: 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
 }
 
 #day-night-checkbox {
@@ -210,6 +237,7 @@ body:has(input[type=checkbox]:checked) {
   left: 2%;
   color: gold;
   font-size: 1.5rem;
+  z-index: 1;
 }
 #navbar img {
   float: left;
@@ -256,6 +284,7 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: clamp(2rem, 7vw, 6rem);
+  z-index: 1;
 }
 
 h2 {
@@ -280,7 +309,6 @@ h2 {
 }
 
 #speech-bubble {
-  background-image: url(images/dayspeech.png);
   grid-area: speech;
   display: flex;
   align-items: center;
@@ -341,7 +369,7 @@ h2 {
   width: 80%;
   height: 80%;
   background: white;
-  border: 3px solid white;
+  border: 5px solid white;
   border-radius: 1%;
   box-shadow: 5px 5px 30px 5px black;
 }
@@ -372,17 +400,12 @@ h2 {
   transform: translateY(3px);
 }
 
-.active-tab {
-  /* calculate color of tab by tab number */
-  background: blue;
-}
-
 /* END OF NOTICEBOARD STYLES */
 .leaderboard {
   display: block;
   margin: auto;
   color: blue;
-  border: 3px solid blue !important;
+  border: 5px solid blue !important;
 }
 
 /* BALANCE STYLES */
@@ -390,7 +413,7 @@ h2 {
   display: grid !important;
   grid-template-columns: 25% 75% !important;
   color: red;
-  border: 3px solid red !important;
+  border: 5px solid red !important;
 }
 
 #totaliser {
@@ -439,13 +462,13 @@ ul {
 
 /* END OF BALANCE STYLES */
 .daily-quiz {
-  color: orange;
-  border: 3px solid orange !important;
+  color: darkorange;
+  border: 5px solid darkorange !important;
 }
 
 .about {
   color: purple;
-  border: 3px solid purple !important;
+  border: 5px solid purple !important;
 }
 
 /* MODAL STYLES */
@@ -510,6 +533,7 @@ footer {
   font-size: 1.2rem;
   padding: 0 10px;
   color: gold;
+  z-index: 3;
 }
 footer .left {
   float: left;

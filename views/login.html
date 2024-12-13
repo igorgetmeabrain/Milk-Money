@@ -21,13 +21,13 @@
       <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
       <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="">
       
-      <div id="login-form">
-        <input type="text" placeholder="please enter your first name">
-        <input type="password" placeholder="please enter your password">
+      <form id="login-form" action="/authenticate" method="POST">
+        <input type="text" name="username" placeholder="please enter your username">
+        <input type="password" name="password" placeholder="please enter your password">
         <button type="submit">Login</button>
         <a id="forgot-password" href="/forgot-password">Forgotten password?</a>
         <a id="create-account" href="/create-account">New to Moolah? Create an account</a>
-      </div>
+      </form>
 
       <footer id="footer">Hello I am the footer 2024</footer>
       

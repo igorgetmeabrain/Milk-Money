@@ -4,17 +4,22 @@ const cowQuotes = require('../components/cowquotes.json');
 module.exports = function (app) {
 
     app.get("/login", (req, res) => {
-        res.sendFile(__dirname + "/views/login.html");
+        res.sendFile(process.cwd() + "/views/login.html");
       });
       
     app.get("/create-account", (req, res) => {
-        res.sendFile(__dirname + "/views/account.html");
+        res.sendFile(process.cwd() + "/views/account.html");
       });
       
-    /* 
-    app.get("/create-new-user", (req, res) => {
+    app.post("/authenticate", (req, res) => {
+      const data = req.body;
+      res.json(data);
+    });
+     
+    app.post("/create-new-user", (req, res) => {
+        const data = req.body;
+        res.json(data);
       });
-    */
       
     app.get("/quote", (req, res) => {
         let randomQuote = cowQuotes.quotes[Math.floor(Math.random()*(cowQuotes.quotes.length))]

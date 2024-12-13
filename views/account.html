@@ -22,7 +22,7 @@
       <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
       <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="">
       
-      <form id="account-form" action="/create-new-user">
+      <form id="account-form" action="/create-new-user" method="POST">
         <label for="username">Please choose a username: </label>
         <input id="username" name="username" type="text" placeholder="alphnumeric characters and underscores only" required>
         
@@ -34,17 +34,17 @@
         
         <div class="custom-select">
           <label for="security-question">Please choose a security question: </label>
-          <select id="security-question">
+          <select id="security-question" name="security-question">
             <option value=1>Who is your least favourite composer?</option>
             <option value=2>Which musical instrument would you uninvent?</option>
             <option value=3>What is your most annoying earworm?</option>
             <option value=4>Who is the most over-rated musician?</option>
           </select>
-          <input type="text" placeholder="please type your answer" required>
+          <input type="text" id="security-answer" name="security-answer" placeholder="please type your answer" required>
         </div>
         
         <div id="milk-preference" class="custom-select">
-          <select>
+          <select id="milk-type" name="milk-type">
             <option value=0>Which is your preferred milk?</option>
             <option value=1>Skimmed</option>
             <option value=2>Semi-skimmed</option>
@@ -56,7 +56,7 @@
           </select>
         </div>
         <label for="bot-check">What is the shelfmark for Debussy's Cello Sonata?</label>
-        <input type="text" id="bot-check" required>
+        <input type="text" id="bot-check" name="bot-check" required>
         <button type="submit" value="Submit">Create Account</button>
       </form>
 

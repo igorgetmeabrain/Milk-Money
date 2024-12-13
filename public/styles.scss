@@ -13,6 +13,7 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 
 img,
@@ -53,7 +54,7 @@ $button-text-color: white;
 $button-text-hover-color: orange;
 $leaderboard: blue;
 $moonit-balance: red;
-$daily-quiz: orange;
+$daily-quiz: darkorange;
 $about: purple;
 $modal-text: black;
 $button-color: green;
@@ -74,12 +75,11 @@ body {
       hsl(240deg 96% 82%) 0%,
       hsl(198deg 100% 50%) 33%,
       hsl(194deg 100% 50%) 46%,
-      hsl(188deg 100% 47%) 52%,
-      hsl(170deg 100% 41%) 56%,
-      hsl(145deg 100% 40%) 57%,
-      hsl(126deg 96% 40%) 58%,
-      hsl(126deg 96% 40%) 59%,
-      hsl(126deg 96% 40%) 59%,
+	  hsl(188deg 100% 47%) 52%,
+	  hsl(188deg 100% 47%) 56%,
+	  hsl(188deg 100% 47%) 57%,
+	  hsl(188deg 100% 47%) 58%,
+      hsl(170deg 100% 41%) 59%,
       hsl(126deg 96% 40%) 60%,
       hsl(126deg 96% 40%) 60%,
       hsl(126deg 96% 40%) 61%,
@@ -94,6 +94,20 @@ body {
       hsl(126deg 96% 40%) 89%,
       hsl(126deg 96% 40%) 94%,
       hsl(126deg 96% 40%) 100%);
+
+	  &::before {
+		content: "";
+		width: 100vw;
+		height: 40vh;
+		background-image: url(./images/grasstexture.jpg);
+		z-index: 0;
+		background-repeat: repeat;
+		position: absolute;
+		top: 60vh;
+		left: 0;
+		opacity: 0.2;
+		filter: blur(1px);
+	}
 }
 
 /* checkbox is sun/moon icon: background changes when checked */
@@ -103,11 +117,10 @@ body:has(input[type='checkbox']:checked) {
 		hsl(222deg 100% 19%) 33%,
 		hsl(214deg 100% 15%) 46%,
 		hsl(200deg 100% 10%) 52%,
-		hsl(172deg 100% 7%) 56%,
-		hsl(144deg 100% 6%) 57%,
-		hsl(125deg 72% 6%) 58%,
+		hsl(200deg 100% 10%) 56%,
+		hsl(200deg 100% 10%) 57%,
+		hsl(200deg 100% 10%) 58%,
 		hsl(126deg 76% 6%) 59%,
-		hsl(126deg 82% 6%) 59%,
 		hsl(127deg 87% 5%) 60%,
 		hsl(127deg 93% 5%) 60%,
 		hsl(127deg 100% 5%) 61%,
@@ -122,6 +135,22 @@ body:has(input[type='checkbox']:checked) {
 		hsl(124deg 86% 7%) 89%,
 		hsl(125deg 88% 7%) 94%,
 		hsl(126deg 95% 8%) 100%);
+
+		&::after {
+			content: "";
+			width: 100vw;
+			height: 60vh;
+			background-image: url(./images/milkyway.jpg);
+			background-size: cover;
+			z-index: 0;
+			background-repeat: no-repeat;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0.3;
+		}
+
+		
   }
 
 #day-night-checkbox {
@@ -277,6 +306,7 @@ body:has(input[type='checkbox']:checked) {
 	left: 2%;
 	color: $navbar-text;
 	font-size: 1.5rem;
+	z-index: 1;
 
 	img {
 		float: left;
@@ -329,6 +359,7 @@ h1 {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	font-size: clamp(2rem, 7vw, 6rem);
+	z-index: 1;
 }
 
 h2 {
@@ -353,7 +384,6 @@ h2 {
 }
 
 #speech-bubble {
-	background-image: url(images/dayspeech.png);
 	grid-area: speech;
 	display: flex;
 	align-items: center;
@@ -419,7 +449,7 @@ h2 {
 	width: 80%;
 	height: 80%;
 	background: white;
-	border: 3px solid white;
+	border: 5px solid white;
 	border-radius: 1%;
 	box-shadow: 5px 5px 30px 5px black;
 }
@@ -452,10 +482,6 @@ h2 {
 	  }
 }
 
-.active-tab {
-	/* calculate color of tab by tab number */
-	background: blue;
-}
 
 /* END OF NOTICEBOARD STYLES */
 
@@ -463,7 +489,7 @@ h2 {
 	display: block;
 	margin: auto;
 	color: $leaderboard;
-	border: 3px solid $leaderboard !important;
+	border: 5px solid $leaderboard !important;
 }
 
 /* BALANCE STYLES */
@@ -472,7 +498,7 @@ h2 {
 	display: grid !important;
 	grid-template-columns: 25% 75% !important;
 	color: $moonit-balance;
-	border: 3px solid $moonit-balance !important;
+	border: 5px solid $moonit-balance !important;
 }
 
 #totaliser {
@@ -523,12 +549,12 @@ ul {
 
 .daily-quiz {
 	color: $daily-quiz;
-	border: 3px solid $daily-quiz !important;
+	border: 5px solid $daily-quiz !important;
 }
 
 .about {
 	color: $about;
-	border: 3px solid $about !important;
+	border: 5px solid $about !important;
 }
 
 /* MODAL STYLES */
@@ -595,6 +621,7 @@ footer {
 	font-size: 1.2rem;
 	padding: 0 10px;
 	color: $footer-text;
+	z-index: 3;
 
 	.left {
 		float: left;
