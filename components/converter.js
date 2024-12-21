@@ -40,7 +40,7 @@ class Converter {
   convertToMoonits(qty, units) {return units == "Litres" ? Math.round(+qty*40) : Math.round(+qty*22.72)}
 
   // transaction id for database
-  transactionId(moonits, date) {return `${moonits}d${Date.now()}`}
+  transactionId(moonits) {return `${moonits}d${Date.now()}`}
 
   getDateString(date) {return new Date(date).toLocaleDateString(undefined, 
     {
@@ -58,6 +58,11 @@ class Converter {
       formatted.push({moonits: +splitTrans[0], date: transDate })
     }
     return formatted;
+  }
+
+  // takes unhashed value - first digit is question no and rest is answer
+  securityQuestion(security) {
+    return security;
   }
 }
 

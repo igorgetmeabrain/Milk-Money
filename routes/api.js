@@ -1,5 +1,6 @@
-const Converter = require('../components/moonit_converter.js');
+const Converter = require('../components/converter.js');
 const cowQuotes = require('../components/cowquotes.json');
+const User = require('../models/user.model.js');
 
 module.exports = function (app) {
 
@@ -8,23 +9,47 @@ module.exports = function (app) {
       });
       
     app.get("/create-account", (req, res) => {
-        res.sendFile(process.cwd() + "/views/account.html");
+        res.sendFile(process.cwd() + "/views/account.html"); 
       });
       
     app.post("/authenticate", (req, res) => {
-      const data = req.body;
-      res.json(data);
-    });
+      // retrieve username and password from database
+      });
      
-    app.post("/create-new-user", (req, res) => {
-        const data = req.body;
-        res.json(data);
+    app.post("/create-new-user", async (req, res) => {
+      const { username, password, security, botcheck } = req.body;
+      console.log(req.body);
+      
+      // need to implement this properly!
+      if (botcheck.replace(/[^A-Za-z0-9]/g, "").toLowerCase() !== "m231deb") {
+        console.log("botcheck failed");
+        return res.send({error: "Sorry, you failed the bot check. Please try again."});
+      }
+
+      // hash password and security answer/question here
+      console.log("botcheck passed");
+      return res.send({message: "botcheck passed"});
+
+      /*
+      try {
+        const user = await User.create(userObject)
+      } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message: error.message})
+      }
+      */
+      
+      // return res.send({message: "you are now in the database"});
       });
       
     app.get("/quote", (req, res) => {
         let randomQuote = cowQuotes.quotes[Math.floor(Math.random()*(cowQuotes.quotes.length))]
         res.send(randomQuote)
-    });
+      });
+
+    app.get("/forgot-password", (req, res) => {
+        // use securityQuestion function from converter module
+    })
 
     let converter = new Converter();
         
@@ -34,19 +59,19 @@ module.exports = function (app) {
         const {qty, units, date} = req.body;
         const dateString = converter.getDateString(date);
         const moonits = converter.convertToMoonits(qty, units);
-        const transactionId = converter.transactionId(moonits, date);
+        const transactionId = converter.transactionId(moonits);
         // save transactionid and update balance in database
         let balanceFromDatabase = 15;
         console.log(transactionId);
 
-        return res.json({result: `You bought ${moonits} moonits on ${dateString}. You now have ${balanceFromDatabase+moonits} moonits.`})
+        return res.send({result: `You bought ${moonits} moonits on ${dateString}. You now have ${balanceFromDatabase+moonits} moonits.`})
       });
 
     app.route("/drink-milk")
       .post((req, res)=>{
         const {qty, date} = req.body;
         const dateString = converter.getDateString(date);
-        const transactionId = converter.transactionId(qty, date);
+        const transactionId = converter.transactionId(qty);
         // save transactionid and update balance in database
         let balanceFromDatabase = 15;
         console.log(transactionId);
@@ -74,7 +99,7 @@ module.exports = function (app) {
       });
 
     app.route("/user-balance")
-    .get((req, res) => {
+      .get((req, res) => {
       // user.transactions and user.balance from database
       const userTransactions = ["-6d1730654468178", "10d1730654429573", "10d1730654358280"];
       const userBalance = 100;
@@ -83,5 +108,5 @@ module.exports = function (app) {
         transactions: transactionsArray,
         balance: userBalance
       });
-    });
+      });
 }

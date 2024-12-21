@@ -10,30 +10,50 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css" type="text/css">
   </head>
 
   <body class="no-select">
+
     <div id="container">
 
       <h1 id="heading">Welcome to Moola!</h1>
 
       <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
-      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="">
+      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="moo.play()">
       
-      <form id="login-form" action="/authenticate" method="POST">
-        <input type="text" name="username" placeholder="please enter your username">
-        <input type="password" name="password" placeholder="please enter your password">
-        <button type="submit">Login</button>
-        <a id="forgot-password" href="/forgot-password">Forgotten password?</a>
-        <a id="create-account" href="/create-account">New to Moolah? Create an account</a>
-      </form>
 
-      <footer id="footer">Hello I am the footer 2024</footer>
-      
+      <!-- implement HTML5 form validation here - min/max length, format -->
+       <div id="login-form">
+        <input type="text" name="username" placeholder="username" autocomplete="off">
+        <input type="password" name="password" placeholder="password">
+        <button onclick="loginForm()">Login</button>
+        <div id="links">
+          <a id="forgot-password" href="/forgot-password">Forgotten password?</a>
+          <a id="create-account" href="/create-account">New to Moolah?</a>
+        </div> 
+        <div id="result-div"></div>
+       </div>
+
+      <footer id="footer">
+        <div class="left">
+          <span class="fa fa-regular fa-copyright"></span>
+          <p class="footer-text">Badger 2024</p>
+          <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
+          <img src="images/badger.png" onclick="badger.play()">
+        </div>
+        <span class="right">
+          Follow me:
+          <a href="https://github.com/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-github"></span> GitHub</a>
+          <a href="https://www.freecodecamp.org/igorgetmeabrain" target="_blank" class="follow">freeCodeCamp <span class="fab fa-free-code-camp"></span></a>
+          <a href="https://codepen.io/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-codepen"></span> CodePen</a>
+        </span>
+      </footer>
+
     </div>
-    
-       
+      
+    <script src="https://kit.fontawesome.com/d1e8eb8a9f.js" crossorigin="anonymous"></script>
 	  <script src="login.js"></script>
   </body>
 </html>

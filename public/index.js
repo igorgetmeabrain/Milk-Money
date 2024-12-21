@@ -22,8 +22,8 @@ const navbarModal = document.getElementById("navbar-modal");
 /* HOMEPAGE INTERACTION */
 
 const whatTheCowSays = [
-  ["Hey, who turned off all the lights? <br> Brrr, I'm freisian!", moo],
-  ["Mooo, the milky way is udderly beautiful! Do you think we're all alone in the mooniverse?", moo],
+  ["Hey, who turned off all the lights? <br> Brrr, I'm friesian!", moo],
+  ["The milky way is udderly beautiful! Do you think we're all alone in the mooniverse?", moo],
   ["Oh, What a beautiful Mooooorning!", moo],
   ["Moooooooooooo!", moo],
   ["Hey, quit poking me, that's mooolestation!", moo],
@@ -396,7 +396,7 @@ const modalHandler = async () => {
   
   const parsed = await data.json();
   if (parsed.error) {
-    errorArea.innerText = JSON.stringify(parsed);
+    errorArea.innerText = parsed.error;
     return;
   }
 

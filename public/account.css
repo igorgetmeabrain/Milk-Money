@@ -95,9 +95,9 @@ body {
   display: grid;
   grid-template-areas:
     "header"
-    "login"
+    "form"
     "footer";
-  grid-template-rows: 12% 75% 12%;
+  grid-template-rows: 12% 77% 10%;
   background: hsla(0, 0%, 0%, 0.7);
   height: 100vh;
 }
@@ -116,26 +116,39 @@ h1 {
   top: 300px;
   left: 50px;
   height: 150px;
+  filter: blur(3px);
 }
 
 #account-form {
-  grid-area: login;
+  grid-area: form;
   display: block;
   margin: auto;
-  margin-top: 4%;
+  margin-top: 3%;
   width: 40%;
-  background-color: gray;
-  border: 1px solid red;
-  padding: 5%;
+  background-color: hsla(0 0% 40% / 0.7);
+  border: 3px solid gold;
+  padding: 2%;
+}
+
+label {
+  font-size: 1.25rem;
 }
 
 input {
   display: block;
   margin: auto;
+  background: hsl(0 0% 80%);
   margin-bottom: 1%;
-  width: 60%;
+  width: 80%;
   height: 2rem;
   padding: 2%;
+  text-align: center;
+}
+
+select {
+  width: 70%;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .custom-select select {
@@ -153,9 +166,52 @@ input {
   margin: auto;
 }
 
-#footer {
-  grid-area: footer;
-  margin-top: auto;
-  text-align: center;
-  font-size: 1.5rem;
+#result-div {
+  margin: 6% 0 0 0;
+  height: 40px;
+  background: hsl(0 0% 50%);
+  border: 2px solid gold;
 }
+
+footer {
+	grid-area: footer;
+  margin-top: 2%;
+	text-align: center;
+	font-size: 1.2rem;
+	padding: 0 10px;
+	color: gold;
+	z-index: 3;
+}
+
+footer .left {
+  float: left;
+	margin-left: 10px;
+}
+	
+.footer-text {
+	display: inline-block;
+}
+
+footer img {
+	display: inline;
+	padding-top: 2%;
+	height: 33px;
+}
+	
+footer .right {
+	float: right;
+	width: 50%;
+	padding-top: 1%;
+}
+	
+footer a {
+  display: inline;
+	margin: 0 2%;
+	text-decoration: none;
+	color: gold;
+}
+
+footer a:hover {
+	color: orange;
+}
+

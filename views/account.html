@@ -20,51 +20,56 @@
       <h1 id="heading">Welcome to Moola!</h1>
 
       <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
-      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="">
+      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="moo.play()">
       
-      <form id="account-form" action="/create-new-user" method="POST">
+
+      <!-- implement HTML5 form validation here 
+       min/max length, format -->
+      <div id="account-form">
         <label for="username">Please choose a username: </label>
-        <input id="username" name="username" type="text" placeholder="alphnumeric characters and underscores only" required>
+        <input id="username" type="text" placeholder="alphanumeric characters and underscores only" required>
         
         <label for="password">Choose a password: </label>
-        <input id="password" name="password" type="password" required>
+        <input id="password" type="password" placeholder="minimum eight characters" required>
         
         <label for="password-check">Re-enter your password: </label>
-        <input id="password-check" type="password" placeholder="please re-enter your password" required>
+        <input id="password-check" type="password" required>
         
         <div class="custom-select">
           <label for="security-question">Please choose a security question: </label>
-          <select id="security-question" name="security-question">
+          <select id="security-question">
             <option value=1>Who is your least favourite composer?</option>
             <option value=2>Which musical instrument would you uninvent?</option>
             <option value=3>What is your most annoying earworm?</option>
             <option value=4>Who is the most over-rated musician?</option>
           </select>
-          <input type="text" id="security-answer" name="security-answer" placeholder="please type your answer" required>
+          <input type="text" id="security-answer" placeholder="please type your answer" required>
         </div>
-        
-        <div id="milk-preference" class="custom-select">
-          <select id="milk-type" name="milk-type">
-            <option value=0>Which is your preferred milk?</option>
-            <option value=1>Skimmed</option>
-            <option value=2>Semi-skimmed</option>
-            <option value=3>Full fat</option>
-            <option value=4>Oat</option>
-            <option value=5>Almond</option>
-            <option value=6>Soy</option>
-            <option value=6>Other</option>
-          </select>
-        </div>
-        <label for="bot-check">What is the shelfmark for Debussy's Cello Sonata?</label>
-        <input type="text" id="bot-check" name="bot-check" required>
-        <button type="submit" value="Submit">Create Account</button>
-      </form>
 
-      <footer id="footer">Hello I am the footer 2024</footer>
-      
+        <label for="bot-check">What is the shelfmark for Debussy's Cello Sonata?</label>
+        <input type="text" id="bot-check" required>
+        <button onclick="submitAccountForm()">Create Account</button>
+        <div id="result-div"></div>
+      </div>
+
+      <footer id="footer">
+        <div class="left">
+          <span class="fa fa-regular fa-copyright"></span>
+          <p class="footer-text">Badger 2024</p>
+          <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
+          <img src="images/badger.png" onclick="badger.play()">
+        </div>
+        <span class="right">
+          Follow me:
+          <a href="https://github.com/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-github"></span> GitHub</a>
+          <a href="https://www.freecodecamp.org/igorgetmeabrain" target="_blank" class="follow">freeCodeCamp <span class="fab fa-free-code-camp"></span></a>
+          <a href="https://codepen.io/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-codepen"></span> CodePen</a>
+        </span>
+      </footer>
+
     </div>
-    
-       
-	  <script src="login.js"></script>
+      
+    <script src="https://kit.fontawesome.com/d1e8eb8a9f.js" crossorigin="anonymous"></script>
+	  <script src="account.js"></script>
   </body>
 </html>
