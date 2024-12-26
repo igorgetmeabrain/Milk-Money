@@ -82,6 +82,10 @@ body {
       hsl(126deg 96% 40%) 100%);
 }
 
+.hidden {
+  display: none;
+}
+
 .no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -119,19 +123,39 @@ h1 {
   filter: blur(3px);
 }
 
-#account-form {
+#account-form, #login-form, #password-reset {
   grid-area: form;
-  display: block;
+  position: relative;
   margin: auto;
   margin-top: 3%;
   width: 40%;
   background-color: hsla(0 0% 40% / 0.7);
   border: 3px solid gold;
-  padding: 2%;
+  padding: 2% 2% 0 2%;
+  text-align: center;
 }
 
 label {
   font-size: 1.25rem;
+}
+
+#login-form button {
+  display: block;
+  margin: auto;
+  width: 25%;
+}
+
+#links {
+  margin-top: 6%;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#links a {
+  font-size: 0.9rem;
+  text-decoration: none;
+	color: gold;
 }
 
 input {
@@ -166,11 +190,32 @@ select {
   margin: auto;
 }
 
-#result-div {
-  margin: 6% 0 0 0;
-  height: 40px;
+.invalid-field {
+  border: 3px solid red;
+}
+
+#result-div, #reset-result-div {
+  margin: 3% 0 3% 0;
+  height: 60px;
+  padding: 1%;
+}
+
+.result-div, .reset-result-div {
   background: hsl(0 0% 50%);
   border: 2px solid gold;
+}
+
+#go-back {
+  text-decoration: none;
+	color: gold;
+}
+
+#go-back:hover {
+  color: orange;
+}
+
+.form-button:hover {
+  background: gold;
 }
 
 footer {

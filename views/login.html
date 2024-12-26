@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css" type="text/css">
+    <link rel="stylesheet" href="accountandlogin.css" type="text/css">
   </head>
 
   <body class="no-select">
@@ -23,17 +23,15 @@
       <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
       <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="moo.play()">
       
-
-      <!-- implement HTML5 form validation here - min/max length, format -->
        <div id="login-form">
         <input type="text" name="username" placeholder="username" autocomplete="off">
         <input type="password" name="password" placeholder="password">
-        <button onclick="loginForm()">Login</button>
+        <button class="form-button" onclick="login()">Login</button>
+        <div id="result-div"><span id="result-text" class="hidden"></span></div>
         <div id="links">
-          <a id="forgot-password" href="/forgot-password">Forgotten password?</a>
+          <a id="forgot-password" onclick="unhidePasswordReset()">Forgotten password?</a>
           <a id="create-account" href="/create-account">New to Moolah?</a>
-        </div> 
-        <div id="result-div"></div>
+        </div>
        </div>
 
       <footer id="footer">
@@ -50,6 +48,27 @@
           <a href="https://codepen.io/igorgetmeabrain" target="_blank" class="follow"><span class="fab fa-codepen"></span> CodePen</a>
         </span>
       </footer>
+
+      <div class="hidden" id="password-reset">
+        <label for="password">Choose a new password: </label>
+        <input id="password" type="password" placeholder="minimum eight characters" required>
+      
+        <label for="password-check">Re-enter your password: </label>
+        <input id="confirm-password" type="password" required>
+        <div class="custom-select">
+          <label for="security-question">What is your security question?</label>
+          <select id="security-question">
+            <option value=1>Who is your least favourite composer?</option>
+            <option value=2>Which musical instrument would you uninvent?</option>
+            <option value=3>What is your most annoying earworm?</option>
+            <option value=4>Who is the most over-rated musician?</option>
+          </select>
+          <input type="text" id="security-answer" placeholder="please type your answer" required>
+        </div>
+        <button class="form-button" onclick="resetPassword()">Reset Password</button>
+        <div id="reset-result-div"><span id="reset-result-text" class="hidden"></span></div>
+        <a href="/login" id="go-back">Back to Login</a>
+      </div>
 
     </div>
       

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="account.css" type="text/css">
+    <link rel="stylesheet" href="accountandlogin.css" type="text/css">
   </head>
 
   <body class="no-select">
@@ -22,9 +22,6 @@
       <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
       <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="moo.play()">
       
-
-      <!-- implement HTML5 form validation here 
-       min/max length, format -->
       <div id="account-form">
         <label for="username">Please choose a username: </label>
         <input id="username" type="text" placeholder="alphanumeric characters and underscores only" required>
@@ -33,7 +30,7 @@
         <input id="password" type="password" placeholder="minimum eight characters" required>
         
         <label for="password-check">Re-enter your password: </label>
-        <input id="password-check" type="password" required>
+        <input id="confirm-password" type="password" required>
         
         <div class="custom-select">
           <label for="security-question">Please choose a security question: </label>
@@ -48,8 +45,9 @@
 
         <label for="bot-check">What is the shelfmark for Debussy's Cello Sonata?</label>
         <input type="text" id="bot-check" required>
-        <button onclick="submitAccountForm()">Create Account</button>
-        <div id="result-div"></div>
+        <button class="form-button" id="submit">Create Account</button>
+        <div id="result-div"><span id="result-text" class="hidden"></span></div>
+        <a href="/login" id="go-back">Back to Login</a>
       </div>
 
       <footer id="footer">

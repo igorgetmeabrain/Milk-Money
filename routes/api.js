@@ -18,16 +18,13 @@ module.exports = function (app) {
      
     app.post("/create-new-user", async (req, res) => {
       const { username, password, security, botcheck } = req.body;
-      console.log(req.body);
       
-      // need to implement this properly!
       if (botcheck.replace(/[^A-Za-z0-9]/g, "").toLowerCase() !== "m231deb") {
         console.log("botcheck failed");
         return res.send({error: "Sorry, you failed the bot check. Please try again."});
       }
 
       // hash password and security answer/question here
-      console.log("botcheck passed");
       return res.send({message: "botcheck passed"});
 
       /*
@@ -48,6 +45,8 @@ module.exports = function (app) {
       });
 
     app.get("/forgot-password", (req, res) => {
+        // unhash security question and answer from database and compare with form data
+        // if correct, change password
         // use securityQuestion function from converter module
     })
 
