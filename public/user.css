@@ -123,7 +123,7 @@ h1 {
   filter: blur(3px);
 }
 
-#account-form, #login-form, #password-reset {
+#account-form, #login-form, #password-reset-form {
   grid-area: form;
   position: relative;
   margin: auto;
@@ -147,15 +147,8 @@ label {
 
 #links {
   margin-top: 6%;
-  margin-bottom: 0;
   display: flex;
   justify-content: space-between;
-}
-
-#links a {
-  font-size: 0.9rem;
-  text-decoration: none;
-	color: gold;
 }
 
 input {
@@ -185,36 +178,33 @@ select {
   cursor: pointer;
 }
 
-#create-account {
-  display: block;
-  margin: auto;
-}
-
 .invalid-field {
   border: 3px solid red;
 }
 
-#result-div, #reset-result-div {
+/* remove this and put in result-div class selector? */
+#account-result-div, #reset-result-div, #login-result-div {
   margin: 3% 0 3% 0;
   height: 60px;
   padding: 1%;
 }
 
-.result-div, .reset-result-div {
+.result-div {
   background: hsl(0 0% 50%);
   border: 2px solid gold;
 }
 
-#go-back {
+#go-back, #links a {
+  font-size: 0.9rem;
   text-decoration: none;
 	color: gold;
 }
 
-#go-back:hover {
+#go-back:hover, #links a:hover {
   color: orange;
 }
 
-.form-button:hover {
+.form-button:hover {  
   background: gold;
 }
 

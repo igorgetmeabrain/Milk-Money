@@ -5,11 +5,7 @@ const User = require('../models/user.model.js');
 module.exports = function (app) {
 
     app.get("/login", (req, res) => {
-        res.sendFile(process.cwd() + "/views/login.html");
-      });
-      
-    app.get("/create-account", (req, res) => {
-        res.sendFile(process.cwd() + "/views/account.html"); 
+        res.sendFile(process.cwd() + "/views/user.html");
       });
       
     app.post("/authenticate", (req, res) => {
