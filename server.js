@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 require("dotenv").config();
-const bcrypt = require('bcrypt'); 
+//const bcrypt = require('bcrypt'); 
 const mongoURI = process.env.DB_URI;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -11,17 +11,6 @@ const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// placeholder before implementing passport etc
-let authenticated = true;
-
-app.get("/", (req, res) => {
-  if (authenticated) {
-    res.sendFile(__dirname + "/views/index.html");
-  } else {
-    res.redirect("/login")
-  }
-});
 
 userRoutes(app);
 

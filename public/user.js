@@ -13,19 +13,22 @@ const showAccountForm = () => {
 };
 
 const submitFormHandler = async (formType, username, password, security, botcheck) => {
-
+    
     // need to get the result area again
     const resultArea = document.querySelector(`#${formType}-result-text`);
 
     const stuff = { 
-    // customise for form type
-      "username": username,
-      "password": password,
-      "security": security,
-      "botcheck": botcheck
-    }
-  
-    const data = await fetch("/create-new-user", {
+    };
+
+    if (username !== 0) stuff["username"] = username;
+    if (password !== 0) stuff["password"] = password;
+    if (security !== 0) stuff["security"] = security;
+    if (botcheck !== 0) stuff["botcheck"] = botcheck;
+    
+    console.log("stuff: ", stuff);
+    
+    const route = formType === "login" ? "/login" : formType === "account" ? "/create-new-user" : "/reset-password";
+    const data = await fetch(route, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -42,8 +45,7 @@ const submitFormHandler = async (formType, username, password, security, botchec
         return resultArea.innerText = parsed.message;
       }
       
-  }
-
+};
 
 const validate = (formType) => {
     if (formType !== "login" && formType !== "account" && formType !== "reset") {
@@ -70,19 +72,14 @@ const validate = (formType) => {
     const username = document.querySelector(`#${formType}-username`);
     const password = document.querySelector(`#${formType}-password`);
 
-    // account and reset fields
-    if (formType != "login") {
-        // variables out of scope....
-        const confirmPassword = document.querySelector(`#confirm-${formType}-password`);
-        const securityQuestion = document.querySelector(`#${formType}-security-question`);
-        const securityAnswer = document.querySelector(`#${formType}-security-answer`);
-        const security = securityQuestion.value + securityAnswer.value;
+    // account and reset only
+    const confirmPassword = document.querySelector(`#confirm-${formType}-password`);
+    const securityQuestion = document.querySelector(`#${formType}-security-question`);
+    const securityAnswer = document.querySelector(`#${formType}-security-answer`);
+    const security = securityQuestion ? securityQuestion.value + securityAnswer.value : null;
         
-        // account only
-        if (formType != "reset") {
-            const botcheck = document.querySelector(`#bot-check`);
-        }    
-    }
+    // account only
+    const botcheck = document.querySelector(`#bot-check`);
 
     // display result area
     resultArea.classList.remove("hidden");
@@ -105,13 +102,17 @@ const validate = (formType) => {
           resultArea.innerText = errorMessages[0];
           password.classList.add("invalid-field");
           break;
-        case formType == "account" && password.value.length < 8:
+        case formType != "login" && password.value.length < 8:
           resultArea.innerText = errorMessages[3];
           password.classList.add("invalid-field");
           break;
-        case formType == "account" && /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password.value):
+        case formType != "login" && /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password.value):
           resultArea.innerText = errorMessages[4];
           password.classList.add("invalid-field");
+          break;
+        case formType != "login" && confirmPassword.value == "":
+          resultArea.innerText = errorMessages[0];
+          confirmPassword.classList.add("invalid-field");
           break;
         case formType != "login" && password.value !== confirmPassword.value:
           resultArea.innerText = errorMessages[5];
@@ -121,17 +122,28 @@ const validate = (formType) => {
           resultArea.innerText = errorMessages[0];
           securityAnswer.classList.add("invalid-field");
           break;
+        case formType == "account" && botcheck.value=="":
+          resultArea.innerText = errorMessages[0];
+          botcheck.classList.add("invalid-field");
+          break;
         default:
           resultArea.innerText = "please wait...";
+          
+          // ensure no fields are null before passing to submitFormHandler
+          const user = username ? username.value : 0;
+          const pass = password.value ? password.value : 0;
+          const sec = security ? security : 0;
+          const bot = botcheck.value ? botcheck.value : 0;
+          
           setTimeout(() => {
             console.log("submitting form");
-            // customise for each form type allowing for undefined parameters
-            // submitFormHandler(formType, username.value, password.value, security, botcheck.value);
+            console.log("\nform type: ", formType, "\nusername: ", user, "\npassword: ", pass, "\nsecurity: ", sec, "\nbotcheck: ", bot);
+            submitFormHandler(formType, user, pass, sec, bot);
           }, 2000);
           break;
       }
     
-}
+};
 
 
 

@@ -1,56 +1,76 @@
 const Converter = require('../components/converter.js');
 const cowQuotes = require('../components/cowquotes.json');
 const User = require('../models/user.model.js');
+const bcrypt = require('bcrypt');
 
 module.exports = function (app) {
 
-    app.get("/login", (req, res) => {
-        res.sendFile(process.cwd() + "/views/user.html");
-      });
-      
-    app.post("/authenticate", (req, res) => {
-      // retrieve username and password from database
-      });
+  // placeholder before implementing passport etc - ensure all routes redirect if unauthenticated
+  let authenticated = true;
+
+  // serve index.html if authenticated, otherwise redirect to user.html
+  app.get("/", (req, res) => {
+    if (authenticated) {
+      res.sendFile(process.cwd() + "/views/index.html");
+    } else {
+      res.redirect("/user")
+    }
+  });
+
+  app.get("/user", (req, res) => {
+    res.sendFile(process.cwd() + "/views/user.html");
+  });
+
+  // submit login form  
+  app.post("/login", (req, res) => {
+    // retrieve username and password from database
+    
+    const { username, password } = req.body;
+    res.json({message: `Welcome ${username} you are now logged in. Your password is ${password}`});
+  });
      
-    app.post("/create-new-user", async (req, res) => {
-      const { username, password, security, botcheck } = req.body;
+  app.post("/create-new-user", async (req, res) => {
+    const { username, password, security, botcheck } = req.body;
       
-      if (botcheck.replace(/[^A-Za-z0-9]/g, "").toLowerCase() !== "m231deb") {
-        console.log("botcheck failed");
-        return res.send({error: "Sorry, you failed the bot check. Please try again."});
-      }
+    if (botcheck.replace(/[^A-Za-z0-9]/g, "").toLowerCase() !== "m231deb") {
+      console.log("botcheck failed");
+      return res.send({error: "Sorry, you failed the bot check. Please try again."});
+    }
 
-      // hash password and security answer/question here
-      return res.send({message: "botcheck passed"});
+    // hash password and security answer/question here
+    return res.send({message: "botcheck passed"});
 
-      /*
-      try {
-        const user = await User.create(userObject)
-      } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message: error.message})
-      }
-      */
+    /*
+    try {
+      const user = await User.create(userObject)
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({message: error.message})
+    }
+    */
       
-      // return res.send({message: "you are now in the database"});
-      });
+    // return res.send({message: "you are now in the database"});
+  });
       
-    app.get("/quote", (req, res) => {
-        let randomQuote = cowQuotes.quotes[Math.floor(Math.random()*(cowQuotes.quotes.length))]
-        res.send(randomQuote)
-      });
+  app.post("/reset-password", (req, res) => {
+    // unhash security question and answer from database and compare with form data
+    // if correct, change password
+    // use securityQuestion function from converter module
+    const { password, security } = req.body;
+    res.json({message: `Your password has been reset to ${password}. Your security code is ${security}`});
+  });
 
-    app.get("/forgot-password", (req, res) => {
-        // unhash security question and answer from database and compare with form data
-        // if correct, change password
-        // use securityQuestion function from converter module
-    })
+  app.get("/quote", (req, res) => {
+      let randomQuote = cowQuotes.quotes[Math.floor(Math.random()*(cowQuotes.quotes.length))]
+      res.send(randomQuote)
+  });
 
-    let converter = new Converter();
+  // user functions
+  let converter = new Converter();
         
-    // flesh this out... get updated balance
-    app.route("/buy-milk")
-      .post((req, res)=>{
+  // flesh this out... get updated balance
+  app.route("/buy-milk")
+    .post((req, res)=>{
         const {qty, units, date} = req.body;
         const dateString = converter.getDateString(date);
         const moonits = converter.convertToMoonits(qty, units);
@@ -60,10 +80,10 @@ module.exports = function (app) {
         console.log(transactionId);
 
         return res.send({result: `You bought ${moonits} moonits on ${dateString}. You now have ${balanceFromDatabase+moonits} moonits.`})
-      });
+  });
 
-    app.route("/drink-milk")
-      .post((req, res)=>{
+  app.route("/drink-milk")
+    .post((req, res)=>{
         const {qty, date} = req.body;
         const dateString = converter.getDateString(date);
         const transactionId = converter.transactionId(qty);
@@ -72,11 +92,11 @@ module.exports = function (app) {
         console.log(transactionId);
 
         return res.send({result: `You drank ${qty} moonits on ${dateString}. You now have ${balanceFromDatabase-qty} moonits.`})
-      });
+  });
     
-    // placeholder object - will be retrieved from database
-    app.route("/leaderboard")
-      .get((req, res) => {
+  // placeholder object - will be retrieved from database
+  app.route("/leaderboard")
+  .get((req, res) => {
         return res.json({leaderboard: [
           {name: "Doug", balance: 33},
           {name: "Mimi", balance: 20},
@@ -84,17 +104,17 @@ module.exports = function (app) {
           {name: "Reuben", balance: 0},
           {name: "Alex", balance: -10}
          ]})
-      });
+  });
 
-    // get team leaderboard from database
-    // retrieve the lowest balance(s) and return name(s)
-    app.route("/need-milk")
-      .get((req, res) => {
+  // get team leaderboard from database
+  // retrieve the lowest balance(s) and return name(s)
+  app.route("/need-milk")
+  .get((req, res) => {
         return res.json({names: ["Doug", "Reuben"]})
-      });
+  });
 
-    app.route("/user-balance")
-      .get((req, res) => {
+  app.route("/user-balance")
+  .get((req, res) => {
       // user.transactions and user.balance from database
       const userTransactions = ["-6d1730654468178", "10d1730654429573", "10d1730654358280"];
       const userBalance = 100;
@@ -103,5 +123,5 @@ module.exports = function (app) {
         transactions: transactionsArray,
         balance: userBalance
       });
-      });
+  });
 }
