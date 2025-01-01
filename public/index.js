@@ -199,14 +199,14 @@ const balanceHTML = (transactions, balance) => {
 // submit button triggers modalHandler
 const modalHTML = `<section class="modal hidden">
 <div class="flex" id="modal">
-<img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" />
-<button class="btn-close" onclick="closeModal()">⨉</button>
+<audio src="audio/minimoo.mp3" preload="auto" id="minimoo"></audio>
+<img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
+<button class="modal-close-button" onclick="closeModal()">⨉</button>
 </div>
 <div id="modal-content"></div>
 <input type="date" id="transaction-date">
-<button class="btn" id="modal-submit" onclick="modalHandler()">Submit</button>
-<div id="error-div"></div>
-<div id="result-div"></div>
+<button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
+<div id="result-div"><span id="result-text" class="hidden"></span></div>
 </section>`
 
 const resetNoticeboard = () => {
@@ -327,26 +327,20 @@ const openModal = function (buyOrDrink) {
   noticeboard.innerHTML = modalHTML;
   const modal = document.querySelector(".modal");
   const overlay = document.querySelector(".overlay");
-  const errorArea = document.querySelector("#error-div");
-  const resultArea = document.querySelector("#result-div");
   noticeboard.classList.add("modal-style");
   allTabs.forEach(e => e.classList.add("hidden"));
   allButtons.forEach(e => e.classList.add("hidden"));
-  errorArea.innerText = "";
-  errorArea.style.color = isItDaytime ? "black" : "white"
-  resultArea.innerText = "";
-  resultArea.style.color = isItDaytime ? "black" : "white"
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
   const modalContent = document.getElementById("modal-content");
   let content;
   if (buyOrDrink == "buy") {
-    content = `<h3>You bought milk!</h3>
-  <input type="number" id="milk-qty" placeholder="enter amount" />
+    content = `<h2>You bought milk!</h2>
+  <input type="number" id="milk-qty" placeholder="amount in pints/litres" />
   <button id="toggle-units">Litres</button>`
   } else if (buyOrDrink == "drink") {
-    content = `<h3>You drank milk!</h3>
-  <input type="number" id="milk-qty" placeholder="enter number of drinks" />`
+    content = `<h2>You drank milk!</h2>
+  <input type="number" id="milk-qty" placeholder="number of drinks" />`
   }
 
   modalContent.innerHTML = content;
@@ -374,12 +368,16 @@ const modalHandler = async () => {
   const unitsButton = document.querySelector("#toggle-units");
   const units = unitsButton ? unitsButton.innerText : "moonits"
   const datePicker = document.querySelector("#transaction-date");
-  const errorArea = document.querySelector("#error-div");
-  const resultArea = document.querySelector("#result-div");
+  const resultArea = document.querySelector("#result-text");
+  const resultDiv = document.querySelector("#result-div");
+
+  // display result area
+  resultArea.classList.remove("hidden");
+  resultDiv.classList.add("result-div");
 
   // input error handling
   if (!datePicker.value || numberInput.value == 0) {
-    errorArea.innerText = "Please enter valid values for quantity and date."
+    resultArea.innerText = "Please enter valid values for quantity and date."
     return;
   }
   const stuff = {"qty": milkQty, "units": units, "date": datePicker.value}
@@ -396,8 +394,7 @@ const modalHandler = async () => {
   
   const parsed = await data.json();
   if (parsed.error) {
-    errorArea.innerText = parsed.error;
-    return;
+    return resultArea.innerText = parsed.error;
   }
 
   resultArea.innerText = parsed.result;

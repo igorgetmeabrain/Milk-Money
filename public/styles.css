@@ -265,7 +265,7 @@ body:has(input[type=checkbox]:checked)::after {
   top: 9%;
   height: 50%;
   width: 20%;
-  background-color: white;
+  background-color: hsla(0, 0%, 40%, 0.7);
   border: 3px solid darkgreen;
   border-radius: 3px;
   z-index: 7;
@@ -473,8 +473,19 @@ ul {
 
 /* MODAL STYLES */
 .modal {
-  z-index: 5;
+  position: relative;
+  top: -2%;
+  left: -2%;
+  height: 104%;
+  width: 104%;
+  background: hsla(0, 0%, 40%, 0.7);
   color: black;
+  border: 5px solid gold;
+  border-radius: 3px;
+  z-index: 5;
+}
+.modal h2 {
+  margin-top: 2%;
 }
 .modal .flex {
   display: flex;
@@ -482,26 +493,47 @@ ul {
   justify-content: space-between;
 }
 .modal input {
-  padding: 0.7rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  margin-top: 2%;
+  padding: 0.25rem 0.5rem;
+  width: 35%;
+  border-radius: 3px;
   font-size: 0.9em;
 }
-
-.btn {
-  display: block;
-  margin: auto;
-  padding: 0.8rem 1.4rem;
-  font-weight: 700;
-  background-color: black;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 1em;
+.modal img {
+  transform: translate(10px, 10px);
 }
 
-.btn-close {
-  transform: translate(10px, -10px);
+#result-div {
+  display: block;
+  margin: auto;
+  margin-top: 4%;
+  width: 80%;
+  height: 20%;
+  padding: 1%;
+  font-size: 1.2rem;
+}
+
+.result-div {
+  background: hsl(0, 0%, 50%);
+  border: 3px solid gold;
+}
+
+.modal-button {
+  display: block;
+  margin: auto;
+  margin-top: 2%;
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 1.2em;
+}
+.modal-button:hover {
+  background: gold;
+}
+
+.modal-close-button {
+  transform: translate(-10px, 0px);
   width: 2.5rem;
   padding: 0.5rem;
   background: #eee;

@@ -58,9 +58,9 @@ $daily-quiz: darkorange;
 $about: purple;
 $modal-text: black;
 $button-color: green;
-$modal-background: white;
-$modal-button: black;
-$modal-button-text: white;
+$modal-background: hsla(0 0% 40% / 0.7);
+$modal-button: white;
+$modal-button-text: black;
 $link-color: gold;
 $link-hover-color: orange;
 $fuzzy-bubbles: "Fuzzy Bubbles", sans-serif;
@@ -560,36 +560,73 @@ ul {
 /* MODAL STYLES */
 
 .modal {
-	z-index: 5;
+	position: relative;
+	top: -2%;
+	left: -2%;
+	height: 104%;
+	width: 104%;
+	background: $modal-background;
 	color: $modal-text;
+	border: 5px solid gold;
+	border-radius: 3px;
+	z-index: 5;
+
+	h2 {
+		margin-top: 2%;
+	}
 
 	.flex {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
+
 	input {
-		padding: 0.7rem 1rem;
-		border: 1px solid #ddd;
-		border-radius: 5px;
+		margin-top: 2%;
+		padding: 0.25rem 0.5rem;
+		width: 35%;
+		border-radius: 3px;
 		font-size: 0.9em;
+	}
+
+	img {
+		transform: translate(10px, 10px);
 	}
 }
 
-.btn {
-	display: block;
-	margin: auto;
-	padding: 0.8rem 1.4rem;
-	font-weight: 700;
-	background-color: $modal-button;
-	color: $modal-button-text;
-	border-radius: 5px;
-	text-align: center;
-	font-size: 1em;
+#result-div {
+  display: block;
+  margin: auto;
+  margin-top: 4%;
+  width: 80%;
+  height: 20%;
+  padding: 1%;
+  font-size: 1.2rem;
+  
 }
 
-.btn-close {
-	transform: translate(10px, -10px);
+.result-div {
+  background: hsl(0 0% 50%);
+  border: 3px solid gold;
+}
+
+.modal-button {
+	display: block;
+	margin: auto;
+	margin-top: 2%;
+	background-color: $modal-button;
+	color: $modal-button-text;
+	border-radius: 3px;
+	text-align: center;
+	font-size: 1.2em;
+
+	&:hover {
+		background: gold;
+	}
+}
+
+.modal-close-button {
+	transform: translate(-10px, 0px);
 	width: 2.5rem;
 	padding: 0.5rem;
 	background: #eee;

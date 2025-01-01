@@ -24,19 +24,22 @@ module.exports = function (app) {
   // submit login form  
   app.post("/login", (req, res) => {
     // retrieve username and password from database
-    
+    // compare with form data and redirect to index.html if correct
     const { username, password } = req.body;
-    res.json({message: `Welcome ${username} you are now logged in. Your password is ${password}`});
+    // placeholder
+    res.json({message: `Welcome ${username} you are now logged in.`});
   });
      
   app.post("/create-new-user", async (req, res) => {
     const { username, password, security, botcheck } = req.body;
-      
+
     if (botcheck.replace(/[^A-Za-z0-9]/g, "").toLowerCase() !== "m231deb") {
       console.log("botcheck failed");
       return res.send({error: "Sorry, you failed the bot check. Please try again."});
     }
 
+    // check if username already exists in system
+    // if not...
     // hash password and security answer/question here
     return res.send({message: "botcheck passed"});
 
@@ -79,7 +82,8 @@ module.exports = function (app) {
         let balanceFromDatabase = 15;
         console.log(transactionId);
 
-        return res.send({result: `You bought ${moonits} moonits on ${dateString}. You now have ${balanceFromDatabase+moonits} moonits.`})
+        return res.send({result: `You bought ${moonits} moonits on ${dateString}.
+          You now have ${balanceFromDatabase+moonits} moonits.`})
   });
 
   app.route("/drink-milk")
@@ -91,7 +95,8 @@ module.exports = function (app) {
         let balanceFromDatabase = 15;
         console.log(transactionId);
 
-        return res.send({result: `You drank ${qty} moonits on ${dateString}. You now have ${balanceFromDatabase-qty} moonits.`})
+        return res.send({result: `You drank ${qty} moonits on ${dateString}.
+          You now have ${balanceFromDatabase-qty} moonits.`})
   });
     
   // placeholder object - will be retrieved from database
