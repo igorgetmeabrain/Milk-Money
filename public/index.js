@@ -75,8 +75,7 @@ function mootButton() {
   document.getElementById("moot-button").classList.toggle("fa-volume-mute")
 }
 
-const helpHTML = `<h2>Help</h2>
-                  `;
+const helpHTML = `<h2>Help</h2>`;
 const settingsHTML = `<h2>Settings</h2>`;
 
 function openNavbarModal(settingsOrHelp) {
@@ -363,6 +362,8 @@ const closeModal = function () {
 };
 
 const modalHandler = async () => {
+
+  const submitButton = document.getElementById("modal-submit");
   const numberInput = document.querySelector("#milk-qty");
   const milkQty = numberInput.value;
   const unitsButton = document.querySelector("#toggle-units");
@@ -370,16 +371,20 @@ const modalHandler = async () => {
   const datePicker = document.querySelector("#transaction-date");
   const resultArea = document.querySelector("#result-text");
   const resultDiv = document.querySelector("#result-div");
+  const inputs = document.querySelectorAll("input");
 
   // display result area
   resultArea.classList.remove("hidden");
   resultDiv.classList.add("result-div");
 
-  // input error handling
-  if (!datePicker.value || numberInput.value == 0) {
+  // check for empty or invalid inputs
+  if (!datePicker.value || numberInput.value <= 0 || new Date(datePicker.value).toString() > new Date().toString()) {
     resultArea.innerText = "Please enter valid values for quantity and date."
+    inputs.forEach(e => e.value = "");
     return;
   }
+  
+  submitButton.classList.add("hidden");
   const stuff = {"qty": milkQty, "units": units, "date": datePicker.value}
   const route = units == "moonits" ? "/drink-milk" : "/buy-milk";
 
@@ -394,6 +399,7 @@ const modalHandler = async () => {
   
   const parsed = await data.json();
   if (parsed.error) {
+    inputElements.forEach(e => e.value = "");
     return resultArea.innerText = parsed.error;
   }
 

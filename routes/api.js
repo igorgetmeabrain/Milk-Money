@@ -78,7 +78,7 @@ module.exports = function (app) {
         const dateString = converter.getDateString(date);
         const moonits = converter.convertToMoonits(qty, units);
         const transactionId = converter.transactionId(moonits);
-        // save transactionid and update balance in database
+        // save transactionid and update balance in database and update leaderboard
         let balanceFromDatabase = 15;
         console.log(transactionId);
 
@@ -91,7 +91,7 @@ module.exports = function (app) {
         const {qty, date} = req.body;
         const dateString = converter.getDateString(date);
         const transactionId = converter.transactionId(qty);
-        // save transactionid and update balance in database
+        // save transactionid and update balance in database and update leaderboard
         let balanceFromDatabase = 15;
         console.log(transactionId);
 

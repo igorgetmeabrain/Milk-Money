@@ -25,7 +25,7 @@ const submitFormHandler = async (formType, username, password, security, botchec
     if (security !== 0) stuff["security"] = security;
     if (botcheck !== 0) stuff["botcheck"] = botcheck;
     
-    console.log("stuff: ", stuff);
+    //console.log("stuff: ", stuff);
     
     const route = formType === "login" ? "/login" : formType === "account" ? "/create-new-user" : "/reset-password";
     const data = await fetch(route, {
@@ -38,7 +38,7 @@ const submitFormHandler = async (formType, username, password, security, botchec
       });
   
     const parsed = await data.json();
-    console.log(JSON.stringify(parsed))
+    //console.log(JSON.stringify(parsed))
       if (parsed.error) {
         return resultArea.innerText = parsed.error;
       } else {
@@ -48,6 +48,7 @@ const submitFormHandler = async (formType, username, password, security, botchec
 };
 
 const validate = (formType) => {
+
     if (formType !== "login" && formType !== "account" && formType !== "reset") {
         return console.log("invalid form type");
     };
@@ -79,12 +80,13 @@ const validate = (formType) => {
     const security = securityQuestion ? securityQuestion.value + securityAnswer.value : null;
         
     // account only
-    const botcheck = document.querySelector(`#bot-check`);
+    const botcheck = document.querySelector("#bot-check");
 
     // display result area
     resultArea.classList.remove("hidden");
     resultDiv.classList.add("result-div");
 
+    // validate form fields
     switch (true) {
         case formType != "reset" && username.value == "":
           resultArea.innerText = errorMessages[0];
@@ -128,16 +130,18 @@ const validate = (formType) => {
           break;
         default:
           resultArea.innerText = "please wait...";
-          
           // ensure no fields are null before passing to submitFormHandler
           const user = username ? username.value : 0;
           const pass = password.value ? password.value : 0;
           const sec = security ? security : 0;
           const bot = botcheck.value ? botcheck.value : 0;
+
+          // reset form fields
+          inputs.forEach(e => e.value = "");
           
           setTimeout(() => {
             console.log("submitting form");
-            console.log("\nform type: ", formType, "\nusername: ", user, "\npassword: ", pass, "\nsecurity: ", sec, "\nbotcheck: ", bot);
+            //console.log("\nform type: ", formType, "\nusername: ", user, "\npassword: ", pass, "\nsecurity: ", sec, "\nbotcheck: ", bot);
             submitFormHandler(formType, user, pass, sec, bot);
           }, 2000);
           break;

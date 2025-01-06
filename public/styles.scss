@@ -340,7 +340,7 @@ body:has(input[type='checkbox']:checked) {
 	top: 9%;
 	height: 50%;
 	width: 20%;
-	background-color: $modal-background;
+	background: white;
 	border: 3px solid darkgreen;
 	border-radius: 3px;
 	z-index: 7;
