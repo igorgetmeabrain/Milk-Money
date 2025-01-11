@@ -297,6 +297,8 @@ body:has(input[type='checkbox']:checked) {
 	overflow: hidden;
 }
 
+/* NAVBAR STYLES */
+
 #navbar {
 	position: absolute;
 	width: 96%;
@@ -338,13 +340,52 @@ body:has(input[type='checkbox']:checked) {
 #navbar-modal {
 	position: absolute;
 	top: 9%;
-	height: 50%;
+	height: 80%;
 	width: 20%;
 	background: white;
 	border: 3px solid darkgreen;
 	border-radius: 3px;
 	z-index: 7;
+
+	label {
+		display: block;
+		margin-top: 4%;
+		font-size: 0.9rem;
+	}
+
+	select {
+		font-size: 0.8rem;
+	}
+
+	input {
+		width: 80%;
+	}
+
+	a {
+		display: block;
+		margin-top: 10%;
+		font-size: 1.2rem;
+		text-decoration: none;
+		color: red;
+	}
 }
+
+#icon-select {
+	max-width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	padding: 1%;
+
+	img {
+		width: 15%;
+		margin: 4px 8px;
+		border-radius: 50%;
+	}
+
+}
+
+/* END OF NAVBAR STYLES */
 
 h1 {
 	width: 40%;
@@ -559,7 +600,14 @@ ul {
 
 /* MODAL STYLES */
 
-.modal {
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 3%;
+}
+
+#modal {
 	position: relative;
 	top: -2%;
 	left: -2%;
@@ -570,16 +618,6 @@ ul {
 	border: 5px solid gold;
 	border-radius: 3px;
 	z-index: 5;
-
-	h2 {
-		margin-top: 2%;
-	}
-
-	.flex {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 
 	input {
 		margin-top: 2%;
@@ -592,6 +630,7 @@ ul {
 	img {
 		transform: translate(10px, 10px);
 	}
+
 }
 
 #result-div {
@@ -613,7 +652,7 @@ ul {
 .modal-button {
 	display: block;
 	margin: auto;
-	margin-top: 2%;
+	margin-top: 10%;
 	background-color: $modal-button;
 	color: $modal-button-text;
 	border-radius: 3px;
@@ -622,6 +661,11 @@ ul {
 
 	&:hover {
 		background: gold;
+	}
+
+	&:disabled {
+		background: gray;
+		color: darkgray;
 	}
 }
 

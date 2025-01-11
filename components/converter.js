@@ -40,7 +40,7 @@ class Converter {
   convertToMoonits(qty, units) {return units == "Litres" ? Math.round(+qty*40) : Math.round(+qty*22.72)}
 
   // transaction id for database
-  transactionId(moonits) {return `${moonits}d${Date.now()}`}
+  transactionId(moonits, type) {return `${moonits}${type}${Date.now()}`}
 
   getDateString(date) {return new Date(date).toLocaleDateString(undefined, 
     {
@@ -53,8 +53,9 @@ class Converter {
   transactionsObjects(array) {
     let formatted = [], splitTrans, transDate;
     for (let i=0; i<array.length; i++) {
-      splitTrans = array[i].split("d");
-      transDate = this.getDateString(+splitTrans[1])
+      splitTrans = array[i].split(/([db])/);
+      splitTrans[0] = splitTrans[1] == "d" ? -Math.abs(+splitTrans[0]) : Math.abs(+splitTrans[0]);
+      transDate = this.getDateString(+splitTrans[2])
       formatted.push({moonits: +splitTrans[0], date: transDate })
     }
     return formatted;

@@ -77,7 +77,7 @@ module.exports = function (app) {
         const {qty, units, date} = req.body;
         const dateString = converter.getDateString(date);
         const moonits = converter.convertToMoonits(qty, units);
-        const transactionId = converter.transactionId(moonits);
+        const transactionId = converter.transactionId(moonits, "b");
         // save transactionid and update balance in database and update leaderboard
         let balanceFromDatabase = 15;
         console.log(transactionId);
@@ -90,7 +90,7 @@ module.exports = function (app) {
     .post((req, res)=>{
         const {qty, date} = req.body;
         const dateString = converter.getDateString(date);
-        const transactionId = converter.transactionId(qty);
+        const transactionId = converter.transactionId(qty, "d");
         // save transactionid and update balance in database and update leaderboard
         let balanceFromDatabase = 15;
         console.log(transactionId);
@@ -121,7 +121,7 @@ module.exports = function (app) {
   app.route("/user-balance")
   .get((req, res) => {
       // user.transactions and user.balance from database
-      const userTransactions = ["-6d1730654468178", "10d1730654429573", "10d1730654358280"];
+      const userTransactions = ["6d1730654468178", "10b1730654429573", "10b1730654358280"];
       const userBalance = 100;
       const transactionsArray = converter.transactionsObjects(userTransactions);
       return res.json({

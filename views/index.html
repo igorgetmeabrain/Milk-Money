@@ -26,7 +26,7 @@
       <h1 id="heading">Moola!</h1>
 
       <div id="navbar">
-        <img src="images/badgericon.png" title="click for user settings" id="user-icon" onclick="openNavbarModal('settings')">
+        <img src="images/icons/badgericon.png" title="click for user settings" id="user-icon" onclick="openNavbarModal('settings')">
         <p>Welcome Doug!</p>
         <i class="fas fa-volume-up" id="moot-button" title="to moo or not to moo" onclick="mootButton()" ></i>
         <i class="fas fa-question" title="ask for help" id="help-button" onclick="openNavbarModal('help')"></i> 
@@ -43,8 +43,8 @@
         </div>
         <div id="buttons">
           <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
-          <button onclick="boughtMilk()" id="bought-milk" class="button">I bought milk</button>
-          <button onclick="drankMilk()" id="drank-milk" class="button">I drank milk</button>
+          <button onclick="openModal('buy')" id="bought-milk" class="button">I bought milk</button>
+          <button onclick="openModal('drink')" id="drank-milk" class="button">I drank milk</button>
           <button onclick="needMilk()" id="need-milk" class="button">We need milk</button>
           <button onclick="ruminate()" id="ruminate" class="button">Ruminations</button>
         </div>

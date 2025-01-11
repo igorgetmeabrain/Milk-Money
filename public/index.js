@@ -17,7 +17,6 @@ const confettiSound = document.getElementById("confetti");
 const badger = document.getElementById("badger");
 const milkPour = document.getElementById("milk-pour");
 const milkPourUp = document.getElementById("milk-pour-up");
-const navbarModal = document.getElementById("navbar-modal");
 
 /* HOMEPAGE INTERACTION */
 
@@ -75,22 +74,99 @@ function mootButton() {
   document.getElementById("moot-button").classList.toggle("fa-volume-mute")
 }
 
-const helpHTML = `<h2>Help</h2>`;
-const settingsHTML = `<h2>Settings</h2>`;
+/* HTML for modals */
+
+const navbarModal = document.getElementById("navbar-modal");
+
+const modalHTML = `<div class="flex">
+    <audio src="audio/minimoo.mp3" preload="auto" id="minimoo"></audio>
+    <img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
+    <h2 class="modal-header"></h2>
+    <button class="modal-close-button">⨉</button>
+    </div>`;
+
+const modalHelpHTML = `<div id="help-form">
+  <label for="help-select">Choose a help topic:</label>
+  <select id="help-select">
+    <option value="suggestion">Suggestion</option>
+    <option value="question">Question</option>
+    <option value="broken">Something Not Working</option>
+    <option value="general">General</option>
+  </select>
+  <textarea id="help-text" placeholder="Type your message here..."></textarea>
+  <button class="modal-button" id="modal-help-submit" onclick="navbarModalHandler('help')">Submit</button>
+</div>`;
+
+const modalSettingsHTML = `<div id="settings-form">
+  <label for="icon-select">Choose your icon:</label>
+  <div id="icon-select">
+    <img src="images/icons/cowicon.png" alt="cow icon" class="icon" id="cowicon" onclick="selectIcon('cow')"/>
+    <img src="images/icons/chickicon.png" alt="chick icon" class="icon" id="chickicon" onclick="selectIcon('chick')"/>
+    <img src="images/icons/goaticon.png" alt="goat icon" class="icon" id="goaticon" onclick="selectIcon('goat')"/>
+    <img src="images/icons/sheepicon.png" alt="sheep icon" class="icon" id="sheepicon" onclick="selectIcon('sheep')"/>
+    <img src="images/icons/mouseicon.png" alt="mouse icon" class="icon" id="mouseicon" onclick="selectIcon('mouse')"/>
+    <img src="images/icons/badgericon.png" alt="badger icon" class="icon" id="badgericon" onclick="selectIcon('badger')"/>
+    <img src="images/icons/hedgehogicon.png" alt="hedgehog icon" class="icon" id="hedgehogicon" onclick="selectIcon('hedgehog')"/>
+    <img src="images/icons/pigicon.png" alt="pig icon" class="icon" id="pigicon" onclick="selectIcon('pig')"/>
+  </div>
+  <label for="change-password">Change your password:</label>
+  <input type="password" id="change-password" placeholder="new password" />
+  <input type="password" id="confirm-password" placeholder="confirm new password" />
+  <label for="new-security-question">Change your security question:</label>
+  <select id="new-security-question">
+    <option value=1>Your least favourite composer?</option>
+    <option value=2>Musical instrument you would uninvent?</option>
+    <option value=3>Your most annoying earworm?</option>
+    <option value=4>Most over-rated musician?</option>
+  </select>
+  <input type="text" id="new-security-answer" placeholder="please type your answer" required>
+  <label for="current-password">Enter current password to confirm:</label>
+  <input type="password" id="current-password" placeholder="current password" />
+  <button class="modal-button" id="modal-settings-submit" onclick="navbarModalHandler('settings')">Save</button>
+</div>
+<a id="logout" href="/logout">Log out</a>`;
+
+const modalFunctionHTML = `
+  <div id="modal-content"></div>
+  <input type="date" id="transaction-date">
+  <button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
+  <div id="result-div"><span id="result-text" class="hidden"></span></div>
+</div>`;
 
 function openNavbarModal(settingsOrHelp) {
-
+  
   if (settingsOrHelp == 'help') {
     navbarModal.style.left ="66vw";
-    navbarModal.innerHTML = helpHTML;
+    navbarModal.innerHTML = modalHTML + modalHelpHTML;
+    document.querySelector(".modal-header").innerText = "Help!";
   } else if (settingsOrHelp == 'settings') {
     navbarModal.style.left ="2%";
-    navbarModal.innerHTML = settingsHTML;
+    navbarModal.innerHTML = modalHTML + modalSettingsHTML;
+    document.querySelector(".modal-header").innerText = "Settings!";
   }
 
   navbarModal.classList.toggle("hidden");
+  const closeButton = document.querySelector(".modal-close-button");
+  closeButton.addEventListener("click", closeNavbarModal);
   
+};
+
+const selectIcon = (icon) => {
+  document.querySelectorAll(".icon").forEach(e => e.style.border = "none");
+  document.getElementById(`${icon}icon`).style.border = "4px solid darkgreen";
+  let selectedIcon = icon;
+  console.log('you have selected the ' + selectedIcon + ' icon');
 }
+
+const closeNavbarModal = function () {
+  navbarModal.classList.add("hidden");
+  navbarModal.innerHTML = "";
+};
+
+const navbarModalHandler = async () => {
+  console.log("navbar modal handler")
+  // retrieve form information and update database
+};
 
 let cowPokeCount = 0;
 function pokeTheCow() {
@@ -107,7 +183,7 @@ function pokeTheCow() {
 
   return cowPokeCount >= 6 ? cowPokeCount = 0 : cowPokeCount++
 
-}
+};
 
 function cowfetti(cowfettiType, size, number) {
   confettiSound.currentTime = 0;
@@ -118,24 +194,9 @@ function cowfetti(cowfettiType, size, number) {
     emojiSize: size,
     confettiNumber: number,
   });
-}
+};
 
 // button functions
-
-function buttonSound() {
-  cowbell.currentTime = 0;
-  cowbell.play();
-}
-
-function boughtMilk() {
-  buttonSound();
-  openModal("buy");
-}
-
-function drankMilk() {
-  buttonSound()
-  openModal("drink");
-}
 
 async function needMilk() {
   // add catch error message
@@ -149,10 +210,11 @@ async function needMilk() {
   theCowSpeaks([results, moo]);
   cowfetti(['🐄', '🐮', '🦡', '🥛'], 75, 50);
 
-}
+};
 
 async function ruminate() {
-  buttonSound()
+  cowbell.currentTime = 0;
+  cowbell.play();
   // add catch error message
   const randomQuote = await fetch("/quote")
   const parsed = await randomQuote.json()
@@ -194,19 +256,6 @@ const balanceHTML = (transactions, balance) => {
   </div>`;
   return HTMLString;
 }
-
-// submit button triggers modalHandler
-const modalHTML = `<section class="modal hidden">
-<div class="flex" id="modal">
-<audio src="audio/minimoo.mp3" preload="auto" id="minimoo"></audio>
-<img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
-<button class="modal-close-button" onclick="closeModal()">⨉</button>
-</div>
-<div id="modal-content"></div>
-<input type="date" id="transaction-date">
-<button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
-<div id="result-div"><span id="result-text" class="hidden"></span></div>
-</section>`
 
 const resetNoticeboard = () => {
   allTabs.forEach(e => e.style.background = "green");
@@ -322,24 +371,25 @@ const allTabs = document.querySelectorAll(".tab");
 const allButtons = document.querySelectorAll(".button");
 
 const openModal = function (buyOrDrink) {
+  navbarModal.classList.add("hidden");
+  cowbell.currentTime = 0;
+  cowbell.play();
   resetNoticeboard();
-  noticeboard.innerHTML = modalHTML;
-  const modal = document.querySelector(".modal");
+  noticeboard.innerHTML = `<div id="modal">` + modalHTML + modalFunctionHTML + `</div>`;
   const overlay = document.querySelector(".overlay");
   noticeboard.classList.add("modal-style");
   allTabs.forEach(e => e.classList.add("hidden"));
   allButtons.forEach(e => e.classList.add("hidden"));
-  modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
   const modalContent = document.getElementById("modal-content");
   let content;
   if (buyOrDrink == "buy") {
-    content = `<h2>You bought milk!</h2>
-  <input type="number" id="milk-qty" placeholder="amount in pints/litres" />
+    content = `<input type="number" id="milk-qty" placeholder="amount in pints/litres" />
   <button id="toggle-units">Litres</button>`
+    document.querySelector(".modal-header").innerText = "You Bought Milk!";
   } else if (buyOrDrink == "drink") {
-    content = `<h2>You drank milk!</h2>
-  <input type="number" id="milk-qty" placeholder="number of drinks" />`
+    content = `<input type="number" id="milk-qty" placeholder="number of drinks" />`
+    document.querySelector(".modal-header").innerText = "You Drank Milk!";
   }
 
   modalContent.innerHTML = content;
@@ -349,13 +399,17 @@ const openModal = function (buyOrDrink) {
     const toggleUnits = () => toggleUnitButton.innerText == "Litres" ? toggleUnitButton.innerText = "Pints" : toggleUnitButton.innerText = "Litres"
     toggleUnitButton.addEventListener("click", toggleUnits);
   };
+
+  const closeButton = document.querySelector(".modal-close-button");
+  closeButton.addEventListener("click", closeModal);
   
 };
 
 const closeModal = function () {
-  const modal = document.querySelector(".modal");
+  const modal = document.getElementById("modal");
   const overlay = document.querySelector(".overlay");
   modal.classList.add("hidden");
+  modal.innerHTML = "";
   overlay.classList.add("hidden");
   allTabs.forEach(e => e.classList.remove("hidden"));
   allButtons.forEach(e => e.classList.remove("hidden"));
@@ -378,13 +432,14 @@ const modalHandler = async () => {
   resultDiv.classList.add("result-div");
 
   // check for empty or invalid inputs
-  if (!datePicker.value || numberInput.value <= 0 || new Date(datePicker.value).toString() > new Date().toString()) {
+  if (!datePicker.value || numberInput.value <= 0 || Date.parse(datePicker.value) > Date.now()) {
+    //console.log(Date.parse(datePicker.value), Date.now())
     resultArea.innerText = "Please enter valid values for quantity and date."
     inputs.forEach(e => e.value = "");
     return;
   }
   
-  submitButton.classList.add("hidden");
+  submitButton.disabled = true;
   const stuff = {"qty": milkQty, "units": units, "date": datePicker.value}
   const route = units == "moonits" ? "/drink-milk" : "/buy-milk";
 
