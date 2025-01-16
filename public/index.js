@@ -1,12 +1,13 @@
+/* RETRIEVE PAGE ELEMENTS */
 const dayNightCheckbox = document.getElementById("day-night-checkbox");
 const cowImage = document.getElementById("cow");
 const speechBubble = document.getElementById("speech-bubble");
 const speechText = document.getElementById("cow-speech");
 const noticeboard = document.getElementById("noticeboard");
 const clouds = document.querySelectorAll(".cloud");
-let isItDaytime = true;
+const navbarModal = document.getElementById("navbar-modal");
 
-// audio clips
+/* AUDIO CLIPS */
 const moo = document.getElementById("moo");
 const baa = document.getElementById("baa");
 const goat = document.getElementById("goat");
@@ -19,7 +20,7 @@ const milkPour = document.getElementById("milk-pour");
 const milkPourUp = document.getElementById("milk-pour-up");
 
 /* HOMEPAGE INTERACTION */
-
+let isItDaytime = true;
 const whatTheCowSays = [
   ["Hey, who turned off all the lights? <br> Brrr, I'm friesian!", moo],
   ["The milky way is udderly beautiful! Do you think we're all alone in the mooniverse?", moo],
@@ -74,100 +75,6 @@ function mootButton() {
   document.getElementById("moot-button").classList.toggle("fa-volume-mute")
 }
 
-/* HTML for modals */
-
-const navbarModal = document.getElementById("navbar-modal");
-
-const modalHTML = `<div class="flex">
-    <audio src="audio/minimoo.mp3" preload="auto" id="minimoo"></audio>
-    <img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
-    <h2 class="modal-header"></h2>
-    <button class="modal-close-button">⨉</button>
-    </div>`;
-
-const modalHelpHTML = `<div id="help-form">
-  <label for="help-select">Choose a help topic:</label>
-  <select id="help-select">
-    <option value="suggestion">Suggestion</option>
-    <option value="question">Question</option>
-    <option value="broken">Something Not Working</option>
-    <option value="general">General</option>
-  </select>
-  <textarea id="help-text" placeholder="Type your message here..."></textarea>
-  <button class="modal-button" id="modal-help-submit" onclick="navbarModalHandler('help')">Submit</button>
-</div>`;
-
-const modalSettingsHTML = `<div id="settings-form">
-  <label for="icon-select">Choose your icon:</label>
-  <div id="icon-select">
-    <img src="images/icons/cowicon.png" alt="cow icon" class="icon" id="cowicon" onclick="selectIcon('cow')"/>
-    <img src="images/icons/chickicon.png" alt="chick icon" class="icon" id="chickicon" onclick="selectIcon('chick')"/>
-    <img src="images/icons/goaticon.png" alt="goat icon" class="icon" id="goaticon" onclick="selectIcon('goat')"/>
-    <img src="images/icons/sheepicon.png" alt="sheep icon" class="icon" id="sheepicon" onclick="selectIcon('sheep')"/>
-    <img src="images/icons/mouseicon.png" alt="mouse icon" class="icon" id="mouseicon" onclick="selectIcon('mouse')"/>
-    <img src="images/icons/badgericon.png" alt="badger icon" class="icon" id="badgericon" onclick="selectIcon('badger')"/>
-    <img src="images/icons/hedgehogicon.png" alt="hedgehog icon" class="icon" id="hedgehogicon" onclick="selectIcon('hedgehog')"/>
-    <img src="images/icons/pigicon.png" alt="pig icon" class="icon" id="pigicon" onclick="selectIcon('pig')"/>
-  </div>
-  <label for="change-password">Change your password:</label>
-  <input type="password" id="change-password" placeholder="new password" />
-  <input type="password" id="confirm-password" placeholder="confirm new password" />
-  <label for="new-security-question">Change your security question:</label>
-  <select id="new-security-question">
-    <option value=1>Your least favourite composer?</option>
-    <option value=2>Musical instrument you would uninvent?</option>
-    <option value=3>Your most annoying earworm?</option>
-    <option value=4>Most over-rated musician?</option>
-  </select>
-  <input type="text" id="new-security-answer" placeholder="please type your answer" required>
-  <label for="current-password">Enter current password to confirm:</label>
-  <input type="password" id="current-password" placeholder="current password" />
-  <button class="modal-button" id="modal-settings-submit" onclick="navbarModalHandler('settings')">Save</button>
-</div>
-<a id="logout" href="/logout">Log out</a>`;
-
-const modalFunctionHTML = `
-  <div id="modal-content"></div>
-  <input type="date" id="transaction-date">
-  <button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
-  <div id="result-div"><span id="result-text" class="hidden"></span></div>
-</div>`;
-
-function openNavbarModal(settingsOrHelp) {
-  
-  if (settingsOrHelp == 'help') {
-    navbarModal.style.left ="66vw";
-    navbarModal.innerHTML = modalHTML + modalHelpHTML;
-    document.querySelector(".modal-header").innerText = "Help!";
-  } else if (settingsOrHelp == 'settings') {
-    navbarModal.style.left ="2%";
-    navbarModal.innerHTML = modalHTML + modalSettingsHTML;
-    document.querySelector(".modal-header").innerText = "Settings!";
-  }
-
-  navbarModal.classList.toggle("hidden");
-  const closeButton = document.querySelector(".modal-close-button");
-  closeButton.addEventListener("click", closeNavbarModal);
-  
-};
-
-const selectIcon = (icon) => {
-  document.querySelectorAll(".icon").forEach(e => e.style.border = "none");
-  document.getElementById(`${icon}icon`).style.border = "4px solid darkgreen";
-  let selectedIcon = icon;
-  console.log('you have selected the ' + selectedIcon + ' icon');
-}
-
-const closeNavbarModal = function () {
-  navbarModal.classList.add("hidden");
-  navbarModal.innerHTML = "";
-};
-
-const navbarModalHandler = async () => {
-  console.log("navbar modal handler")
-  // retrieve form information and update database
-};
-
 let cowPokeCount = 0;
 function pokeTheCow() {
 
@@ -196,8 +103,193 @@ function cowfetti(cowfettiType, size, number) {
   });
 };
 
-// button functions
+/* HTML FOR MODALS */
+const modalHTML = `<div class="flex">
+    <audio src="audio/minimoo.mp3" preload="auto" id="minimoo"></audio>
+    <img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
+    <h2 class="modal-header"></h2>
+    <button class="modal-close-button">⨉</button>
+    </div>`;
 
+const modalHelpHTML = `<div id="help-form">
+  <label for="help-select">Choose a help topic:</label>
+  <select id="help-select">
+    <option value=0>Please select...</option>
+    <option value="suggestion">Suggestion</option>
+    <option value="question">Question</option>
+    <option value="broken">Something Broken</option>
+    <option value="other">Something Else</option>
+  </select>
+  <textarea id="help-text" placeholder="Type your message here..."></textarea>
+  <button class="modal-button" id="modal-help-submit" onclick="navbarModalHandler('help')">Submit</button>
+  <div id="help-result-div"><span id="help-result-text" class="hidden"></span></div>
+</div>`;
+
+const modalSettingsHTML = `<div id="settings-form">
+  <label for="icon-select">Choose your icon:</label>
+  <div id="icon-select">
+    <img src="images/icons/cowicon.png" alt="cow icon" class="icon" id="cowicon" onclick="selectIcon('cow')"/>
+    <img src="images/icons/chickicon.png" alt="chick icon" class="icon" id="chickicon" onclick="selectIcon('chick')"/>
+    <img src="images/icons/goaticon.png" alt="goat icon" class="icon" id="goaticon" onclick="selectIcon('goat')"/>
+    <img src="images/icons/sheepicon.png" alt="sheep icon" class="icon" id="sheepicon" onclick="selectIcon('sheep')"/>
+    <img src="images/icons/mouseicon.png" alt="mouse icon" class="icon" id="mouseicon" onclick="selectIcon('mouse')"/>
+    <img src="images/icons/badgericon.png" alt="badger icon" class="icon" id="badgericon" onclick="selectIcon('badger')"/>
+    <img src="images/icons/hedgehogicon.png" alt="hedgehog icon" class="icon" id="hedgehogicon" onclick="selectIcon('hedgehog')"/>
+    <img src="images/icons/pigicon.png" alt="pig icon" class="icon" id="pigicon" onclick="selectIcon('pig')"/>
+  </div>
+  <label for="change-password">Change your password:</label>
+  <input type="password" id="change-password" placeholder="new password" />
+  <input type="password" id="confirm-password" placeholder="confirm new password" />
+  <label for="new-security-question">Change your security question:</label>
+  <select id="new-security-question">
+    <option value=0>Please select...</option>
+    <option value=1>Your least favourite composer?</option>
+    <option value=2>Musical instrument you would uninvent?</option>
+    <option value=3>Your most annoying earworm?</option>
+    <option value=4>Most over-rated musician?</option>
+  </select>
+  <input type="text" id="new-security-answer" placeholder="please type your answer" required>
+  <label for="current-password">Enter current password to confirm:</label>
+  <input type="password" id="current-password" placeholder="current password" />
+  <button class="modal-button" id="modal-settings-submit" onclick="navbarModalHandler('settings')">Save Changes</button>
+  <div id="settings-result-div"><span id="settings-result-text" class="hidden"></span></div>
+</div>
+<a id="logout" href="/logout">Log out</a>`;
+
+const modalFunctionHTML = `
+  <div id="modal-content"></div>
+  <input type="date" id="transaction-date">
+  <button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
+  <div id="result-div"><span id="result-text" class="hidden"></span></div>
+</div>`;
+
+/* NAVBAR MODAL FUNCTIONS */
+function openNavbarModal(settingsOrHelp) {
+  
+  if (settingsOrHelp == 'help') {
+    navbarModal.style.left ="66vw";
+    navbarModal.innerHTML = modalHTML + modalHelpHTML;
+    document.querySelector(".modal-header").innerText = "Help";
+  } else if (settingsOrHelp == 'settings') {
+    navbarModal.style.left ="2%";
+    navbarModal.innerHTML = modalHTML + modalSettingsHTML;
+    document.querySelector(".modal-header").innerText = "Settings";
+  }
+
+  navbarModal.classList.toggle("hidden");
+  const closeButton = document.querySelector(".modal-close-button");
+  closeButton.addEventListener("click", closeNavbarModal);
+  
+};
+
+const selectIcon = (icon) => {
+  document.querySelectorAll(".icon").forEach(e => e.classList.remove("selected-icon"));
+  document.getElementById(`${icon}icon`).classList.add("selected-icon");
+  console.log('you have selected the ' + icon + ' icon');
+};
+
+const closeNavbarModal = function () {
+  navbarModal.classList.add("hidden");
+  navbarModal.innerHTML = "";
+};
+
+const navbarModalHandler = async (helpOrSettings) => {
+
+  // need to add result area to modal to return error/success messages
+  const resultDiv = document.querySelector(`#${helpOrSettings}-result-div`);
+  const resultText = document.querySelector(`#${helpOrSettings}-result-text`);
+
+  // show result area
+  resultDiv.classList.add("result-div");
+  resultText.classList.remove("hidden");
+  const stuff = {};
+
+  if (helpOrSettings == "help") {
+    const type = document.getElementById("help-select").value;
+    const text = document.getElementById("help-text").value;
+    
+    // validate inputs
+    if (type == "0") {
+      return resultText.innerText = "please select a help topic";
+    } else if (!text) {
+      return resultText.innerText = "please enter a message";
+    } else {
+      resultText.innerText = "please wait...";
+    }
+
+    stuff.type = type;
+    stuff.text = text;
+
+  } else if (helpOrSettings == "settings") {
+    const securityQuestion = document.getElementById("new-security-question").value;
+    const securityAnswer = document.getElementById("new-security-answer").value;
+    const security = securityQuestion != "0" && securityAnswer ? securityQuestion + securityAnswer : null;
+    const icon = document.querySelector(".selected-icon") ? document.querySelector(".selected-icon").alt.replace(" icon", "") : null;
+    const password = document.getElementById("change-password").value ? document.getElementById("change-password").value : null;
+    const confirmPassword = document.getElementById("confirm-password").value ? document.getElementById("confirm-password").value : null;
+    const currentPassword = document.getElementById("current-password").value ? document.getElementById("current-password").value : null;
+    
+    stuff.icon = icon;
+    stuff.password = password;
+    stuff.security = security;
+    stuff.currentPassword = currentPassword;
+
+    // validate inputs
+    switch (true) {
+      case (securityAnswer && securityQuestion == "0"):
+        resultText.innerText = "please select a security question";
+        break;
+      case (securityQuestion != "0" && !securityAnswer):
+        resultText.innerText = "please provide a security answer";
+        break;
+      case Object.keys(stuff).every(e => !stuff[e]):
+        resultText.innerText = "you have not made any changes";
+        break;
+      case currentPassword && !icon && !password && !security:
+        resultText.innerText = "you have not made any changes";
+        break;
+      case password !== confirmPassword:
+        resultText.innerText = "passwords do not match";
+        break;
+      case password && /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password):
+        resultText.innerText = "password must be at least 8 characters and contain at least one uppercase, one lowercase, one numeric and one special character";
+        break;
+      case !currentPassword:
+        resultText.innerText = "please enter your password to confirm changes";
+        break;
+      default:
+        resultText.innerText = "please wait...";
+    }
+
+  } else {
+    // return as modal message
+    return console.log("form type invalid");
+  }
+
+  // now disable submit button and submit form data (including null values)
+  if (resultText.innerText == "please wait...") {
+    const submitButton = document.querySelector(`#modal-${helpOrSettings}-submit`);
+    submitButton.disabled = true;
+    const data = await fetch(`/navbar-${helpOrSettings}`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(stuff)
+    });
+
+    const parsed = await data.json();
+    resultText.innerText = parsed.result;
+    return;
+  } else {
+    // failsafe in case of bad logic
+    console.log("validation failed? ", resultText.innerText);
+  }
+
+};
+
+/* BUTTON FUNCTIONS */
 async function needMilk() {
   // add catch error message
   const data = await fetch("/need-milk")
@@ -219,7 +311,7 @@ async function ruminate() {
   const randomQuote = await fetch("/quote")
   const parsed = await randomQuote.json()
   theCowSpeaks([`As ${parsed.author} once said, "${parsed.quote}".`, moo])
-}
+};
 
 // tab functions
 const leaderboardTab = document.getElementById("tab-1");

@@ -385,6 +385,10 @@ body:has(input[type='checkbox']:checked) {
 
 }
 
+.selected-icon {
+	border: 3px solid darkgreen;
+}
+
 /* END OF NAVBAR STYLES */
 
 h1 {

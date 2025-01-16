@@ -303,6 +303,10 @@ body:has(input[type=checkbox]:checked)::after {
   border-radius: 50%;
 }
 
+.selected-icon {
+  border: 3px solid darkgreen;
+}
+
 /* END OF NAVBAR STYLES */
 h1 {
   width: 40%;

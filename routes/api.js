@@ -63,6 +63,19 @@ module.exports = function (app) {
     res.json({message: `Your password has been reset to ${password}. Your security code is ${security}`});
   });
 
+  // handle logout properly
+  app.post("/logout", (req, res) => {
+    res.json({message: "You are now logged out."});
+  });
+
+  app.post("/navbar-help", (req, res) => {
+    res.json({result: "You have requested help."});
+  });
+
+  app.post("/navbar-settings", (req, res) => {
+    res.json({result: "You have requested settings."});
+  });
+
   app.get("/quote", (req, res) => {
       let randomQuote = cowQuotes.quotes[Math.floor(Math.random()*(cowQuotes.quotes.length))]
       res.send(randomQuote)

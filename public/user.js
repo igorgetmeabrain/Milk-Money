@@ -17,8 +17,7 @@ const submitFormHandler = async (formType, username, password, security, botchec
     // need to get the result area again
     const resultArea = document.querySelector(`#${formType}-result-text`);
 
-    const stuff = { 
-    };
+    const stuff = {};
 
     if (username !== 0) stuff["username"] = username;
     if (password !== 0) stuff["password"] = password;
@@ -61,7 +60,8 @@ const validate = (formType) => {
         "username must contain only alphanumeric characters and underscores",
         "password must be at least 8 characters",
         "password must contain at least one uppercase, one lowercase, one numeric and one special character",
-        "passwords do not match"
+        "passwords do not match",
+        "please select a security question"
     ];
 
     // reset invalid form field warnings
@@ -77,7 +77,7 @@ const validate = (formType) => {
     const confirmPassword = document.querySelector(`#confirm-${formType}-password`);
     const securityQuestion = document.querySelector(`#${formType}-security-question`);
     const securityAnswer = document.querySelector(`#${formType}-security-answer`);
-    const security = securityQuestion ? securityQuestion.value + securityAnswer.value : null;
+    const security = securityQuestion != 0 ? securityQuestion.value + securityAnswer.value : null;
         
     // account only
     const botcheck = document.querySelector("#bot-check");
@@ -120,6 +120,9 @@ const validate = (formType) => {
           resultArea.innerText = errorMessages[5];
           password.classList.add("invalid-field");
           break;
+        case formType != "login" && securityQuestion.value == "0":
+          resultArea.innerText = errorMessages[6];
+          break;
         case formType != "login" && securityAnswer.value == "":
           resultArea.innerText = errorMessages[0];
           securityAnswer.classList.add("invalid-field");
@@ -138,6 +141,7 @@ const validate = (formType) => {
 
           // reset form fields
           inputs.forEach(e => e.value = "");
+          securityQuestion ? securityQuestion.value = "0" : null;
           
           setTimeout(() => {
             console.log("submitting form");
