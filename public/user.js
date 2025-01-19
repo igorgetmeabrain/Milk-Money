@@ -19,12 +19,12 @@ const submitFormHandler = async (formType, username, password, security, botchec
 
     const stuff = {};
 
-    if (username !== 0) stuff["username"] = username;
-    if (password !== 0) stuff["password"] = password;
-    if (security !== 0) stuff["security"] = security;
-    if (botcheck !== 0) stuff["botcheck"] = botcheck;
+    if (username) stuff.username = username;
+    if (password) stuff.password = password;
+    if (security) stuff.security = security;
+    if (botcheck) stuff.botcheck = botcheck;
     
-    //console.log("stuff: ", stuff);
+    console.log("stuff: ", stuff);
     
     const route = formType === "login" ? "/login" : formType === "account" ? "/create-new-user" : "/reset-password";
     const data = await fetch(route, {
@@ -77,7 +77,7 @@ const validate = (formType) => {
     const confirmPassword = document.querySelector(`#confirm-${formType}-password`);
     const securityQuestion = document.querySelector(`#${formType}-security-question`);
     const securityAnswer = document.querySelector(`#${formType}-security-answer`);
-    const security = securityQuestion != 0 ? securityQuestion.value + securityAnswer.value : null;
+    const security = securityQuestion && securityAnswer ? securityQuestion.value + securityAnswer.value : null;
         
     // account only
     const botcheck = document.querySelector("#bot-check");
@@ -134,21 +134,23 @@ const validate = (formType) => {
         default:
           resultArea.innerText = "please wait...";
           // ensure no fields are null before passing to submitFormHandler
-          const user = username ? username.value : 0;
-          const pass = password.value ? password.value : 0;
-          const sec = security ? security : 0;
-          const bot = botcheck.value ? botcheck.value : 0;
+          const user = username ? username.value : null;
+          const pass = password ? password.value : null;
+          const sec = security;
+          const bot = botcheck? botcheck.value : null;
 
           // reset form fields
           inputs.forEach(e => e.value = "");
           securityQuestion ? securityQuestion.value = "0" : null;
+
+          // disable submit button]
+          const submitButton = document.querySelector(`#${formType}-submit`);
+          submitButton.disabled = true;
           
           setTimeout(() => {
             console.log("submitting form");
-            //console.log("\nform type: ", formType, "\nusername: ", user, "\npassword: ", pass, "\nsecurity: ", sec, "\nbotcheck: ", bot);
             submitFormHandler(formType, user, pass, sec, bot);
           }, 2000);
-          break;
       }
     
 };

@@ -54,16 +54,16 @@ function dayNight() {
     noticeboard.style.backgroundColor = "black";
     speechText.style.color = "white";
     navbarModal.style.backgroundColor = "black";
-    navbarModal.style.color = "white";
+    navbarModal.style.color = "#999999";
   
     theCowSpeaks(Math.random() < 0.5 ? whatTheCowSays[0] : whatTheCowSays[1]);
   } else {
     isItDaytime = true;
     cowImage.src = "images/daycow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 100%, 0.9)");
-    noticeboard.style.backgroundColor = "white";
+    noticeboard.style.backgroundColor = "#cccccc";
     speechText.style.color = "black";
-    navbarModal.style.backgroundColor = "white";
+    navbarModal.style.backgroundColor = "#999999";
     navbarModal.style.color = "black";
     theCowSpeaks(whatTheCowSays[2]);
   }
@@ -136,6 +136,8 @@ const modalSettingsHTML = `<div id="settings-form">
     <img src="images/icons/badgericon.png" alt="badger icon" class="icon" id="badgericon" onclick="selectIcon('badger')"/>
     <img src="images/icons/hedgehogicon.png" alt="hedgehog icon" class="icon" id="hedgehogicon" onclick="selectIcon('hedgehog')"/>
     <img src="images/icons/pigicon.png" alt="pig icon" class="icon" id="pigicon" onclick="selectIcon('pig')"/>
+    <img src="images/icons/duckicon.png" alt="duck icon" class="icon" id="duckicon" onclick="selectIcon('duck')"/>
+    <img src="images/icons/bunnyicon.png" alt="bunny icon" class="icon" id="bunnyicon" onclick="selectIcon('bunny')"/>
   </div>
   <label for="change-password">Change your password:</label>
   <input type="password" id="change-password" placeholder="new password" />
@@ -225,9 +227,9 @@ const navbarModalHandler = async (helpOrSettings) => {
     const securityAnswer = document.getElementById("new-security-answer").value;
     const security = securityQuestion != "0" && securityAnswer ? securityQuestion + securityAnswer : null;
     const icon = document.querySelector(".selected-icon") ? document.querySelector(".selected-icon").alt.replace(" icon", "") : null;
-    const password = document.getElementById("change-password").value ? document.getElementById("change-password").value : null;
-    const confirmPassword = document.getElementById("confirm-password").value ? document.getElementById("confirm-password").value : null;
-    const currentPassword = document.getElementById("current-password").value ? document.getElementById("current-password").value : null;
+    const password = document.getElementById("change-password").value || null;
+    const confirmPassword = document.getElementById("confirm-password").value || null;
+    const currentPassword = document.getElementById("current-password").value || null;
     
     stuff.icon = icon;
     stuff.password = password;
@@ -284,7 +286,7 @@ const navbarModalHandler = async (helpOrSettings) => {
     return;
   } else {
     // failsafe in case of bad logic
-    console.log("validation failed? ", resultText.innerText);
+    console.log("validation fault?");
   }
 
 };
@@ -555,5 +557,3 @@ const modalHandler = async () => {
   return; 
 
 };
-
-

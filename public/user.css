@@ -127,26 +127,32 @@ h1 {
   grid-area: form;
   position: relative;
   margin: auto;
-  margin-top: 3%;
   width: 40%;
   background-color: hsla(0 0% 40% / 0.7);
   border: 3px solid gold;
-  padding: 2% 2% 0 2%;
+  padding: 0 2% 0 2%;
   text-align: center;
 }
 
+.modal-heading {
+  margin-bottom: 3%;
+  font-size: 2rem;
+  color: gold;
+}
+
 label {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
 #login-form button {
   display: block;
   margin: auto;
+  margin-top: 3%;
   width: 25%;
 }
 
 #links {
-  margin-top: 6%;
+  margin-top: 3%;
   display: flex;
   justify-content: space-between;
 }

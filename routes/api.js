@@ -69,10 +69,14 @@ module.exports = function (app) {
   });
 
   app.post("/navbar-help", (req, res) => {
+    // send req.body back to check if it is working
+    console.log(req.body);
     res.json({result: "You have requested help."});
   });
 
   app.post("/navbar-settings", (req, res) => {
+    // send req.body back to check if it is working
+    console.log(req.body);
     res.json({result: "You have requested settings."});
   });
 
