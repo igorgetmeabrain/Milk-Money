@@ -549,6 +549,10 @@ ul {
   font-size: 0.85rem;
 }
 
+.about-grid {
+  display: grid;
+}
+
 /* MODAL STYLES */
 .flex {
   display: flex;
