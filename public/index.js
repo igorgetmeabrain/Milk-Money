@@ -7,6 +7,10 @@ const noticeboard = document.getElementById("noticeboard");
 const clouds = document.querySelectorAll(".cloud");
 const navbarModal = document.getElementById("navbar-modal");
 
+// show current date in footer
+const footerDate = document.querySelector('.footer-date');
+footerDate.innerText = new Date().toDateString();
+
 /* AUDIO CLIPS */
 const moo = document.getElementById("moo");
 const baa = document.getElementById("baa");
@@ -121,8 +125,8 @@ const modalHelpHTML = `<div id="help-form">
     <option value="other">Something Else</option>
   </select>
   <textarea id="help-text" placeholder="Type your message here..."></textarea>
-  <button class="modal-button" id="modal-help-submit" onclick="navbarModalHandler('help')">Submit</button>
   <div id="help-result-div"><span id="help-result-text" class="hidden"></span></div>
+  <button class="navbar-modal-button" id="modal-help-submit" onclick="navbarModalHandler('help')">Submit</button>
 </div>`;
 
 const modalSettingsHTML = `<div id="settings-form">
@@ -153,16 +157,16 @@ const modalSettingsHTML = `<div id="settings-form">
   <input type="text" id="new-security-answer" placeholder="please type your answer" required>
   <label for="current-password">Enter current password to confirm:</label>
   <input type="password" id="current-password" placeholder="current password" />
-  <button class="modal-button" id="modal-settings-submit" onclick="navbarModalHandler('settings')">Save Changes</button>
   <div id="settings-result-div"><span id="settings-result-text" class="hidden"></span></div>
+  <button class="navbar-modal-button" id="modal-settings-submit" onclick="navbarModalHandler('settings')">Save Changes</button>
 </div>
 <a id="logout" href="/logout">Log out</a>`;
 
 const modalFunctionHTML = `
   <div id="modal-content"></div>
   <input type="date" id="transaction-date">
-  <button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
   <div id="result-div"><span id="result-text" class="hidden"></span></div>
+  <button class="modal-button" id="modal-submit" onclick="modalHandler()">Submit</button>
 </div>`;
 
 /* NAVBAR MODAL FUNCTIONS */
@@ -253,8 +257,11 @@ const navbarModalHandler = async (helpOrSettings) => {
       case password !== confirmPassword:
         resultText.innerText = "passwords do not match";
         break;
-      case password && /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password):
-        resultText.innerText = "password must be at least 8 characters and contain at least one uppercase, one lowercase, one numeric and one special character";
+      case password && password.length < 8:
+        resultText.innerText = "password must be at least 8 characters";
+        break;
+      case password && /^([^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password):
+        resultText.innerText = "password must contain at least one uppercase, one lowercase, one numeric and one special character";
         break;
       case !currentPassword:
         resultText.innerText = "please enter your password to confirm changes";
@@ -360,7 +367,7 @@ const displayLeaderboards = async () =>  {
 
   tabSound();
   resetNoticeboard();
-  leaderboardTab.style.background = "blue";
+  leaderboardTab.style.background = "seagreen";
   noticeboard.classList.add("leaderboard");
 
   const data = await fetch("/leaderboard");
@@ -400,7 +407,7 @@ const fillTotaliser = (balance) => {
 
 const displayBalance = async () => {
   resetNoticeboard();
-  balanceTab.style.background = "red";
+  balanceTab.style.background = "blue";
   noticeboard.classList.add("moonit-balance");
 
   const data = await fetch("/user-balance");
@@ -445,19 +452,50 @@ const displayBalance = async () => {
 const displayDailyQuiz = async () => {
   tabSound();
   resetNoticeboard();
-  dailyQuizTab.style.background = "darkorange";
+  dailyQuizTab.style.background = "red";
   noticeboard.classList.add("daily-quiz");
 
   noticeboard.innerHTML = "This is placeholder text until I have written this function"
 }
 
-const displayAbout = async () => {
+const aboutHTML = `
+<div class="about-grid">
+<h3>What is Moola?</h3>
+<p class="about-text">Moola monitors communal milk usage in a typical workplace.
+Its primary purpose is to calculate whose turn it is to replenish the communal milk supply!</p>
+<br>
+<h3>How does Moola work?</h3>
+<p class="about-text">Milk usage is calculated in Moonits.
+One Moonit is about the amount required for one hot drink.
+(Those who prefer it milkier may use two or more Moonits per drink).
+Every time you dip into or replenish the communal milk supply, you log it on Moola and your Moonit balance will be updated accordingly.
+You may also consult the Moonit leaderboard (or ask Moozart the cow) whose turn it is to buy the milk!</p>
+<br>
+<h3>What else can I do on Moola?</h3>
+<p class="about-text">There are a plethora of unnecessary features, so try clicking around and see what happens!
+There is even a Daily Quiz, to ponder whilst you sup your favourite beverage!</p>
+<br>
+<h3>Moola is not working!</h3>
+<p class="about-text">If you are having trouble with Moola, need help or have questions or suggestions, 
+please click the Help (?) icon above, to contact the Moola Mooverlords.</p>
+<br>
+<h3>CREDITS</h3>
+<a href="https://iconscout.com/icons/sheep" class="text-underline font-size-sm" target="_blank">Sheep</a> by <a href="https://iconscout.com/contributors/vintagio" class="text-underline font-size-sm">Dhimas Ronggobramantyo</a> on <a href="https://iconscout.com" class="text-underline font-size-sm">IconScout</a>
+<a href="https://www.freepik.com/icons/pig/2#uuid=dacec295-290b-40f0-b662-f48609a66feb">Icon by Whitevector</a>
+<a href="https://www.flaticon.com/free-icons/hedgehog" title="hedgehog icons">Hedgehog icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/chick" title="chick icons">Chick icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/goat" title="goat icons">Goat icons created by Flat Icons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/mouse" title="mouse icons">Mouse icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/duck" title="duck icons">Duck icons created by Freepik - Flaticon</a>
+</div>
+`;
+
+const displayAbout = () => {
   tabSound();
   resetNoticeboard();
   aboutTab.style.background = "purple";
   noticeboard.classList.add("about");
-
-  noticeboard.innerHTML = "This is placeholder text until I have written this function"
+  noticeboard.innerHTML = aboutHTML;
 }
 
 // modal functions
@@ -557,3 +595,9 @@ const modalHandler = async () => {
   return; 
 
 };
+
+
+window.addEventListener("load", (event) => {
+  displayLeaderboards();
+  console.log("page is fully loaded");
+});

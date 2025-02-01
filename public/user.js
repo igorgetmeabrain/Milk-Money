@@ -2,6 +2,10 @@ const loginForm = document.getElementById('login-form');
 const resetForm = document.getElementById('password-reset-form');
 const accountForm = document.getElementById('account-form');
 
+// show current date in footer
+const footerDate = document.querySelector('.footer-date');
+footerDate.innerText = new Date().toDateString();
+
 const showPasswordResetForm = () => {
     resetForm.classList.remove('hidden');
     loginForm.classList.add('hidden');
@@ -55,7 +59,7 @@ const validate = (formType) => {
     const resultArea = document.querySelector(`#${formType}-result-text`);
     const resultDiv = document.querySelector(`#${formType}-result-div`);
     const errorMessages = [
-        "this field is required",
+        "a required field is missing",
         "username must be between 3 and 10 characters",
         "username must contain only alphanumeric characters and underscores",
         "password must be at least 8 characters",
@@ -88,69 +92,68 @@ const validate = (formType) => {
 
     // validate form fields
     switch (true) {
-        case formType != "reset" && username.value == "":
-          resultArea.innerText = errorMessages[0];
-          username.classList.add("invalid-field");
-          break;
-        case formType == "account" && (username.value.length < 3 || username.value.length>10):
-          resultArea.innerText = errorMessages[1];
-          username.classList.add("invalid-field");
-          break;
-        case formType == "account" && !/^[a-zA-Z0-9_]+$/.test(username.value):
-          resultArea.innerText = errorMessages[2];
-          username.classList.add("invalid-field");
-          break;
-        case password.value == "":
-          resultArea.innerText = errorMessages[0];
-          password.classList.add("invalid-field");
-          break;
-        case formType != "login" && password.value.length < 8:
-          resultArea.innerText = errorMessages[3];
-          password.classList.add("invalid-field");
-          break;
-        case formType != "login" && /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password.value):
-          resultArea.innerText = errorMessages[4];
-          password.classList.add("invalid-field");
-          break;
-        case formType != "login" && confirmPassword.value == "":
-          resultArea.innerText = errorMessages[0];
-          confirmPassword.classList.add("invalid-field");
-          break;
-        case formType != "login" && password.value !== confirmPassword.value:
-          resultArea.innerText = errorMessages[5];
-          password.classList.add("invalid-field");
-          break;
-        case formType != "login" && securityQuestion.value == "0":
-          resultArea.innerText = errorMessages[6];
-          break;
-        case formType != "login" && securityAnswer.value == "":
-          resultArea.innerText = errorMessages[0];
-          securityAnswer.classList.add("invalid-field");
-          break;
-        case formType == "account" && botcheck.value=="":
-          resultArea.innerText = errorMessages[0];
-          botcheck.classList.add("invalid-field");
-          break;
-        default:
-          resultArea.innerText = "please wait...";
-          // ensure no fields are null before passing to submitFormHandler
-          const user = username ? username.value : null;
-          const pass = password ? password.value : null;
-          const sec = security;
-          const bot = botcheck? botcheck.value : null;
+      case formType == "account" && (username.value.length < 3 || username.value.length>10):
+        resultArea.innerText = errorMessages[1];
+        username.classList.add("invalid-field");
+        break;
+      case formType == "account" && !/^[a-zA-Z0-9_]+$/.test(username.value):
+        resultArea.innerText = errorMessages[2];
+        username.classList.add("invalid-field");
+        break;
+      case formType != "reset" && username.value == "":
+        resultArea.innerText = errorMessages[0];
+        username.classList.add("invalid-field");
+        break;
+      case password.value == "":
+        resultArea.innerText = errorMessages[0];
+        password.classList.add("invalid-field");
+        break;
+      case formType != "login" && password.value.length < 8:
+        resultArea.innerText = errorMessages[3];
+        password.classList.add("invalid-field");
+        break;
+      case formType != "login" && /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password.value):
+        resultArea.innerText = errorMessages[4];
+        password.classList.add("invalid-field");
+        break;
+      case formType != "login" && confirmPassword.value == "":
+        resultArea.innerText = errorMessages[0];
+        confirmPassword.classList.add("invalid-field");
+        break;
+      case formType != "login" && password.value !== confirmPassword.value:
+        resultArea.innerText = errorMessages[5];
+        password.classList.add("invalid-field");
+        break;
+      case formType != "login" && securityQuestion.value == "0":
+        resultArea.innerText = errorMessages[6];
+        break;
+      case formType != "login" && securityAnswer.value == "":
+        resultArea.innerText = errorMessages[0];
+        securityAnswer.classList.add("invalid-field");
+        break;
+      case formType == "account" && botcheck.value=="":
+        resultArea.innerText = errorMessages[0];
+        botcheck.classList.add("invalid-field");
+        break;
+      default:
+        resultArea.innerText = "please wait...";
+        const user = username ? username.value : null;
+        const pass = password ? password.value : null;
+        const sec = security;
+        const bot = botcheck? botcheck.value : null;
 
-          // reset form fields
-          inputs.forEach(e => e.value = "");
-          securityQuestion ? securityQuestion.value = "0" : null;
+        // reset form fields
+        inputs.forEach(e => e.value = "");
+        securityQuestion ? securityQuestion.value = "0" : null;
 
-          // disable submit button]
-          const submitButton = document.querySelector(`#${formType}-submit`);
-          submitButton.disabled = true;
+        // disable submit button]
+        const submitButton = document.querySelector(`#${formType}-submit`);
+        submitButton.disabled = true;
           
-          setTimeout(() => {
-            console.log("submitting form");
-            submitFormHandler(formType, user, pass, sec, bot);
-          }, 2000);
+        setTimeout(() => {
+          console.log("submitting form");
+          submitFormHandler(formType, user, pass, sec, bot);
+        }, 2000);
       }
     
 };

@@ -264,7 +264,7 @@ body:has(input[type=checkbox]:checked)::after {
 #navbar-modal {
   position: absolute;
   top: 9%;
-  height: 80%;
+  height: 90%;
   width: 20%;
   background: #999999;
   border: 3px solid gold;
@@ -277,6 +277,7 @@ body:has(input[type=checkbox]:checked)::after {
   font-size: 0.9rem;
 }
 #navbar-modal select {
+  width: 80%;
   font-size: 0.8rem;
 }
 #navbar-modal input {
@@ -284,10 +285,43 @@ body:has(input[type=checkbox]:checked)::after {
 }
 #navbar-modal a {
   display: block;
-  margin-top: 10%;
+  margin-top: 4%;
   font-size: 1.2rem;
   text-decoration: none;
   color: red;
+}
+#navbar-modal textarea {
+  width: 80%;
+  height: 300px;
+  resize: none;
+}
+
+.navbar-modal-button {
+  display: block;
+  margin: auto;
+  margin-top: 10%;
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 1.2em;
+}
+.navbar-modal-button:hover {
+  background: gold;
+}
+.navbar-modal-button:disabled {
+  background: gray;
+  color: darkgray;
+}
+
+#help-result-div, #settings-result-div {
+  display: block;
+  margin: auto;
+  margin-top: 4%;
+  width: 80%;
+  height: 70px;
+  padding: 1%;
+  font-size: 0.8rem;
 }
 
 #icon-select {
@@ -444,16 +478,16 @@ h2 {
 .leaderboard {
   display: block;
   margin: auto;
-  color: blue;
-  border: 5px solid blue !important;
+  color: #0b782a;
+  border: 5px solid #0b782a !important;
 }
 
 /* BALANCE STYLES */
 .moonit-balance {
   display: grid !important;
   grid-template-columns: 25% 75% !important;
-  color: red;
-  border: 5px solid red !important;
+  color: #3f48cc;
+  border: 5px solid #3f48cc !important;
 }
 
 #totaliser {
@@ -502,13 +536,17 @@ ul {
 
 /* END OF BALANCE STYLES */
 .daily-quiz {
-  color: darkorange;
-  border: 5px solid darkorange !important;
+  color: #d14141;
+  border: 5px solid #d14141 !important;
 }
 
 .about {
-  color: purple;
-  border: 5px solid purple !important;
+  color: #783a78;
+  border: 5px solid #783a78 !important;
+}
+
+.about-text {
+  font-size: 0.85rem;
 }
 
 /* MODAL STYLES */
@@ -614,7 +652,7 @@ footer .left {
   float: left;
   margin-left: 10px;
 }
-footer .left .footer-text {
+footer .left .footer-text, footer .left .footer-date {
   display: inline-block;
 }
 footer .left img {

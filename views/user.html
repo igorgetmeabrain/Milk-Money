@@ -25,10 +25,12 @@
       
       <div id="login-form">
         <h2 id="login-heading" class="modal-heading">Please log in:</h2>
+        <div class="hr"></div>
         <input type="text" id="login-username" placeholder="username" autocomplete="off">
         <input type="password" id="login-password" placeholder="password">
-        <button class="form-button" id="login-submit" onclick="validate('login')">Login</button>
+        <div class="hr"></div>
         <div id="login-result-div"><span id="login-result-text" class="hidden"></span></div>
+        <button class="form-button" id="login-submit" onclick="validate('login')">Login</button>
         <div id="links">
           <a id="forgot-password" onclick="showPasswordResetForm()">Forgotten password?</a>
           <a id="create-account" onclick="showAccountForm()">New to Moolah?</a>
@@ -37,13 +39,14 @@
 
       <div id="password-reset-form" class="hidden">
         <h2 id="reset-heading" class="modal-heading">Reset your password:</h2>
-        <input id="reset-password" type="password" placeholder="minimum eight characters" required>
-        <label for="confirm-reset-password">Re-enter your password: </label>
-        <input id="confirm-reset-password" type="password" required>
+        <div class="hr"></div>
+        <input id="reset-password" type="password" placeholder="please choose a new password" required>
+        <div class="hr"></div>
+        <input id="confirm-reset-password" type="password" placeholder="re-enter your password" required>
+        <div class="hr"></div>
         <div class="custom-select">
-          <label for="reset-security-question">What is your security question?</label>
           <select id="reset-security-question">
-            <option value=0>Please select...</option>
+            <option value=0>Click to select a security question...</option>
             <option value=1>Your least favourite composer?</option>
             <option value=2>Musical instrument you would uninvent?</option>
             <option value=3>Your most annoying earworm?</option>
@@ -51,26 +54,23 @@
           </select>
           <input type="text" id="reset-security-answer" placeholder="please type your answer" required>
         </div>
-        <button class="form-button" id="reset-submit" onclick="validate('reset')">Reset Password</button>
+        <div class="hr"></div>
         <div id="reset-result-div"><span id="reset-result-text" class="hidden"></span></div>
-        <a href="/user" id="go-back">Back to Login</a>
+        <button class="form-button" id="reset-submit" onclick="validate('reset')">Reset Password</button>
+        <a href="/user" id="go-back" class="link">Back to Login</a>
       </div>
 
       <div id="account-form" class="hidden">
         <h2 id="account-heading" class="modal-heading">Create an account:</h2>
-        <label for="account-username">Please choose a username: </label>
-        <input id="account-username" type="text" placeholder="alphanumeric characters and underscores only" required>
-        
-        <label for="account-password">Choose a password: </label>
-        <input id="account-password" type="password" placeholder="minimum eight characters" required>
-        
-        <label for="confirm-account-password">Re-enter your password: </label>
-        <input id="confirm-account-password" type="password" required>
-        
+        <div class="hr"></div>
+        <input id="account-username" type="text" placeholder="please choose a username" required>
+        <div class="hr"></div>
+        <input id="account-password" type="password" placeholder="please choose a password" required>
+        <input id="confirm-account-password" type="password" placeholder="please re-enter your password" required>
+        <div class="hr"></div>
         <div class="custom-select">
-          <label for="account-security-question">Please choose a security question: </label>
           <select id="account-security-question">
-            <option value=0>Please select...</option>
+            <option value=0>Please select a security question...</option>
             <option value=1>Your least favourite composer?</option>
             <option value=2>Musical instrument you would uninvent?</option>
             <option value=3>Your most annoying earworm?</option>
@@ -78,20 +78,21 @@
           </select>
           <input type="text" id="account-security-answer" placeholder="please type your answer" required>
         </div>
-
-        <label for="bot-check">What is the shelfmark for Debussy's Cello Sonata?</label>
-        <input type="text" id="bot-check" required>
-        <button class="form-button" id="account-submit" onclick="validate('account')">Create Account</button>
+        <div class="hr"></div>
+        <input type="text" id="bot-check" placeholder="Shelfmark for Debussy's Cello Sonata?" required>
+        <div class="hr"></div>
         <div id="account-result-div"><span id="account-result-text" class="hidden"></span></div>
-        <a href="/user" id="go-back">Back to Login</a>
+        <button class="form-button" id="account-submit" onclick="validate('account')">Create Account</button>
+        <a href="/user" id="go-back" class="link">Back to Login</a>
       </div>
 
       <footer id="footer">
         <div class="left">
           <span class="fa fa-regular fa-copyright"></span>
-          <p class="footer-text">Badger 2024</p>
+          <p class="footer-text">Badger</p>
           <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
           <img src="images/badger.png" onclick="badger.play()">
+          <p class="footer-date"></p>
         </div>
         <span class="right">
           Follow me:

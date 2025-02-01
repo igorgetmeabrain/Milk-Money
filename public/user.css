@@ -127,6 +127,7 @@ h1 {
   grid-area: form;
   position: relative;
   margin: auto;
+  margin-top: 2%;
   width: 40%;
   background-color: hsla(0 0% 40% / 0.7);
   border: 3px solid gold;
@@ -136,42 +137,36 @@ h1 {
 
 .modal-heading {
   margin-bottom: 3%;
-  font-size: 2rem;
+  font-size: 1.75rem;
   color: gold;
 }
 
-label {
-  font-size: 1.2rem;
-}
-
-#login-form button {
-  display: block;
-  margin: auto;
-  margin-top: 3%;
-  width: 25%;
-}
-
-#links {
-  margin-top: 3%;
-  display: flex;
-  justify-content: space-between;
+.hr {
+  width: 50%;
+  height: 1px;
+  margin: 2% 0 2% 25%;
+  border: 1px solid gold;
 }
 
 input {
   display: block;
   margin: auto;
-  background: hsl(0 0% 80%);
+  background: #cccccc;
   margin-bottom: 1%;
-  width: 80%;
-  height: 2rem;
-  padding: 2%;
+  width: 60%;
+  height: 1.8rem;
+  padding: 1%;
   text-align: center;
 }
 
 select {
-  width: 70%;
+  width: 60%;
   font-size: 0.9rem;
   text-align: center;
+}
+
+option {
+  background: #cccccc;
 }
 
 .custom-select select {
@@ -189,14 +184,34 @@ select {
 }
 
 #account-result-div, #reset-result-div, #login-result-div {
-  margin: 3% 0 3% 0;
-  height: 60px;
+  margin-top: 4%;
+  height: 55px;
   padding: 1%;
 }
 
 .result-div {
   background: hsl(0 0% 50%);
+  color: #0f0f0f;
   border: 2px solid gold;
+}
+
+.form-button {
+  margin: 5% 0;
+  width: 40%;
+}
+
+.form-button:hover {  
+  background: gold;
+}
+
+.form-button:disabled {
+  background: gray;
+  color: darkgray;
+}
+
+#links {
+  display: flex;
+  justify-content: space-between;
 }
 
 #go-back, #links a {
@@ -209,8 +224,8 @@ select {
   color: orange;
 }
 
-.form-button:hover {  
-  background: gold;
+.link {
+  display: block;
 }
 
 footer {
@@ -228,7 +243,7 @@ footer .left {
 	margin-left: 10px;
 }
 	
-.footer-text {
+.footer-text, .footer-date {
 	display: inline-block;
 }
 
