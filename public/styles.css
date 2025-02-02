@@ -442,7 +442,7 @@ h2 {
   padding: 2%;
   width: 80%;
   height: 80%;
-  background: #cccccc;
+  background: #f2f2f2;
   border: 5px solid white;
   border-radius: 1%;
   box-shadow: 5px 5px 30px 5px black;
@@ -545,12 +545,13 @@ ul {
   border: 5px solid #783a78 !important;
 }
 
-.about-text {
-  font-size: 0.85rem;
+.about-content {
+  max-height: 100%;
+  overflow-y: scroll;
 }
-
-.about-grid {
-  display: grid;
+.about-content span {
+  display: block;
+  text-decoration: none;
 }
 
 /* MODAL STYLES */

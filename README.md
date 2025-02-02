@@ -26,13 +26,7 @@ If you are having trouble with Moola, need help or have questions or suggestions
 ## CREDITS
 
 [Moozart the cow found moooching about on Pinterest](https://uk.pinterest.com/pin/10625749114908978/)
-[Chick icon created by Freepik - Flaticon](https://www.flaticon.com/free-icons/chick)
-[Goat icon created by Freepik - Flaticon](https://www.flaticon.com/free-icons/goat)
-[Sheep icon](https://iconscout.com/icons/sheep) by [Dhimas Ronggobramantyo](https://iconscout.com/contributors/vintagio) on [IconScout](https://iconscout.com)
-[Mouse icon created by Freepik - Flaticon](https://www.flaticon.com/free-icons/mouse)
-[Hedgehog icon created by Freepik - Flaticon](https://www.flaticon.com/free-icons/hedgehog)
-[Pig icon by Whitevector](https://www.freepik.com/icons/pig/2#uuid=dacec295-290b-40f0-b662-f48609a66feb)
-[Duck icon created by Freepik - Flaticon](https://www.flaticon.com/free-icons/duck)
-[Bunny icon created by Freepik - Flaticon](https://www.flaticon.com/free-icons/bunny)
+[Sheep icon](https://iconscout.com/free-icon/sheep-2283629) by [Dhimas Ronggobramantyo](https://iconscout.com/contributors/vintagio) on [IconScout](https://iconscout.com)
+[Other icons by Freepik - Flaticon](https://www.flaticon.com/authors/freepik)
 
 

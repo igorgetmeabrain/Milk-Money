@@ -61,6 +61,7 @@ $button-color: green;
 $modal-background: #999999;
 $modal-button: white;
 $modal-button-text: black;
+$noticeboard-background: #f2f2f2;
 $link-color: gold;
 $link-hover-color: orange;
 $fuzzy-bubbles: "Fuzzy Bubbles", sans-serif;
@@ -535,7 +536,7 @@ h2 {
 	padding: 2%;
 	width: 80%;
 	height: 80%;
-	background: #cccccc;
+	background: $noticeboard-background;
 	border: 5px solid white;
 	border-radius: 1%;
 	box-shadow: 5px 5px 30px 5px black;
@@ -644,14 +645,14 @@ ul {
 	border: 5px solid $about !important;
 }
 
-.about-text {
-	font-size: 0.85rem;
-}
+.about-content {
+	max-height: 100%;
+	overflow-y: scroll;
 
-.about-grid {
-	display: grid;
-	
-
+	span {
+		display: block;
+		text-decoration: none;
+	}
 }
 
 /* MODAL STYLES */
