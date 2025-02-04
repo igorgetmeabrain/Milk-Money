@@ -553,6 +553,10 @@ ul {
   display: block;
   text-decoration: none;
 }
+.about-content span a {
+  text-decoration: none;
+  color: blue;
+}
 
 /* MODAL STYLES */
 .flex {

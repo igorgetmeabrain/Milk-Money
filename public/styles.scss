@@ -570,7 +570,6 @@ h2 {
 	  }
 }
 
-
 /* END OF NOTICEBOARD STYLES */
 
 .leaderboard {
@@ -652,7 +651,14 @@ ul {
 	span {
 		display: block;
 		text-decoration: none;
+
+		a {
+			text-decoration: none;
+			color: blue;
+		}
 	}
+
+
 }
 
 /* MODAL STYLES */

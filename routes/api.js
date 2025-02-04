@@ -1,5 +1,6 @@
 const Converter = require('../components/converter.js');
 const cowQuotes = require('../components/cowquotes.json');
+const quizQuestions = require('../components/quizquestions.json');
 const User = require('../models/user.model.js');
 const bcrypt = require('bcrypt');
 
