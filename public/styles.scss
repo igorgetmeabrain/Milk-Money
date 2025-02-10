@@ -634,10 +634,28 @@ ul {
 
 /* END OF BALANCE STYLES */
 
+/* QUIZ STYLES */
+
 .daily-quiz {
 	color: $daily-quiz;
 	border: 5px solid $daily-quiz !important;
 }
+
+#quiz-container {
+	max-height: 100%;
+	border: 1px solid red;
+
+	img {
+		height: 10vh;
+		border: 1px solid red;
+	}
+}
+
+.image-blur {
+	filter: blur(3px);
+}
+
+/* END OF QUIZ STYLES */
 
 .about {
 	color: $about;

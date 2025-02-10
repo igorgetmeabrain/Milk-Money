@@ -535,11 +535,26 @@ ul {
 }
 
 /* END OF BALANCE STYLES */
+/* QUIZ STYLES */
 .daily-quiz {
   color: #d14141;
   border: 5px solid #d14141 !important;
 }
 
+#quiz-container {
+  max-height: 100%;
+  border: 1px solid red;
+}
+#quiz-container img {
+  height: 10vh;
+  border: 1px solid red;
+}
+
+.image-blur {
+  filter: blur(3px);
+}
+
+/* END OF QUIZ STYLES */
 .about {
   color: #783a78;
   border: 5px solid #783a78 !important;
