@@ -47,6 +47,7 @@ h6 {
 }
 
 /* END OF CSS RESET */
+/* VARIABLES */
 body {
   font-family: "Fuzzy Bubbles", sans-serif;
   font-weight: 700;
@@ -296,7 +297,7 @@ body:has(input[type=checkbox]:checked)::after {
   resize: none;
 }
 
-.navbar-modal-button {
+.navbar-modal-button, .modal-button, .quiz-button {
   display: block;
   margin: auto;
   margin-top: 10%;
@@ -306,10 +307,10 @@ body:has(input[type=checkbox]:checked)::after {
   text-align: center;
   font-size: 1.2em;
 }
-.navbar-modal-button:hover {
+.navbar-modal-button:hover, .modal-button:hover, .quiz-button:hover {
   background: gold;
 }
-.navbar-modal-button:disabled {
+.navbar-modal-button:disabled, .modal-button:disabled, .quiz-button:disabled {
   background: gray;
   color: darkgray;
 }
@@ -541,17 +542,20 @@ ul {
   border: 5px solid #d14141 !important;
 }
 
-#quiz-container {
-  max-height: 100%;
-  border: 1px solid red;
-}
-#quiz-container img {
-  height: 10vh;
-  border: 1px solid red;
+#quiz-header {
+  display: block;
+  margin: auto;
 }
 
-.image-blur {
-  filter: blur(3px);
+#message-text {
+  font-size: 1.2rem;
+  margin: 10% 0;
+}
+
+#start-quiz-btn {
+  position: absolute;
+  bottom: 20%;
+  left: 45%;
 }
 
 /* END OF QUIZ STYLES */
@@ -617,24 +621,6 @@ ul {
 .result-div {
   background: hsl(0, 0%, 50%);
   border: 3px solid gold;
-}
-
-.modal-button {
-  display: block;
-  margin: auto;
-  margin-top: 10%;
-  background-color: white;
-  color: black;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 1.2em;
-}
-.modal-button:hover {
-  background: gold;
-}
-.modal-button:disabled {
-  background: gray;
-  color: darkgray;
 }
 
 .modal-close-button {

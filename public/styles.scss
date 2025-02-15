@@ -48,6 +48,8 @@ h6 {
 }
 
 /* END OF CSS RESET */
+
+/* VARIABLES */
 $navbar-text: gold;
 $footer-text: gold;
 $button-text-color: white;
@@ -379,7 +381,7 @@ body:has(input[type='checkbox']:checked) {
 
 }
 
-.navbar-modal-button {
+.navbar-modal-button, .modal-button, .quiz-button {
 	display: block;
 	margin: auto;
 	margin-top: 10%;
@@ -641,18 +643,20 @@ ul {
 	border: 5px solid $daily-quiz !important;
 }
 
-#quiz-container {
-	max-height: 100%;
-	border: 1px solid red;
-
-	img {
-		height: 10vh;
-		border: 1px solid red;
-	}
+#quiz-header {
+	display: block;
+	margin: auto;
 }
 
-.image-blur {
-	filter: blur(3px);
+#message-text {
+	font-size: 1.2rem;
+	margin: 10% 0;
+}
+
+#start-quiz-btn {
+	position: absolute;
+	bottom: 20%;
+	left: 45%;	
 }
 
 /* END OF QUIZ STYLES */
@@ -727,26 +731,6 @@ ul {
 .result-div {
   background: hsl(0 0% 50%);
   border: 3px solid gold;
-}
-
-.modal-button {
-	display: block;
-	margin: auto;
-	margin-top: 10%;
-	background-color: $modal-button;
-	color: $modal-button-text;
-	border-radius: 3px;
-	text-align: center;
-	font-size: 1.2em;
-
-	&:hover {
-		background: gold;
-	}
-
-	&:disabled {
-		background: gray;
-		color: darkgray;
-	}
 }
 
 .modal-close-button {

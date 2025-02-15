@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 userRoutes(app);
 
+// create html page for this
 app.use(function(req, res, next) {
   res.status(404)
     .type('text')

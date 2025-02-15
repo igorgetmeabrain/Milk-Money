@@ -147,4 +147,33 @@ module.exports = function (app) {
         balance: userBalance
       });
   });
+
+  app.route("/daily-quiz")
+  .get((req, res) => {
+    // check if user has already taken quiz today (check user object for date of last quiz) [datestamp, score] e.g.
+    let hasTakenQuiz = false;
+
+    if (hasTakenQuiz) {
+      return res.json({completed: true, message: "You have already taken the quiz today.<br>Please come back tomorrow!"});
+    } else {
+      return res.json({completed: false, message: "You have not taken the quiz today.<br>Would you like to start now?"});
+    }
+  });
+
+  app.route("/start-quiz")
+    .get((req, res) => {
+      // FETCH QUIZ QUESTIONS
+      // check if today's questions are already in database
+      // if so...
+        // retrieve [datestamp, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] e.g.
+        // generate quizQuestions object and return
+      // if not...
+        // save old questions to database array of asked questions
+        // create new datestamped database array for today's questions
+        let quizArray = ["datestamp", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        // generate quizQuestions object and return
+      let quizQuestions = {"questions": [{"question": "this is a question"}]};
+      return res.json(quizQuestions);
+    });
+
 }
