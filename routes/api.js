@@ -1,6 +1,5 @@
 const Converter = require('../components/converter.js');
 const cowQuotes = require('../components/cowquotes.json');
-const quizQuestions = require('../components/quizquestions.json');
 const User = require('../models/user.model.js');
 const bcrypt = require('bcrypt');
 
@@ -150,7 +149,7 @@ module.exports = function (app) {
 
   app.route("/daily-quiz")
   .get((req, res) => {
-    // check if user has already taken quiz today (check user object for date of last quiz) [datestamp, score] e.g.
+    // if user object has quizscore with today's datestamp hasTakenQuiz = true
     let hasTakenQuiz = false;
 
     if (hasTakenQuiz) {
@@ -163,17 +162,40 @@ module.exports = function (app) {
   app.route("/start-quiz")
     .get((req, res) => {
       // FETCH QUIZ QUESTIONS
-      // check if today's questions are already in database
-      // if so...
-        // retrieve [datestamp, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] e.g.
-        // generate quizQuestions object and return
-      // if not...
-        // save old questions to database array of asked questions
-        // create new datestamped database array for today's questions
-        let quizArray = ["datestamp", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        // generate quizQuestions object and return
-      let quizQuestions = {"questions": [{"question": "this is a question"}]};
-      return res.json(quizQuestions);
+      /* sample database schema object for quiz:
+        { 
+          asked: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+          current: ["Sun 15 Feb 2025", 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        }
+      */
+      // retrieve asked and current arrays from database
+        // if database object doesn't exist, create it with empty arrays
+        // if current datestamp exists and is not today push question ids to asked array and update asked array in database
+
+        //sample object (retrieve from database)
+        const askedQuestions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        
+        // if not enough unasked questions, reset askedQuestions array
+        if (!converter.generateRandomQuestionsArray(askedQuestions)) {
+          askedQuestions = [];
+          // save empty array to database to reset questions
+        }
+
+        // if current datestamp exists and is not today
+          const questionsArray = converter.generateRandomQuestionsArray(askedQuestions);
+          // save as current in database
+        // else questionsArray = current array from database
+
+      // generate quizQuestions object and return
+      let questionsObject = converter.generateQuestionsObject(questionsArray);
+      return res.json(questionsObject);
     });
 
-}
+    app.route("/end-quiz")
+    .post((req, res) => {
+      // update user object with score and datestamp
+      // update leaderboard if necessary
+      // send appropriate message back to user
+    });
+
+  }

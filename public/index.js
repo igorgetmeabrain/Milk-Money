@@ -382,7 +382,7 @@ const displayLeaderboards = async () =>  {
   return; 
 }
 
-// FUNCTION FOR TOTALISER DISPLAY
+/* FUNCTION FOR TOTALISER DISPLAY */
 function fillScaleElement(i) {
   setTimeout(function() {
     if (i>=-85 && i<=100) {
@@ -449,7 +449,7 @@ const displayBalance = async () => {
   return;
 }
 
-// FUNCTIONS FOR QUIZ
+/* QUIZ FUNCTIONS */
 
 const quizHTML = `
 <h2 id="quiz-header">Daily Quiz</h2>
@@ -477,18 +477,30 @@ const displayDailyQuiz = async () => {
 };
 
 const startQuiz = async () => {
-  const data = await fetch("/start-quiz");
 
+  document.getElementById("message-text").innerHTML = "Fetching quiz questions...<br>please wait...";
+  document.getElementById("start-quiz-btn").disabled = "true";
+
+  const data = await fetch("/start-quiz");
   const parsed = await data.json();
   if (parsed.error) {
     document.getElementById("message-text").innerText = JSON.stringify(parsed);
     return;
   } else {
-    document.getElementById("message-text").innerText = "please wait...";
-    document.getElementById("start-quiz-btn").disabled = "true";
-    return;
+    playQuiz(parsed.questions);
   }
-}
+};
+
+const playQuiz = () => {
+  // all game logic here
+  // when game is over, call endQuiz
+};
+
+const endQuiz = async (score) => {
+  // post request to send score to user object
+};
+
+/* END OF QUIZ FUNCTIONS */
 
 const aboutHTML = `
 <div class="about-content">

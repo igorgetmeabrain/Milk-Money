@@ -34,6 +34,8 @@ res.json({
 
 */
 
+const quizQuestions = require('../components/quizquestions.json');
+
 class Converter {
 
   // 1 pint = 0.568 litres
@@ -61,10 +63,37 @@ class Converter {
     return formatted;
   }
 
+  generateRandomQuestionsArray(askedArray) {
+
+    if (askedArray.length + 10 > quizQuestions.questions.length) return false;
+
+    let questionsArray = [];
+    while (questionsArray.length < 10) {
+      let random = Math.floor(Math.random() * quizQuestions.questions.length);
+      let questionId = quizQuestions.questions[random].id;
+      if (questionsArray.indexOf(questionId) === -1 && askedArray.indexOf(questionId) === -1) {
+        questionsArray.push(questionId);
+      }
+    }
+    questionsArray.unshift(new Date().toDateString());
+    console.log(questionsArray)
+    return questionsArray;    
+  }
+
+  generateQuestionsObject(questionsArray) {
+    let questionsObject = {"questions": []};
+    // ignore first element (datestamp)
+    for (let i=1; i<questionsArray.length; i++) {
+      // find matching id for questionsArray[i] in quizQuestions and push object to questionsObject.questions
+    }
+    return questionsObject;
+  }
+
   // takes unhashed value - first digit is question no and rest is answer
   securityQuestion(security) {
     return security;
   }
+
 }
 
 module.exports = Converter;
