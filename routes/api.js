@@ -172,22 +172,23 @@ module.exports = function (app) {
         // if database object doesn't exist, create it with empty arrays
         // if current datestamp exists and is not today push question ids to asked array and update asked array in database
 
-        //sample object (retrieve from database)
-        const askedQuestions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        //sample asked array (retrieve from database)
+        const asked = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         
         // if not enough unasked questions, reset askedQuestions array
-        if (!converter.generateRandomQuestionsArray(askedQuestions)) {
-          askedQuestions = [];
+        if (!converter.generateRandomQuestionsArray(asked)) {
+          asked = [];
           // save empty array to database to reset questions
         }
 
         // if current datestamp exists and is not today
-          const questionsArray = converter.generateRandomQuestionsArray(askedQuestions);
+          const questionsArray = converter.generateRandomQuestionsArray(asked);
           // save as current in database
         // else questionsArray = current array from database
 
       // generate quizQuestions object and return
       let questionsObject = converter.generateQuestionsObject(questionsArray);
+      console.log(questionsObject);
       return res.json(questionsObject);
     });
 

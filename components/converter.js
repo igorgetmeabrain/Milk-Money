@@ -85,6 +85,7 @@ class Converter {
     // ignore first element (datestamp)
     for (let i=1; i<questionsArray.length; i++) {
       // find matching id for questionsArray[i] in quizQuestions and push object to questionsObject.questions
+      questionsObject.questions.push(quizQuestions.questions.find(o=>o.id === questionsArray[i]));     
     }
     return questionsObject;
   }

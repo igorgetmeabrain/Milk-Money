@@ -487,12 +487,18 @@ const startQuiz = async () => {
     document.getElementById("message-text").innerText = JSON.stringify(parsed);
     return;
   } else {
-    playQuiz(parsed.questions);
+    return playQuiz(parsed.questions);
   }
 };
 
-const playQuiz = () => {
-  // all game logic here
+const playQuiz = (questionsArray) => {
+
+  // test string
+  //let HTMLString = "Here are the questions: ";
+  //questionsArray.forEach(e=>HTMLString+=`<li>${e.question}</li>`);
+  //document.getElementById("message-text").innerHTML  = HTMLString;
+
+  // all game logic here (see codepen)
   // when game is over, call endQuiz
 };
 
@@ -635,7 +641,6 @@ const modalHandler = async () => {
   return; 
 
 };
-
 
 window.addEventListener("load", (event) => {
   displayLeaderboards();
