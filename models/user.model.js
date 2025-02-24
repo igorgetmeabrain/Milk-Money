@@ -14,6 +14,10 @@ const UserSchema = new Schema(
     security: {
       type: String,
       required: true
+    },
+    icon: {
+      type: String,
+      required: true
     }
   },
   {timestamps: true}

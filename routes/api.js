@@ -42,7 +42,15 @@ module.exports = function (app) {
     // if not...
     // hash password and security answer/question here
     return res.send({message: "botcheck passed"});
-
+    const userObject = {
+      username: username,
+      password: password,
+      security: security,
+      icon: "cow",
+      transactions: [],
+      balance: 0,
+      scores: [/*datestamped scores*/]
+    };
     /*
     try {
       const user = await User.create(userObject)
@@ -151,7 +159,7 @@ module.exports = function (app) {
   .get((req, res) => {
     // if user object has quizscore with today's datestamp hasTakenQuiz = true
     let hasTakenQuiz = false;
-
+    // get score and display with message
     if (hasTakenQuiz) {
       return res.json({completed: true, message: "You have already taken the quiz today.<br>Please come back tomorrow!"});
     } else {
@@ -199,4 +207,4 @@ module.exports = function (app) {
       // send appropriate message back to user
     });
 
-  }
+  };

@@ -450,11 +450,27 @@ const displayBalance = async () => {
 }
 
 /* QUIZ FUNCTIONS */
+let score = 0, questionNumber = 0, askAltQuestion = false;
 
-const quizHTML = `
+const startQuizHTML = `
 <h2 id="quiz-header">Daily Quiz</h2>
 <p id="message-text"></p>
 <button id="start-quiz-btn" class="quiz-button" onclick="startQuiz()" class="hidden">Start Quiz</button>`;
+
+const playQuizHTML = `
+  <div id="quiz-container">
+    <div id="question-container">
+      <h2 id="question-header"></h2>
+      <img id="image-question">
+      <audio id="audio-question" class="hidden" controls></audio>
+      <p id="no-audio" class-"hidden">Can't listen now?</p>
+      <p id="question-text"></p>
+    </div>
+    <div id="answers"></div>
+    <div id="next-button">
+      <button id="next-question">Next Question</button>
+    </div>
+  </div>`;
 
 const displayDailyQuiz = async () => {
   tabSound();
@@ -467,7 +483,7 @@ const displayDailyQuiz = async () => {
     noticeboard.innerText = JSON.stringify(parsed);
     return;
   } else {
-    noticeboard.innerHTML = quizHTML;
+    noticeboard.innerHTML = startQuizHTML;
     document.getElementById("message-text").innerHTML = parsed.message;
     if (!parsed.completed) {
       document.getElementById("start-quiz-btn").classList.remove("hidden");
@@ -492,19 +508,102 @@ const startQuiz = async () => {
 };
 
 const playQuiz = (questionsArray) => {
+  noticeboard.innerHTML = playQuizHTML;
+  askQuestion(questionsArray[0]);
+};
 
-  // test string
-  //let HTMLString = "Here are the questions: ";
-  //questionsArray.forEach(e=>HTMLString+=`<li>${e.question}</li>`);
-  //document.getElementById("message-text").innerHTML  = HTMLString;
+const askQuestion = (questionObject) => {
+  document.getElementById("next-question").disabled = true;
+  const {type, source, question, A, B, C, D, answer, blur=0, altquestion=false} = questionObject;
+  const questionHeader = document.getElementById("question-header");
+  const questionText = document.getElementById("question-text");
+  const audioQuestion = document.getElementById("audio-question");
+  const imageQuestion = document.getElementById("image-question");
+  const noAudio = document.getElementById("no-audio");
+  const answerDiv = document.getElementById("answers");
+  const options = ["A", "B", "C", "D"]
+  const answers = [A, B, C, D];
 
-  // all game logic here (see codepen)
-  // when game is over, call endQuiz
+  questionHeader.textContent = `QUESTION ${questionNo+1}:`;
+  questionText.textContent = question;
+  
+  // reset answerDiv and then add answer buttons and event listeners
+  answerDiv.innerHTML = "";
+  options.forEach((a, i)=>{
+    const button = document.createElement("button");
+    button.innerText = answers[i];
+    button.value = options[i];
+    button.classList.add("answer-btn");
+    answerDiv.appendChild(button);
+    button.addEventListener("click", () => {selectAnswer(button.value, answer)})
+  })
+   
+ // tidy this up
+  if (type === "audio" && !askAltQuestion) {
+    audioQuestion.src = source;
+    audioQuestion.classList.remove("hidden");
+    noAudio.classList.remove("hidden");
+    noAudio.addEventListener("click", () => {noAudioQuestions(altquestion)});
+    imageQuestion.classList.add("hidden");
+  } else if (type === "audio" && askAltQuestion) {
+    questionText.textContent = altquestion;
+    audioQuestion.src = source;
+    audioQuestion.classList.add("hidden");
+    imageQuestion.src="";
+  } else if (type ==="image") {
+    imageQuestion.src = source;
+    imageQuestion.style.filter = `blur(${blur}px)`;
+    audioQuestion.classList.add("hidden");
+    noAudio.classList.add("hidden"); 
+  } else if (type ==="text") {
+    audioQuestion.classList.add("hidden");
+    imageQuestion.src="";
+    noAudio.classList.add("hidden");  
+  }
+  
+  return;
+};
+
+const selectAnswer = (response, answer) => {
+  const nextQuestionButton = document.getElementById("next-question");
+  nextQuestionButton.disabled = false;
+  document.querySelectorAll(".answer-btn").forEach(btn=>btn.disabled=true);
+  document.getElementById("image-question").style.filter = "blur(0px)";
+  
+  if (response === answer) {
+    score++;
+    questionNo++;
+    document.querySelector(`[value="${response}"]`).classList.add("correct-answer");
+  } else {
+    questionNo++;
+    document.querySelector(`[value="${response}"]`).classList.add("incorrect-answer");
+    document.querySelector(`[value="${answer}"]`).classList.add("correct-answer");
+  }
+  
+  // trigger end of quiz with finish button
+  if (questionNo>9) {
+    nextQuestionButton.removeEventListener("click", abc)
+    nextQuestionButton.innerText = "Finish";
+    nextQuestionButton.addEventListener("click", () => {endQuiz(score)})
+  }
+}
+
+const noAudioQuestions = (altquestion) => {
+  document.getElementById("audio-question").classList.add("hidden");
+  document.getElementById("no-audio").classList.add("hidden");
+  document.getElementById("question-text").textContent = altquestion;
+  askAltQuestion = true;
 };
 
 const endQuiz = async (score) => {
+  // display message to user
   // post request to send score to user object
 };
+
+// this doesn't work....not accessible (and clunky)
+const abc = () => {askQuestion(questionsArray[questionNo])};
+
+document.getElementById("next-question").addEventListener("click", abc);
 
 /* END OF QUIZ FUNCTIONS */
 
