@@ -46,7 +46,7 @@ function theCowSpeaks(cowVocab) {
   speechText.style.fontSize = `${fontSize}rem`
   speechBubble.style.backgroundImage = isItDaytime ? "url(images/dayspeech.png)" : "url(images/nightspeech.png)";
   speechBubble.style.opacity = "1";
-  mootype.play()
+  if (mootype) {mootype.play()};
   speechText.innerHTML = mooing; 
 };
 
@@ -450,7 +450,10 @@ const displayBalance = async () => {
 }
 
 /* QUIZ FUNCTIONS */
-let score = 0, questionNumber = 0, askAltQuestion = false;
+
+// how to make questions globally available?
+
+let score = 0, questionNo = 0, askAltQuestion = false;
 
 const startQuizHTML = `
 <h2 id="quiz-header">Daily Quiz</h2>
@@ -459,16 +462,16 @@ const startQuizHTML = `
 
 const playQuizHTML = `
   <div id="quiz-container">
-    <div id="question-container">
-      <h2 id="question-header"></h2>
+    <h2 id="question-header"></h2>
+    <div id="imageoraudio-container"> 
       <img id="image-question">
       <audio id="audio-question" class="hidden" controls></audio>
       <p id="no-audio" class-"hidden">Can't listen now?</p>
-      <p id="question-text"></p>
     </div>
     <div id="answers"></div>
-    <div id="next-button">
-      <button id="next-question">Next Question</button>
+    <div id="navigation-buttons">
+      <button id="next-question" class="quiz-nav-button">Next Question</button>
+      <button id="finish-quiz" class="quiz-nav-button">Finish Quiz</button>
     </div>
   </div>`;
 
@@ -509,23 +512,24 @@ const startQuiz = async () => {
 
 const playQuiz = (questionsArray) => {
   noticeboard.innerHTML = playQuizHTML;
+  document.getElementById("next-question").addEventListener("click", () =>{askQuestion(questionsArray[questionNo])});
   askQuestion(questionsArray[0]);
 };
 
 const askQuestion = (questionObject) => {
+  document.getElementById("finish-quiz").classList.add("hidden");
   document.getElementById("next-question").disabled = true;
   const {type, source, question, A, B, C, D, answer, blur=0, altquestion=false} = questionObject;
   const questionHeader = document.getElementById("question-header");
-  const questionText = document.getElementById("question-text");
   const audioQuestion = document.getElementById("audio-question");
   const imageQuestion = document.getElementById("image-question");
   const noAudio = document.getElementById("no-audio");
   const answerDiv = document.getElementById("answers");
-  const options = ["A", "B", "C", "D"]
+  const options = ["A", "B", "C", "D"];
   const answers = [A, B, C, D];
 
   questionHeader.textContent = `QUESTION ${questionNo+1}:`;
-  questionText.textContent = question;
+  theCowSpeaks([question, null]);
   
   // reset answerDiv and then add answer buttons and event listeners
   answerDiv.innerHTML = "";
@@ -536,15 +540,15 @@ const askQuestion = (questionObject) => {
     button.classList.add("answer-btn");
     answerDiv.appendChild(button);
     button.addEventListener("click", () => {selectAnswer(button.value, answer)})
-  })
+  });
    
- // tidy this up
+
   if (type === "audio" && !askAltQuestion) {
     audioQuestion.src = source;
     audioQuestion.classList.remove("hidden");
     noAudio.classList.remove("hidden");
     noAudio.addEventListener("click", () => {noAudioQuestions(altquestion)});
-    imageQuestion.classList.add("hidden");
+    imageQuestion.src="";
   } else if (type === "audio" && askAltQuestion) {
     questionText.textContent = altquestion;
     audioQuestion.src = source;
@@ -582,9 +586,11 @@ const selectAnswer = (response, answer) => {
   
   // trigger end of quiz with finish button
   if (questionNo>9) {
-    nextQuestionButton.removeEventListener("click", abc)
-    nextQuestionButton.innerText = "Finish";
-    nextQuestionButton.addEventListener("click", () => {endQuiz(score)})
+    // hide button and replace with finish button
+    const finishQuizButton = document.getElementById("finish-quiz");
+    nextQuestionButton.classList.add("hidden");
+    finishQuizButton.classList.remove("hidden");
+    finishQuizButton.addEventListener("click", () => {endQuiz(score)})
   }
 }
 
@@ -596,14 +602,11 @@ const noAudioQuestions = (altquestion) => {
 };
 
 const endQuiz = async (score) => {
+  document.getElementById("finish-quiz").disabled = true;
+  console.log("you scored: ", score);
   // display message to user
   // post request to send score to user object
 };
-
-// this doesn't work....not accessible (and clunky)
-const abc = () => {askQuestion(questionsArray[questionNo])};
-
-document.getElementById("next-question").addEventListener("click", abc);
 
 /* END OF QUIZ FUNCTIONS */
 

@@ -196,7 +196,7 @@ module.exports = function (app) {
 
       // generate quizQuestions object and return
       let questionsObject = converter.generateQuestionsObject(questionsArray);
-      console.log(questionsObject);
+      //console.log(questionsObject);
       return res.json(questionsObject);
     });
 

@@ -408,7 +408,7 @@ h2 {
 
 .button {
   display: inline-block;
-  margin-top: 2%;
+  margin-top: 5%;
   height: 40px;
   padding: 3px 6px;
   background: green;
@@ -441,8 +441,8 @@ h2 {
   margin: auto;
   margin-top: 6%;
   padding: 2%;
-  width: 80%;
-  height: 80%;
+  width: 83%;
+  height: 83%;
   background: #f2f2f2;
   border: 5px solid white;
   border-radius: 1%;
@@ -542,11 +542,6 @@ ul {
   border: 5px solid #d14141 !important;
 }
 
-#quiz-header {
-  display: block;
-  margin: auto;
-}
-
 #message-text {
   font-size: 1.2rem;
   margin: 10% 0;
@@ -561,25 +556,24 @@ ul {
 #quiz-container {
   display: grid;
   margin: auto;
-  grid-template-rows: 3fr 1fr 0.5fr;
-  grid-template-areas: "question" "answers" "next";
-  width: 60%;
-  border: 2px solid black;
-}
-
-#question-container {
-  grid-area: question;
-  border: 2px solid blue;
+  grid-template-rows: 10% 60% 20% 10%;
+  grid-template-areas: "question-header" "imageoraudio" "answers" "next";
+  width: 100%;
+  height: 100%;
 }
 
 #question-header {
-  text-align: center;
+  grid-area: question-header;
+}
+
+#imageoraudio-container {
+  grid-area: imageoraudio;
 }
 
 #image-question {
   display: block;
   margin: auto;
-  height: 15vh;
+  height: 34vh;
 }
 
 #audio-question {
@@ -596,14 +590,8 @@ ul {
   color: blue;
   cursor: pointer;
 }
-
 #no-audio:hover {
   color: orange;
-}
-
-#question-text {
-  text-align: center;
-  border: 1px solid green;
 }
 
 #answers {
@@ -611,23 +599,15 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
-  row-gap: 10px;
-  border: 3px solid purple;
-  padding: 2%;
-}
-
-.answer-btn {
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  row-gap: 5px;
   padding: 1%;
 }
 
-#next-button {
+#navigation-buttons {
   grid-area: next;
-  display: flex;
-  justify-content: center;
-  border: 3px solid orange;
-  padding: 2%;
+  margin-top: 2%;
 }
 
 .correct-answer {
@@ -776,7 +756,7 @@ footer .right a:hover {
   top: 0;
   left: 0;
   background: black;
-  z-index: 5;
+  z-index: 8;
   display: none;
 }
 
