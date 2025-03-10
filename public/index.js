@@ -44,7 +44,7 @@ function theCowSpeaks(cowVocab) {
   let fontSize = (2.2-mooing.length*0.01) < 0.9 ? 0.9 : (2.2-mooing.length*0.01)
   //console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
   speechText.style.fontSize = `${fontSize}rem`
-  speechBubble.style.backgroundImage = isItDaytime ? "url(images/dayspeech.png)" : "url(images/nightspeech.png)";
+  speechBubble.style.backgroundImage = isItDaytime ? "url(images/homepage/dayspeech.png)" : "url(images/homepage/nightspeech.png)";
   speechBubble.style.opacity = "1";
   if (mootype) {mootype.play()};
   speechText.innerHTML = mooing; 
@@ -53,7 +53,7 @@ function theCowSpeaks(cowVocab) {
 function dayNight() {
   if (dayNightCheckbox.checked) {
     isItDaytime = false;
-    cowImage.src = "images/nightcow.png";
+    cowImage.src = "images/homepage/nightcow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 20%, 0.9)");
     noticeboard.style.backgroundColor = "black";
     speechText.style.color = "white";
@@ -63,7 +63,7 @@ function dayNight() {
     theCowSpeaks(Math.random() < 0.5 ? whatTheCowSays[0] : whatTheCowSays[1]);
   } else {
     isItDaytime = true;
-    cowImage.src = "images/daycow.png";
+    cowImage.src = "images/homepage/daycow.png";
     clouds.forEach(cloud => cloud.style.backgroundColor = "hsla(0, 0%, 100%, 0.9)");
     noticeboard.style.backgroundColor = "#f2f2f2";
     speechText.style.color = "black";
@@ -506,6 +506,7 @@ const startQuiz = async () => {
     document.getElementById("message-text").innerText = JSON.stringify(parsed);
     return;
   } else {
+    //console.log(parsed)
     return playQuiz(parsed.questions);
   }
 };
@@ -528,8 +529,9 @@ const askQuestion = (questionObject) => {
   const options = ["A", "B", "C", "D"];
   const answers = [A, B, C, D];
 
+  console.log(source);
+
   questionHeader.textContent = `QUESTION ${questionNo+1}:`;
-  theCowSpeaks([question, null]);
   
   // reset answerDiv and then add answer buttons and event listeners
   answerDiv.innerHTML = "";
@@ -541,16 +543,15 @@ const askQuestion = (questionObject) => {
     answerDiv.appendChild(button);
     button.addEventListener("click", () => {selectAnswer(button.value, answer)})
   });
-   
 
   if (type === "audio" && !askAltQuestion) {
     audioQuestion.src = source;
+    console.log(audioQuestion.src);
     audioQuestion.classList.remove("hidden");
     noAudio.classList.remove("hidden");
     noAudio.addEventListener("click", () => {noAudioQuestions(altquestion)});
     imageQuestion.src="";
   } else if (type === "audio" && askAltQuestion) {
-    questionText.textContent = altquestion;
     audioQuestion.src = source;
     audioQuestion.classList.add("hidden");
     imageQuestion.src="";
@@ -565,7 +566,7 @@ const askQuestion = (questionObject) => {
     noAudio.classList.add("hidden");  
   }
   
-  return;
+  return theCowSpeaks([askAltQuestion && type === "audio" ? altquestion : question, null]);
 };
 
 const selectAnswer = (response, answer) => {
@@ -597,8 +598,8 @@ const selectAnswer = (response, answer) => {
 const noAudioQuestions = (altquestion) => {
   document.getElementById("audio-question").classList.add("hidden");
   document.getElementById("no-audio").classList.add("hidden");
-  document.getElementById("question-text").textContent = altquestion;
   askAltQuestion = true;
+  return theCowSpeaks([altquestion, null]);
 };
 
 const endQuiz = async (score) => {

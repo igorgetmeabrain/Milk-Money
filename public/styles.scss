@@ -102,7 +102,7 @@ body {
 		content: "";
 		width: 100vw;
 		height: 40vh;
-		background-image: url(./images/grasstexture.jpg);
+		background-image: url(./images/homepage/grasstexture.jpg);
 		z-index: 0;
 		background-repeat: repeat;
 		position: absolute;
@@ -143,7 +143,7 @@ body:has(input[type='checkbox']:checked) {
 			content: "";
 			width: 100vw;
 			height: 60vh;
-			background-image: url(./images/milkyway.jpg);
+			background-image: url(./images/homepage/milkyway.jpg);
 			background-size: cover;
 			z-index: 0;
 			background-repeat: no-repeat;

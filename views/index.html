@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Moola Homepage</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/images/icons/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
@@ -33,16 +33,16 @@
       </div>
 
       <div id="cow-container">
-        <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
-        <audio src="audio/baa.mp3" preload="auto" id="baa"></audio>
-        <audio src="audio/goat.mp3" preload="auto" id="goat"></audio>
-        <audio src="audio/queen.mp3" preload="auto" id="queen"></audio>
-        <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="pokeTheCow()">
+        <audio src="audio/homepage/moo.mp3" preload="auto" id="moo"></audio>
+        <audio src="audio/homepage/baa.mp3" preload="auto" id="baa"></audio>
+        <audio src="audio/homepage/goat.mp3" preload="auto" id="goat"></audio>
+        <audio src="audio/homepage/queen.mp3" preload="auto" id="queen"></audio>
+        <img src="images/homepage/daycow.png" id="cow" alt="a female cartoon cow" onclick="pokeTheCow()">
         <div id="speech-bubble" onclick="style='opacity: 0'">
           <p id="cow-speech"></p>
         </div>
         <div id="buttons">
-          <audio src="audio/cowbell.mp3" preload="auto" id="cowbell"></audio>
+          <audio src="audio/homepage/cowbell.mp3" preload="auto" id="cowbell"></audio>
           <button onclick="openModal('buy')" id="bought-milk" class="button">I bought milk</button>
           <button onclick="openModal('drink')" id="drank-milk" class="button">I drank milk</button>
           <button onclick="needMilk()" id="need-milk" class="button">We need milk</button>
@@ -51,15 +51,15 @@
       </div>
 
       <div id="noticeboard-container">
-        <audio src="audio/milkpour.mp3" preload="auto" id="milk-pour"></audio>
-        <audio src="audio/milkpourup2.mp3" preload="auto" id="milk-pour-up"></audio>
-        <audio src="audio/confetti.mp3" preload="auto" id="confetti"></audio>
+        <audio src="audio/homepage/milkpour.mp3" preload="auto" id="milk-pour"></audio>
+        <audio src="audio/homepage/milkpourup2.mp3" preload="auto" id="milk-pour-up"></audio>
+        <audio src="audio/homepage/confetti.mp3" preload="auto" id="confetti"></audio>
         <!-- noticeboard content rendered to this div -->
         <div id="noticeboard">
           <!-- modal also rendered to noticeboard-->
         </div>
         <div id="tabs">
-          <audio src="audio/cowpat.mp3" preload="auto" id="cowpat"></audio>
+          <audio src="audio/homepage/cowpat.mp3" preload="auto" id="cowpat"></audio>
           <button onclick="displayLeaderboards()" id="tab-1" class="tab">Leaderboards</button>
           <button onclick="displayBalance()" id="tab-2" class="tab">My moonit balance</button>
           <button onclick="displayDailyQuiz()" id="tab-3" class="tab">Daily Quiz</button>
@@ -71,8 +71,8 @@
         <div class="left">
           <span class="fa fa-regular fa-copyright"></span>
           <p class="footer-text">Badger</p>
-          <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
-          <img src="images/badger.png" onclick="badger.play()">
+          <audio src="audio/homepage/badger.mp3" preload="auto" id="badger"></audio>
+          <img src="images/homepage/badger.png" onclick="badger.play()">
           <p class="footer-date"></p>
         </div>
         <span class="right">
@@ -91,7 +91,7 @@
 
     <!-- orientation warning -->
     <div id="orientation">
-      <div class="phone"><img src="images/daycowrotated.png" id="orient-img"></div>
+      <div class="phone"><img src="images/homepage/daycowrotated.png" id="orient-img"></div>
       <div class="message">Please rotate your device!</div>
     </div>
 
