@@ -673,24 +673,23 @@ ul {
   
 #imageoraudio-container {
 	grid-area: imageoraudio;
+	position: relative;
 }
   
 #image-question {
 	display: block;
 	margin: auto;
-	height: 34vh;
+	height: 34vh;	
 }
   
 #audio-question {
-	position: absolute;
-	top: 18%;
-	left: 32%;
-	border: 1px solid green;
+	position: relative;
+	bottom: 50%;
 }
   
 #no-audio {
-	border: 1px solid red;
-	height: 1rem;
+	position: relative;
+	bottom: 35%;
 	text-align: center;
 	color: blue;
 	cursor: pointer;

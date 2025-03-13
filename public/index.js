@@ -109,8 +109,8 @@ function cowfetti(cowfettiType, size, number) {
 
 /* HTML FOR MODALS */
 const modalHTML = `<div class="flex">
-    <audio src="audio/minimoo.mp3" preload="auto" id="minimoo"></audio>
-    <img src="images/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
+    <audio src="audio/homepage/minimoo.mp3" preload="auto" id="minimoo"></audio>
+    <img src="images/homepage/daycow.png" width="62px" height="70px" alt="mini cow logo" onclick="minimoo.play()"/>
     <h2 class="modal-header"></h2>
     <button class="modal-close-button">⨉</button>
     </div>`;
