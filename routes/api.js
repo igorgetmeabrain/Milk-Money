@@ -3,6 +3,9 @@ const cowQuotes = require('../components/cowquotes.json');
 const User = require('../models/user.model.js');
 const bcrypt = require('bcrypt');
 
+// temporary for testing
+const quizQuestions = require('../components/quizquestions.json');
+
 module.exports = function (app) {
 
   // placeholder before implementing passport etc - ensure all routes redirect if unauthenticated
@@ -165,6 +168,12 @@ module.exports = function (app) {
     } else {
       return res.json({completed: false, message: "You have not taken the quiz today.<br>Would you like to start now?"});
     }
+  });
+
+  // temporary testing - remove route
+  app.route("/start-test-quiz")
+  .get((req, res) => {
+    return res.json(quizQuestions)
   });
 
   app.route("/start-quiz")

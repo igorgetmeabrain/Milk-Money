@@ -500,7 +500,8 @@ const startQuiz = async () => {
   document.getElementById("message-text").innerHTML = "Fetching quiz questions...<br>please wait...";
   document.getElementById("start-quiz-btn").disabled = "true";
 
-  const data = await fetch("/start-quiz");
+  // change back to /start-quiz after testing
+  const data = await fetch("/start-test-quiz");
   const parsed = await data.json();
   if (parsed.error) {
     document.getElementById("message-text").innerText = JSON.stringify(parsed);
@@ -572,8 +573,10 @@ const askQuestion = (questionObject) => {
 const selectAnswer = (response, answer) => {
   const nextQuestionButton = document.getElementById("next-question");
   nextQuestionButton.disabled = false;
+
   document.querySelectorAll(".answer-btn").forEach(btn=>btn.disabled=true);
   document.getElementById("image-question").style.filter = "blur(0px)";
+  document.getElementById("audio-question").pause();
   
   if (response === answer) {
     score++;
@@ -586,7 +589,8 @@ const selectAnswer = (response, answer) => {
   }
   
   // trigger end of quiz with finish button
-  if (questionNo>9) {
+  // using 999 for testing
+  if (questionNo>999) {
     // hide button and replace with finish button
     const finishQuizButton = document.getElementById("finish-quiz");
     nextQuestionButton.classList.add("hidden");
