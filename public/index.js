@@ -500,14 +500,12 @@ const startQuiz = async () => {
   document.getElementById("message-text").innerHTML = "Fetching quiz questions...<br>please wait...";
   document.getElementById("start-quiz-btn").disabled = "true";
 
-  // change back to /start-quiz after testing
-  const data = await fetch("/start-test-quiz");
+  const data = await fetch("/start-quiz");
   const parsed = await data.json();
   if (parsed.error) {
     document.getElementById("message-text").innerText = JSON.stringify(parsed);
     return;
   } else {
-    //console.log(parsed)
     return playQuiz(parsed.questions);
   }
 };
@@ -530,8 +528,6 @@ const askQuestion = (questionObject) => {
   const options = ["A", "B", "C", "D"];
   const answers = [A, B, C, D];
 
-  console.log(source);
-
   questionHeader.textContent = `QUESTION ${questionNo+1}:`;
   
   // reset answerDiv and then add answer buttons and event listeners
@@ -552,19 +548,23 @@ const askQuestion = (questionObject) => {
     noAudio.classList.remove("hidden");
     noAudio.addEventListener("click", () => {noAudioQuestions(altquestion)});
     imageQuestion.src="";
+    answerDiv.classList.remove("text-question");
   } else if (type === "audio" && askAltQuestion) {
     audioQuestion.src = source;
     audioQuestion.classList.add("hidden");
     imageQuestion.src="";
+    answerDiv.classList.remove("text-question");
   } else if (type ==="image") {
     imageQuestion.src = source;
     imageQuestion.style.filter = `blur(${blur}px)`;
     audioQuestion.classList.add("hidden");
-    noAudio.classList.add("hidden"); 
+    noAudio.classList.add("hidden");
+    answerDiv.classList.remove("text-question");
   } else if (type ==="text") {
     audioQuestion.classList.add("hidden");
     imageQuestion.src="";
-    noAudio.classList.add("hidden");  
+    noAudio.classList.add("hidden");
+    answerDiv.classList.add("text-question");
   }
   
   return theCowSpeaks([askAltQuestion && type === "audio" ? altquestion : question, null]);
@@ -589,8 +589,7 @@ const selectAnswer = (response, answer) => {
   }
   
   // trigger end of quiz with finish button
-  // using 999 for testing
-  if (questionNo>999) {
+  if (questionNo>9) {
     // hide button and replace with finish button
     const finishQuizButton = document.getElementById("finish-quiz");
     nextQuestionButton.classList.add("hidden");

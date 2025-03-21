@@ -173,7 +173,7 @@ module.exports = function (app) {
   // temporary testing - remove route
   app.route("/start-test-quiz")
   .get((req, res) => {
-    return res.json(quizQuestions)
+    return res.json(quizQuestions);
   });
 
   app.route("/start-quiz")

@@ -679,7 +679,7 @@ ul {
 #image-question {
 	display: block;
 	margin: auto;
-	height: 34vh;	
+	height: 34vh;
 }
   
 #audio-question {
@@ -698,6 +698,10 @@ ul {
 		color: orange;
 	}
 }
+
+.text-question {
+	transform: translateY(-100px);
+}
   
 #answers {
 	grid-area: answers;
@@ -707,6 +711,7 @@ ul {
 	column-gap: 5px;
 	row-gap: 5px;
 	padding: 1%;
+	z-index: 2;
 }
   
 #navigation-buttons {
