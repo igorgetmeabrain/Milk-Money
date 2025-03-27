@@ -11,8 +11,22 @@ const navbarModal = document.getElementById("navbar-modal");
 const footerDate = document.querySelector('.footer-date');
 footerDate.innerText = new Date().toDateString();
 
+// preload night images
+new Image().src = "images/homepage/nightcow.png";
+new Image().src = "images/homepage/nightspeech.png";
+new Image().src = "images/homepage/milkyway.jpg";
+
+
 /* AUDIO CLIPS */
 const moo = document.getElementById("moo");
+const confirmMoo = document.getElementById("confirm-moo");
+const correctMoo = document.getElementById("correct-moo");
+const incorrectMoo = document.getElementById("incorrect-moo");
+const noWayMoo = document.getElementById("no-way-moo");
+const ponderMoo = document.getElementById("ponder-moo");
+const questionMoo = document.getElementById("question-moo");
+const quitMolestingMeMoo = document.getElementById("quit-molesting-me-moo");
+const whateverMoo = document.getElementById("whatever-moo");
 const baa = document.getElementById("baa");
 const goat = document.getElementById("goat");
 const queen = document.getElementById("queen");
@@ -26,12 +40,12 @@ const milkPourUp = document.getElementById("milk-pour-up");
 /* HOMEPAGE INTERACTION */
 let isItDaytime = true;
 const whatTheCowSays = [
-  ["Hey, who turned off all the lights? <br> Brrr, I'm friesian!", moo],
-  ["The milky way is udderly beautiful! Do you think we're all alone in the mooniverse?", moo],
+  ["Hey, who turned off all the lights? <br> Brrr, I'm friesian!", noWayMoo],
+  ["The milky way is udderly beautiful! Do you think we're all alone in the mooniverse?", ponderMoo],
   ["Oh, What a beautiful Mooooorning!", moo],
-  ["Moooooooooooo!", moo],
-  ["Hey, quit poking me, that's mooolestation!", moo],
-  ["Oi, don't make me hoof it over there <br> You'll udderly regret it!", moo],
+  ["Moooooooooo!", confirmMoo],
+  ["Hey, quit poking me, that's mooolestation!", quitMolestingMeMoo],
+  ["Oi, don't make me hoof it over there <br> You'll udderly regret it!", noWayMoo],
   ["You're really getting my goat now!", goat],
   ["I'm feeling a little sheepish today...", baa],
   ["Moo-la la la Moo-la la la Moo-la la la Moo-la la la Moo-la la Moooo!", queen]
@@ -40,8 +54,8 @@ const whatTheCowSays = [
 function theCowSpeaks(cowVocab) {
   const [mooing, mootype] = cowVocab
   whatTheCowSays.forEach(e=>{e[1].pause(); e[1].currentTime = 0})
-  // check this line
-  let fontSize = (2.2-mooing.length*0.01) < 0.9 ? 0.9 : (2.2-mooing.length*0.01)
+  // check this line - 
+  let fontSize = (2.2-mooing.length*0.01) < 1 ? 1 : (2.2-mooing.length*0.01)
   //console.log(mooing.length, fontSize, 2.2-mooing.length*0.01)
   speechText.style.fontSize = `${fontSize}rem`
   speechBubble.style.backgroundImage = isItDaytime ? "url(images/homepage/dayspeech.png)" : "url(images/homepage/nightspeech.png)";
@@ -319,7 +333,7 @@ async function ruminate() {
   // add catch error message
   const randomQuote = await fetch("/quote")
   const parsed = await randomQuote.json()
-  theCowSpeaks([`As ${parsed.author} once said, "${parsed.quote}".`, moo])
+  theCowSpeaks([`As ${parsed.author} once said, "${parsed.quote}".`, ponderMoo])
 };
 
 /* TAB FUNCTIONS */
@@ -333,15 +347,38 @@ function tabSound() {
   cowpat.play();
 }
 
-const leaderboardHTML = (leaderboard) => {
+const leaderboardHTML = (leaderboard, quizLeaderboard) => {
   let HTMLString = `
-  <h2>Leaderboard</h2>
-  <h4>Rank Name Moonits</h4>
-  <ol id="numbered-list">`
-  leaderboard.forEach(o => HTMLString += `<li>${o.name} ${o.balance}</li>`)
-  HTMLString += `</ol>`
-  return HTMLString;
-}
+  <h2 class="leaderboard-header">Leaderboards</h2>
+  <div id="moonit-leaderboard">
+    <h4 class="leaderboard-header">Moonit Leaderboard</h4>
+    <table id="moonit-table">
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Moonits</th>
+    </tr>`;
+
+    leaderboard.forEach((o, i) => HTMLString += `<tr><td>${i+1}</td><td>${o.name}</td><td>${o.balance}</td></tr>`)
+
+    HTMLString += `</table>
+  </div>
+  <div id="quiz-leaderboard">
+    <h4 class="leaderboard-header">Quiz Leaderboard</h4>
+    <table id="quiz-table">
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>`
+
+    quizLeaderboard.forEach((o, i) => HTMLString += `<tr><td>${i+1}</td><td>${o.name}</td><td>${o.score}</td></tr>`)
+    
+    HTMLString += `</table>
+    </div>`;
+  
+    return HTMLString;
+};
 
 const balanceHTML = (transactions, balance) => {
   let HTMLString = `
@@ -370,7 +407,7 @@ const displayLeaderboards = async () =>  {
   leaderboardTab.style.background = "seagreen";
   noticeboard.classList.add("leaderboard");
 
-  const data = await fetch("/leaderboard");
+  const data = await fetch("/leaderboards");
 
   const parsed = await data.json();
   if (parsed.error) {
@@ -378,9 +415,9 @@ const displayLeaderboards = async () =>  {
     return;
   }
 
-  noticeboard.innerHTML = leaderboardHTML(parsed.leaderboard);
+  noticeboard.innerHTML = leaderboardHTML(parsed.leaderboard, parsed.quizLeaderboard);
   return; 
-}
+};
 
 /* FUNCTION FOR TOTALISER DISPLAY */
 function fillScaleElement(i) {
@@ -567,7 +604,7 @@ const askQuestion = (questionObject) => {
     answerDiv.classList.add("text-question");
   }
   
-  return theCowSpeaks([askAltQuestion && type === "audio" ? altquestion : question, null]);
+  return theCowSpeaks([askAltQuestion && type === "audio" ? altquestion : question, questionMoo]);
 };
 
 const selectAnswer = (response, answer) => {
@@ -582,10 +619,12 @@ const selectAnswer = (response, answer) => {
     score++;
     questionNo++;
     document.querySelector(`[value="${response}"]`).classList.add("correct-answer");
+    theCowSpeaks([`Correct!`, correctMoo]);
   } else {
     questionNo++;
     document.querySelector(`[value="${response}"]`).classList.add("incorrect-answer");
     document.querySelector(`[value="${answer}"]`).classList.add("correct-answer");
+    theCowSpeaks([`Cowputer says 'No'!`, incorrectMoo]);
   }
   
   // trigger end of quiz with finish button

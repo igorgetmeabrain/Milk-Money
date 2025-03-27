@@ -128,15 +128,24 @@ module.exports = function (app) {
   });
     
   // placeholder object - will be retrieved from database
-  app.route("/leaderboard")
+  app.route("/leaderboards")
   .get((req, res) => {
-        return res.json({leaderboard: [
+        return res.json({
+          leaderboard: [
           {name: "Doug", balance: 33},
           {name: "Mimi", balance: 20},
           {name: "Alison", balance: 3},
           {name: "Reuben", balance: 0},
           {name: "Alex", balance: -10}
-         ]})
+         ],
+         quizLeaderboard: [
+          {name: "Doug", score: 33},
+          {name: "Mimi", score: 20},
+          {name: "Alison", score: 3},
+          {name: "Reuben", score: 1},
+          {name: "Alex", score: 0}
+         ]
+        })
   });
 
   // get team leaderboard from database
