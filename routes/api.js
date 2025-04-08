@@ -136,14 +136,24 @@ module.exports = function (app) {
           {name: "Mimi", balance: 20},
           {name: "Alison", balance: 3},
           {name: "Reuben", balance: 0},
-          {name: "Alex", balance: -10}
+          {name: "Alex", balance: -10},
+          {name: "Caroline", balance: -10},
+          {name: "Sarah", balance: -10},
+          {name: "Toni-Ann", balance: -10},
+          {name: "Julia", balance: -10},
+          {name: "Tonya", balance: -10}
          ],
          quizLeaderboard: [
           {name: "Doug", score: 33},
           {name: "Mimi", score: 20},
           {name: "Alison", score: 3},
           {name: "Reuben", score: 1},
-          {name: "Alex", score: 0}
+          {name: "Alex", score: 0},
+          {name: "Caroline", balance: -10},
+          {name: "Sarah", balance: -10},
+          {name: "Toni-Ann", balance: -10},
+          {name: "Julia", balance: -10},
+          {name: "Tonya", balance: -10}
          ]
         })
   });

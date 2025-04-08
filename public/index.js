@@ -534,6 +534,10 @@ const displayDailyQuiz = async () => {
 
 const startQuiz = async () => {
 
+  // check local/session storage for quiz questions
+  // if not found, fetch from server
+  // if found, start quiz from question no and score
+
   document.getElementById("message-text").innerHTML = "Fetching quiz questions...<br>please wait...";
   document.getElementById("start-quiz-btn").disabled = "true";
 
@@ -543,6 +547,7 @@ const startQuiz = async () => {
     document.getElementById("message-text").innerText = JSON.stringify(parsed);
     return;
   } else {
+    // put questions in local/session storage
     return playQuiz(parsed.questions);
   }
 };
@@ -635,7 +640,7 @@ const selectAnswer = (response, answer) => {
     finishQuizButton.classList.remove("hidden");
     finishQuizButton.addEventListener("click", () => {endQuiz(score)})
   }
-}
+};
 
 const noAudioQuestions = (altquestion) => {
   document.getElementById("audio-question").classList.add("hidden");
