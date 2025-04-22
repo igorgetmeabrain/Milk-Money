@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Moola Login</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/images/icons/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap" rel="stylesheet">
@@ -20,8 +20,8 @@
 
       <h1 id="heading">Welcome to Moola!</h1>
 
-      <audio src="audio/moo.mp3" preload="auto" id="moo"></audio>
-      <img src="images/daycow.png" id="cow" alt="a female cartoon cow" onclick="moo.play()">
+      <audio src="audio/homepage/moo.mp3" preload="auto" id="moo"></audio>
+      <img src="images/homepage/daycow.png" id="cow" alt="a female cartoon cow" onclick="moo.play()">
       
       <div id="login-form">
         <h2 id="login-heading" class="modal-heading">Please log in:</h2>
@@ -90,8 +90,8 @@
         <div class="left">
           <span class="fa fa-regular fa-copyright"></span>
           <p class="footer-text">Badger</p>
-          <audio src="audio/badger.mp3" preload="auto" id="badger"></audio>
-          <img src="images/badger.png" onclick="badger.play()">
+          <audio src="audio/homepage/badger.mp3" preload="auto" id="badger"></audio>
+          <img src="images/homepage/badger.png" onclick="badger.play()">
           <p class="footer-date"></p>
         </div>
         <span class="right">
@@ -102,6 +102,12 @@
         </span>
       </footer>
 
+    </div>
+
+    <!-- orientation warning -->
+    <div id="orientation">
+      <div class="phone"><img src="images/homepage/daycowrotated.png" id="orient-img"></div>
+      <div class="message">Please rotate your device!</div>
     </div>
   
     <script src="https://kit.fontawesome.com/d1e8eb8a9f.js" crossorigin="anonymous"></script>

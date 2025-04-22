@@ -349,7 +349,7 @@ function tabSound() {
 
 const leaderboardHTML = (leaderboard, quizLeaderboard) => {
   let HTMLString = `
-  <h2 class="leaderboard-header">Leaderboards</h2>
+  <h2 class="leaderboard-title">Leaderboards</h2>
   <div id="moonit-leaderboard">
     <h4 class="leaderboard-header">Moonit Leaderboard</h4>
     <table id="moonit-table">

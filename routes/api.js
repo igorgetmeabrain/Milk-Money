@@ -9,7 +9,7 @@ const quizQuestions = require('../components/quizquestions.json');
 module.exports = function (app) {
 
   // placeholder before implementing passport etc - ensure all routes redirect if unauthenticated
-  let authenticated = true;
+  let authenticated = false;
 
   // serve index.html if authenticated, otherwise redirect to user.html
   app.get("/", (req, res) => {
@@ -149,11 +149,11 @@ module.exports = function (app) {
           {name: "Alison", score: 3},
           {name: "Reuben", score: 1},
           {name: "Alex", score: 0},
-          {name: "Caroline", balance: -10},
-          {name: "Sarah", balance: -10},
-          {name: "Toni-Ann", balance: -10},
-          {name: "Julia", balance: -10},
-          {name: "Tonya", balance: -10}
+          {name: "Caroline", score: -10},
+          {name: "Sarah", score: -10},
+          {name: "Toni-Ann", score: -10},
+          {name: "Julia", score: -10},
+          {name: "Tonya", score: -10}
          ]
         })
   });

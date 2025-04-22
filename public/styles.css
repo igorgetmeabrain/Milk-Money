@@ -485,13 +485,13 @@ h2 {
 }
 
 .leaderboard-header {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   text-align: center;
+  text-decoration: underline;
 }
 
 #moonit-leaderboard, #quiz-leaderboard {
   display: inline-block;
-  border: 1px solid blue;
   width: 46%;
   margin: 3% 1%;
   padding: 1%;
@@ -500,8 +500,7 @@ h2 {
 #moonit-table, #quiz-table {
   margin: auto;
   text-align: center;
-  font-size: 1.2rem;
-  border: 1px solid red;
+  font-size: 1rem;
 }
 
 /* BALANCE STYLES */

@@ -32,35 +32,3 @@ mongoose.connect(mongoURI)
 .catch((error)=>{
   console.log(error);
 });
-
-// delete this code
-let docURL = "https://docs.google.com/document/d/e/2PACX-1vQGUck9HIFCyezsrBSnmENk5ieJuYwpt7YHYEzeNJkIb9OSDdx-ov2nRNReKQyey-cwJOoEKUhLmN9z/pub";
-
-const getDocument = async (url) => {
-  fetch(url)
-  .then(response => {
-    const reader = response.body.getReader();
-    return new ReadableStream({
-      start(controller) {
-        function push() {
-          reader.read().then(({ done, value }) => {
-            if (done) {
-              controller.close();
-              return;
-            }
-            controller.enqueue(value);
-            push();
-          });
-        }
-        push();
-      }
-    });
-  })
-  .then(stream => new Response(stream))
-  .then(response => response.text())
-  .then(text => console.log(text));
-  }
-  
-getDocument(docURL)
-
-// delete this code
