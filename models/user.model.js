@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { type } = require('os');
 const {Schema} = mongoose;
 
 const UserSchema = new Schema(
@@ -18,9 +19,20 @@ const UserSchema = new Schema(
     icon: {
       type: String,
       required: true
+    },
+    transactions: {
+      type: Array,
+      required: true
+    },
+    balance: {
+      type: Number,
+      required: true
+    },
+    scores: {
+      type: Array,
+      required: true
     }
   },
-  {timestamps: true}
 );
 
 const User = mongoose.model("User", UserSchema);

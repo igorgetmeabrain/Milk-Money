@@ -1,16 +1,14 @@
 const Converter = require('../components/converter.js');
 const cowQuotes = require('../components/cowquotes.json');
 const User = require('../models/user.model.js');
-const bcrypt = require('bcrypt');
 
-// temporary for testing
+// temporary for testing - can get this from git repo
 const quizQuestions = require('../components/quizquestions.json');
 
 module.exports = function (app) {
 
   // placeholder before implementing passport etc - ensure all routes redirect if unauthenticated
   let authenticated = false;
-
   // serve index.html if authenticated, otherwise redirect to user.html
   app.get("/", (req, res) => {
     if (authenticated) {
@@ -20,6 +18,7 @@ module.exports = function (app) {
     }
   });
 
+  // need to rename this route to /login and rename html file to login.html
   app.get("/user", (req, res) => {
     res.sendFile(process.cwd() + "/views/user.html");
   });
@@ -39,32 +38,39 @@ module.exports = function (app) {
     if (botcheck.replace(/[^A-Za-z0-9]/g, "").toLowerCase() !== "m231deb") {
       console.log("botcheck failed");
       return res.send({error: "Sorry, you failed the bot check. Please try again."});
-    }
-
+    };
+    console.log("botcheck passed");
     // check if username already exists in system
-    // if not...
+    // create findUser function to check if username exists in database
+    if (findUser(username)) {
+      console.log("username already exists");
+      return res.send({message: "Sorry, that username already exists. Please try again."});
+    } else {
     // hash password and security answer/question here
-    return res.send({message: "botcheck passed"});
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedSecurity = await bcrypt.hash(security, 10);
+
     const userObject = {
       username: username,
-      password: password,
-      security: security,
+      password: hashedPassword,
+      security: hashedSecurity,
       icon: "cow",
       transactions: [],
       balance: 0,
-      scores: [/*datestamped scores*/]
+      scores: []
     };
-    /*
+
     try {
       const user = await User.create(userObject)
     } catch (error) {
       console.log(error.message);
       res.status(500).json({message: error.message})
     }
-    */
-      
-    // return res.send({message: "you are now in the database"});
+    console.log("user created");
+    res.json({message: 'You are now registered. Please log in to continue.'});
+    };
   });
+
       
   app.post("/reset-password", (req, res) => {
     // unhash security question and answer from database and compare with form data

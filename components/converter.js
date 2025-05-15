@@ -34,6 +34,7 @@ res.json({
 
 */
 
+// this can be retrieved from git repo instead
 const quizQuestions = require('../components/quizquestions.json');
 
 class Converter {
@@ -63,6 +64,7 @@ class Converter {
     return formatted;
   }
 
+  // this creates a datestamped array of quiz question ids
   generateRandomQuestionsArray(askedArray) {
 
     if (askedArray.length + 10 > quizQuestions.questions.length) return false;
@@ -71,12 +73,13 @@ class Converter {
     while (questionsArray.length < 10) {
       let random = Math.floor(Math.random() * quizQuestions.questions.length);
       let questionId = quizQuestions.questions[random].id;
+      //avoid duplicate or already asked questions
       if (questionsArray.indexOf(questionId) === -1 && askedArray.indexOf(questionId) === -1) {
         questionsArray.push(questionId);
       }
     }
+    //datestamp questionsArray
     questionsArray.unshift(new Date().toDateString());
-    console.log(questionsArray)
     return questionsArray;    
   }
 

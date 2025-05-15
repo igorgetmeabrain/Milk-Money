@@ -541,6 +541,7 @@ const startQuiz = async () => {
   document.getElementById("message-text").innerHTML = "Fetching quiz questions...<br>please wait...";
   document.getElementById("start-quiz-btn").disabled = "true";
 
+  // use start-test-quiz route for testing
   const data = await fetch("/start-quiz");
   const parsed = await data.json();
   if (parsed.error) {

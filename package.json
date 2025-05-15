@@ -14,10 +14,14 @@
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.18.1",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.1",
     "node": "^22.6.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
   },
   "repository": {
     "type": "git",

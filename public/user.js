@@ -28,8 +28,6 @@ const submitFormHandler = async (formType, username, password, security, botchec
     if (security) stuff.security = security;
     if (botcheck) stuff.botcheck = botcheck;
     
-    console.log("stuff: ", stuff);
-    
     const route = formType === "login" ? "/login" : formType === "account" ? "/create-new-user" : "/reset-password";
     const data = await fetch(route, {
         method: "POST",
@@ -41,7 +39,6 @@ const submitFormHandler = async (formType, username, password, security, botchec
       });
   
     const parsed = await data.json();
-    //console.log(JSON.stringify(parsed))
       if (parsed.error) {
         return resultArea.innerText = parsed.error;
       } else {
